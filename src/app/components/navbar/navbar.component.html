@@ -1,8 +1,11 @@
 <mat-toolbar color="primary" style="height: 4vw; min-height: 70px;">
+    <!-- <div class="logo">
+        <img src="assets\logo.png" alt="logo">
+    </div> -->
     <span>Sprawozdanie</span>
     <div class="spacer"></div>
-    <a mat-button>Nowy Protokół</a>
-    <a mat-button>
+    <a mat-raised-button color="warn" style="margin: 0 15px;" routerLink="/create">Nowy Protokół</a>
+    <a mat-icon-button routerLink="/">
         <mat-icon>home</mat-icon>
     </a>
 </mat-toolbar>
