@@ -7,12 +7,16 @@ import { MaterialModule } from './material/material.module';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { TestComponent } from './components/test/test.component';
+import { LandingPageComponent } from './components/landing-page/landing-page.component';
+import { ReportComponent } from './components/report/report.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    TestComponent
+    TestComponent,
+    LandingPageComponent,
+    ReportComponent
   ],
   imports: [
     BrowserModule,
