@@ -35,6 +35,11 @@ export class ReportService {
           ]
         }
       ],
+      styles: {
+        table: {
+          margin: [0, 5, 0, 15]
+        }
+      }
     };
   }
 
@@ -44,6 +49,7 @@ export class ReportService {
 
   public addToPDF(element){
     this.docDefinition['content'].push(element)
+    console.log(this.docDefinition)
   }
 
   public openPDF(){

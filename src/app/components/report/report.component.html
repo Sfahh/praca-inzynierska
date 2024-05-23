@@ -1,3 +1,56 @@
-<button mat-raised-button (click)="openPDF()">Open PDF</button>
-<button mat-raised-button (click)="downloadPDF()">Download PDF</button>
-<button mat-raised-button (click)="printPDF()">Print PDF</button>
+<div class="container">
+    <div class="buttons">
+        <button mat-raised-button (click)="openPDF()">Open PDF</button>
+        <button mat-raised-button (click)="downloadPDF()">Download PDF</button>
+        <button mat-raised-button (click)="printPDF()">Print PDF</button>
+    </div>
+    <div class="form-container" >
+        <form [formGroup]="form" (ngSubmit)="onSubmit(form)" autocomplete="off">
+            <mat-form-field appearance="outline">
+                <mat-label>Numer projektu</mat-label>
+                <input matInput type="number" formControlName="project_nr">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Zleceniodawca</mat-label>
+                <textarea matInput formControlName="principal"></textarea>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Obiekt badany</mat-label>
+                <input matInput type="text" formControlName="object">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Miejsce wykonania badań</mat-label>
+                <input matInput type="text" formControlName="place">
+            </mat-form-field>
+            <mat-label>Zakres zadań</mat-label>
+            <div>
+                <mat-checkbox formControlName="isEmission">Emisja</mat-checkbox>
+                <mat-checkbox formControlName="isEndurance">Odporność</mat-checkbox>
+            </div>
+            <mat-form-field appearance="outline">
+                <mat-label>Data wykonania sprawozdania</mat-label>
+                <input matInput [matDatepicker]="picker" formControlName="date">
+                <mat-hint>DD/MM/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Sprawozdanie sprawdził</mat-label>
+                <mat-select formControlName="reviewer">
+                    @for (person of personsList; track person){
+                        <mat-option [value]="person.name">{{person.name}}</mat-option>
+                    }
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Sprawozdanie wykonał</mat-label>
+                <mat-select formControlName="excutor">
+                    @for (person of personsList; track person){
+                        <mat-option [value]="person.name">{{person.name}}</mat-option>
+                    }
+                </mat-select>
+            </mat-form-field>
+            <button mat-raised-button type="submit">Zapisz</button>
+        </form>
+    </div>
+</div>
