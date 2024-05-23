@@ -9,6 +9,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { TestComponent } from './components/test/test.component';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
 import { ReportComponent } from './components/report/report.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -16,12 +17,13 @@ import { ReportComponent } from './components/report/report.component';
     NavbarComponent,
     TestComponent,
     LandingPageComponent,
-    ReportComponent
+    ReportComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    MaterialModule
+    MaterialModule,
+    ReactiveFormsModule
   ],
   providers: [
     provideAnimationsAsync()
