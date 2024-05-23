@@ -9,7 +9,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { TestComponent } from './components/test/test.component';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
 import { ReportComponent } from './components/report/report.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ObjectDescriptionComponent } from './components/object-description/object-description.component';
 
 @NgModule({
   declarations: [
@@ -18,12 +19,14 @@ import { ReactiveFormsModule } from '@angular/forms';
     TestComponent,
     LandingPageComponent,
     ReportComponent,
+    ObjectDescriptionComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     MaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [
     provideAnimationsAsync()

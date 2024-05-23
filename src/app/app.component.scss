@@ -9,5 +9,13 @@
     }
     .content{
         padding: 5%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .buttons{
+            display: flex;
+            gap: 10px;
+            padding-bottom: 40px;
+        }
     }
 }
