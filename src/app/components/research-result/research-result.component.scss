@@ -3,7 +3,7 @@
     flex-direction: column;
     align-items: center;
     gap: 10px;
-    .power, .signal, .mode, .others{
+    .emission, .endurance{
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -30,12 +30,30 @@
                 flex-grow: 1;
             }
         }
+        .line{
+            border: solid 1px grey;
+            opacity: 0.5;
+        }
     }
 }
 
-textarea{
-    height: 300px !important;
+.header{
+    position: relative;
+    width: 100%;
+    padding-bottom: 20px;
+    b{
+        left: 50%;
+        transform: translate(-50%, -50%);
+        position: absolute;
+    }
+    button{
+        position: absolute;
+        right: 0;
+        transform: translate(0, -50%);
+    }
 }
+
+
 .buttons{
     position: fixed;
     bottom: 10px;

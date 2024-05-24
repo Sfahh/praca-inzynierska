@@ -5,7 +5,7 @@ export class BasicInfo {
     place: string = null;
     isEmission: string = null;
     isEndurance: string = null;
-    date: Date = null
+    date: string = null
     executor: string = null;
     reviewer: string = null;
 }
@@ -21,7 +21,7 @@ export class ObjectPower {
 }
 
 export class ObjectSignal {
-    conn_number: string = 'AC 230 V';
+    conn_number: string;
     connections: {
         [key: string]: string;
     };
@@ -36,4 +36,10 @@ export class ObjectMode{
     modes_desc: {
         [key: string]: string;
     }
+}
+
+export class ObjectOthers{
+    criterion: string = null;
+    date: string = null;
+    representative: string = null;
 }

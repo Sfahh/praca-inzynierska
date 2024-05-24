@@ -11,6 +11,8 @@ import { LandingPageComponent } from './components/landing-page/landing-page.com
 import { ReportComponent } from './components/report/report.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ObjectDescriptionComponent } from './components/object-description/object-description.component';
+import { DatePipe } from '@angular/common';
+import { ResearchResultComponent } from './components/research-result/research-result.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,7 @@ import { ObjectDescriptionComponent } from './components/object-description/obje
     LandingPageComponent,
     ReportComponent,
     ObjectDescriptionComponent,
+    ResearchResultComponent,
   ],
   imports: [
     BrowserModule,
@@ -29,7 +32,8 @@ import { ObjectDescriptionComponent } from './components/object-description/obje
     FormsModule
   ],
   providers: [
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })

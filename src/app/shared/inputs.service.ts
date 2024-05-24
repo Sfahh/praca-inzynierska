@@ -42,6 +42,11 @@ export class InputsService{
       object_mode: {
         modes: '',
         modes_desc: {}
+      },
+      object_others: {
+        criterion: '',
+        date: '',
+        representative: ''
       }
     }
    }

@@ -1,0 +1,45 @@
+<div class="container">
+    <div class="emission" *ngIf="isEmission">
+        <div class="header">
+            <b>Emisja</b>
+            <button mat-icon-button><mat-icon>add</mat-icon></button>
+        </div>
+        <div class="section">
+            <div class="row">
+                <mat-form-field appearance="outline">
+                    <mat-label>Norma</mat-label>
+                    <input type="text" matInput>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Specyfikacja</mat-label>
+                    <input type="text" matInput>
+                </mat-form-field>
+            </div>
+            <div class="row">
+                <mat-form-field appearance="outline">
+                    <mat-label>Szczegółowe wyniki badań</mat-label>
+                    <input type="text" matInput>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Wynik próby</mat-label>
+                    <mat-select>
+                        <mat-option value="Pozytywna">Pozytywna</mat-option>
+                        <mat-option value="Negatywna">Negatywna</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="line"></div>
+        </div>
+    </div>
+    <div class="endurance" *ngIf="isEndurance">
+        <b>Odporność</b>
+        <div class="row">
+
+        </div>
+    </div>
+
+    <div class="buttons">
+        <button mat-raised-button routerLink="/object">Wróć</button>
+        <button mat-raised-button routerLink="/result" (click)="next()">Dalej</button>
+    </div>
+</div>

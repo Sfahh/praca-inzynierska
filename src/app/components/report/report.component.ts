@@ -5,6 +5,7 @@ import { FormControl, FormGroup, Validators,ReactiveFormsModule } from '@angular
 import { People } from '../../shared/persons';
 import { InputsService } from '../../shared/inputs.service';
 import { BasicInfo } from '../../shared/dictionary';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-report',
@@ -17,7 +18,12 @@ export class ReportComponent implements OnInit{
   isPrev: boolean;
   isEdited: boolean = true;
 
-  constructor(public reportService: ReportService, private dateAdapter: DateAdapter<Date>, public inputs: InputsService){
+  constructor(
+    public reportService: ReportService, 
+    private dateAdapter: DateAdapter<Date>, 
+    public inputs: InputsService,
+    public datepipe: DatePipe
+  ){
     this.dateAdapter.setLocale('en-GB');
   }
 
@@ -48,6 +54,7 @@ export class ReportComponent implements OnInit{
   }
 
   next(){
+    this.data.date = this.datepipe.transform(this.data.date, 'dd/MM/yyyy');
     this.isEdited = this.data === this.inputs.inputs?.basic_info ? false : true;
     this.inputs.updateInputs('basic_info', this.data)
     this.reportService.addToPDF({
@@ -78,6 +85,10 @@ export class ReportComponent implements OnInit{
         [`${this.data.reviewer}`, `${this.data.executor}`]
       ]
     }
+  })
+  this.reportService.addToPDF({
+    style: 'info',
+    text: 'Sprawozdanie jest integralną całością.\n Może być udostępniane stronom trzecim tylko w całości i za zgodą Zleceniodawcy'
   })
   }
 
