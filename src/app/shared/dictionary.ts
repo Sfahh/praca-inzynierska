@@ -43,3 +43,20 @@ export class ObjectOthers{
     date: string = null;
     representative: string = null;
 }
+
+export class Emission{
+    norm: string = '';
+    specs: string = '';
+    result: string = '';
+}
+export class Endurance{
+    norm: string = '';
+    specs: string = '';
+    criterion: string = ''
+    result: string = '';
+}
+
+export class Results{
+    emission: Emission[] = [];
+    endurance: Endurance[] = [];
+}

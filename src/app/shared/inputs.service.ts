@@ -16,8 +16,8 @@ export class InputsService{
         principal: '',
         object: '',
         place: '',
-        isEmission: '',
-        isEndurance: '',
+        isEmission: true,
+        isEndurance: true,
         date: '',
         executor: '',
         reviewer: ''
@@ -47,6 +47,10 @@ export class InputsService{
         criterion: '',
         date: '',
         representative: ''
+      },
+      results: {
+        emission: [],
+        endurance: [],
       }
     }
    }

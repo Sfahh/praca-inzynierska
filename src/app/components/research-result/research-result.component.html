@@ -2,39 +2,83 @@
     <div class="emission" *ngIf="isEmission">
         <div class="header">
             <b>Emisja</b>
-            <button mat-icon-button><mat-icon>add</mat-icon></button>
+            <button mat-icon-button (click)="addNorm('emission')"><mat-icon>add</mat-icon></button>
         </div>
-        <div class="section">
+        <div class="section" *ngFor="let item of countNorms(normEmissionNumber); let i = index">
             <div class="row">
                 <mat-form-field appearance="outline">
                     <mat-label>Norma</mat-label>
-                    <input type="text" matInput>
+                    <input type="text" matInput [(ngModel)]="dataResult.emission[i].norm">
                 </mat-form-field>
                 <mat-form-field appearance="outline">
                     <mat-label>Specyfikacja</mat-label>
-                    <input type="text" matInput>
+                    <input type="text" matInput [(ngModel)]="dataResult.emission[i].specs">
                 </mat-form-field>
             </div>
             <div class="row">
-                <mat-form-field appearance="outline">
+                <!-- <mat-form-field appearance="outline">
                     <mat-label>Szczegółowe wyniki badań</mat-label>
                     <input type="text" matInput>
-                </mat-form-field>
+                </mat-form-field> -->
                 <mat-form-field appearance="outline">
                     <mat-label>Wynik próby</mat-label>
-                    <mat-select>
+                    <mat-select [(ngModel)]="dataResult.emission[i].result">
                         <mat-option value="Pozytywna">Pozytywna</mat-option>
                         <mat-option value="Negatywna">Negatywna</mat-option>
                     </mat-select>
                 </mat-form-field>
             </div>
-            <div class="line"></div>
+            <div class="row" *ngIf="i !== 0">
+                <button mat-mini-fab color="warn" (click)="deleteNorm('emission', i)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </div>
+            <br>
+            <div class="line" *ngIf="i !== (dataResult.emission.length + 1)"></div>
+            <br>
         </div>
     </div>
     <div class="endurance" *ngIf="isEndurance">
-        <b>Odporność</b>
-        <div class="row">
-
+        <div class="header">
+            <b>Odporność</b>
+            <button mat-icon-button (click)="addNorm('endurance')"><mat-icon>add</mat-icon></button>
+        </div>
+        <div class="section" *ngFor="let item of countNorms(normEnduranceNumber); let i = index">
+            <div class="row">
+                <mat-form-field appearance="outline">
+                    <mat-label>Norma</mat-label>
+                    <input type="text" matInput [(ngModel)]="dataResult.endurance[i].norm">
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Specyfikacja</mat-label>
+                    <input type="text" matInput [(ngModel)]="dataResult.endurance[i].specs">
+                </mat-form-field>
+            </div>
+            <div class="row">
+                <!-- <mat-form-field appearance="outline">
+                    <mat-label>Szczegółowe wyniki badań</mat-label>
+                    <input type="text" matInput>
+                </mat-form-field> -->
+                <mat-form-field appearance="outline">
+                    <mat-label>Uzyskane kryterium w trakcie testu</mat-label>
+                    <input type="text" matInput [(ngModel)]="dataResult.endurance[i].criterion">
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Wynik próby</mat-label>
+                    <mat-select [(ngModel)]="dataResult.endurance[i].result">
+                        <mat-option value="Pozytywna">Pozytywna</mat-option>
+                        <mat-option value="Negatywna">Negatywna</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="row" *ngIf="i !== 0">
+                <button mat-mini-fab color="warn" (click)="deleteNorm('endurance', i)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </div>
+            <br>
+            <div class="line"></div>
+            <br>
         </div>
     </div>
 
