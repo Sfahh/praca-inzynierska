@@ -5,12 +5,8 @@
     align-items: center;
     gap: 10px;
     
-    .buttons{
-        display: flex;
-        gap: 10px;
-        padding-bottom: 40px;
-    }
-    form{
+    
+    .form-container{
         display: flex;
         flex-direction: column;
         gap: 20px;

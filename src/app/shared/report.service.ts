@@ -38,6 +38,10 @@ export class ReportService {
       styles: {
         table: {
           margin: [0, 5, 0, 15]
+        },
+        info: {
+          margin: [0, 400, 0, 0],
+          alignment: 'center'
         }
       }
     };

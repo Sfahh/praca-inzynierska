@@ -9,7 +9,10 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { TestComponent } from './components/test/test.component';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
 import { ReportComponent } from './components/report/report.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ObjectDescriptionComponent } from './components/object-description/object-description.component';
+import { DatePipe } from '@angular/common';
+import { ResearchResultComponent } from './components/research-result/research-result.component';
 
 @NgModule({
   declarations: [
@@ -18,15 +21,19 @@ import { ReactiveFormsModule } from '@angular/forms';
     TestComponent,
     LandingPageComponent,
     ReportComponent,
+    ObjectDescriptionComponent,
+    ResearchResultComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     MaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })
