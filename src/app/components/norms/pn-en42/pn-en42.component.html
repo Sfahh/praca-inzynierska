@@ -1,0 +1,316 @@
+<div class="container">
+  <h1>Norma PN-EN 61000-4-2</h1>
+  <div class="row">
+    <mat-form-field appearance="outline">
+      <mat-label>Temperatura </mat-label>
+      <input type="text" matInput [(ngModel)]="data.basic_data.temperature" />
+      <span matTextSuffix>&deg;C</span>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Ciśnienie atmosferyczne </mat-label>
+      <input type="text" matInput [(ngModel)]="data.basic_data.pressure" />
+      <span matTextSuffix>kPa</span>
+    </mat-form-field>
+  </div>
+  <div class="row">
+    <mat-form-field appearance="outline">
+      <mat-label>Wilgotność</mat-label>
+      <input
+        max="100"
+        type="number"
+        matInput
+        [(ngModel)]="data.basic_data.humidity"
+      />
+      <span matTextSuffix>%</span>
+    </mat-form-field>
+  </div>
+  <div class="row">
+    <mat-form-field appearance="outline">
+      <mat-label>Lista urządzeń pomiarowych</mat-label>
+      <input
+        type="text"
+        matInput
+        [(ngModel)]="data.basic_data.devices"
+        [matAutocomplete]="auto"
+      />
+      <mat-autocomplete #auto="matAutocomplete">
+        @for (device of devices; track device){
+        <mat-option [value]="device">{{ device }}</mat-option>
+        }
+      </mat-autocomplete>
+    </mat-form-field>
+  </div>
+  <div class="row">
+    <mat-checkbox [(ngModel)]="data.is_table_top">Table top</mat-checkbox>
+    <mat-checkbox [(ngModel)]="data.is_floor_standing"
+      >Floor standing</mat-checkbox
+    >
+  </div>
+  <ng-container *ngIf="data.is_table_top || data.floor_standing">
+    <mat-accordion class="results" multi>
+      <ng-container *ngIf="data.is_table_top">
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>Table top</mat-panel-title>
+          </mat-expansion-panel-header>
+
+          <div class="row">Contact</div>
+          <div class="row">
+            <mat-form-field appearance="outline">
+              <mat-label>Poziom </mat-label>
+              <input
+                type="text"
+                matInput
+                [(ngModel)]="data.table_top['contact'].level"
+              />
+              <span matTextSuffix>kV</span>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Osiągnięte kryterium </mat-label>
+              <input
+                type="text"
+                matInput
+                [(ngModel)]="data.table_top['contact'].criterion"
+              />
+            </mat-form-field>
+          </div>
+          <div class="row">
+            <mat-form-field appearance="outline">
+              <mat-label>Wymagane kryterium </mat-label>
+              <input
+                type="text"
+                matInput
+                [(ngModel)]="data.table_top['contact'].required_crit"
+              />
+            </mat-form-field>
+          </div>
+          <div class="row">Air</div>
+          <div class="row">
+            <mat-form-field appearance="outline">
+              <mat-label>Poziom </mat-label>
+              <input
+                type="text"
+                matInput
+                [(ngModel)]="data.table_top['air'].level"
+              />
+              <span matTextSuffix>kV</span>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Osiągnięte kryterium </mat-label>
+              <input
+                type="text"
+                matInput
+                [(ngModel)]="data.table_top['air'].criterion"
+              />
+            </mat-form-field>
+          </div>
+          <div class="row">
+            <mat-form-field appearance="outline">
+              <mat-label>Wymagane kryterium </mat-label>
+              <input
+                type="text"
+                matInput
+                [(ngModel)]="data.table_top['air'].required_crit"
+              />
+            </mat-form-field>
+          </div>
+          <div class="row">VCP</div>
+          <div class="row">
+            <mat-form-field appearance="outline">
+              <mat-label>Poziom </mat-label>
+              <input
+                type="text"
+                matInput
+                [(ngModel)]="data.table_top['vcp'].level"
+              />
+              <span matTextSuffix>kV</span>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Osiągnięte kryterium </mat-label>
+              <input
+                type="text"
+                matInput
+                [(ngModel)]="data.table_top['vcp'].criterion"
+              />
+            </mat-form-field>
+          </div>
+          <div class="row">
+            <mat-form-field appearance="outline">
+              <mat-label>Wymagane kryterium </mat-label>
+              <input
+                type="text"
+                matInput
+                [(ngModel)]="data.table_top['vcp'].required_crit"
+              />
+            </mat-form-field>
+          </div>
+          <div class="row">HCP</div>
+          <div class="row">
+            <mat-form-field appearance="outline">
+              <mat-label>Poziom </mat-label>
+              <input
+                type="text"
+                matInput
+                [(ngModel)]="data.table_top['hcp'].level"
+              />
+              <span matTextSuffix>kV</span>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Osiągnięte kryterium </mat-label>
+              <input
+                type="text"
+                matInput
+                [(ngModel)]="data.table_top['hcp'].criterion"
+              />
+            </mat-form-field>
+          </div>
+          <div class="row">
+            <mat-form-field appearance="outline">
+              <mat-label>Wymagane kryterium </mat-label>
+              <input
+                type="text"
+                matInput
+                [(ngModel)]="data.table_top['hcp'].required_crit"
+              />
+            </mat-form-field>
+          </div>
+        </mat-expansion-panel>
+      </ng-container>
+      <ng-container *ngIf="data.is_floor_standing">
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>Floor standing</mat-panel-title>
+          </mat-expansion-panel-header>
+          <div class="row">Contact</div>
+          <div class="row">
+            <mat-form-field appearance="outline">
+              <mat-label>Poziom </mat-label>
+              <input
+                type="text"
+                matInput
+                [(ngModel)]="data.floor_standing['contact'].level"
+              />
+              <span matTextSuffix>kV</span>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Osiągnięte kryterium </mat-label>
+              <input
+                type="text"
+                matInput
+                [(ngModel)]="data.floor_standing['contact'].criterion"
+              />
+            </mat-form-field>
+          </div>
+          <div class="row">
+            <mat-form-field appearance="outline">
+              <mat-label>Wymagane kryterium </mat-label>
+              <input
+                type="text"
+                matInput
+                [(ngModel)]="data.floor_standing['contact'].required_crit"
+              />
+            </mat-form-field>
+          </div>
+          <div class="row">Air</div>
+          <div class="row">
+            <mat-form-field appearance="outline">
+              <mat-label>Poziom </mat-label>
+              <input
+                type="text"
+                matInput
+                [(ngModel)]="data.floor_standing['air'].level"
+              />
+              <span matTextSuffix>kV</span>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Osiągnięte kryterium </mat-label>
+              <input
+                type="text"
+                matInput
+                [(ngModel)]="data.floor_standing['air'].criterion"
+              />
+            </mat-form-field>
+          </div>
+          <div class="row">
+            <mat-form-field appearance="outline">
+              <mat-label>Wymagane kryterium </mat-label>
+              <input
+                type="text"
+                matInput
+                [(ngModel)]="data.floor_standing['air'].required_crit"
+              />
+            </mat-form-field>
+          </div>
+          <div class="row">VCP</div>
+          <div class="row">
+            <mat-form-field appearance="outline">
+              <mat-label>Poziom </mat-label>
+              <input
+                type="text"
+                matInput
+                [(ngModel)]="data.floor_standing['vcp'].level"
+              />
+              <span matTextSuffix>kV</span>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Osiągnięte kryterium </mat-label>
+              <input
+                type="text"
+                matInput
+                [(ngModel)]="data.floor_standing['vcp'].criterion"
+              />
+            </mat-form-field>
+          </div>
+          <div class="row">
+            <mat-form-field appearance="outline">
+              <mat-label>Wymagane kryterium </mat-label>
+              <input
+                type="text"
+                matInput
+                [(ngModel)]="data.floor_standing['vcp'].required_crit"
+              />
+            </mat-form-field>
+          </div>
+        </mat-expansion-panel>
+      </ng-container>
+    </mat-accordion>
+  </ng-container>
+  <div class="row">
+    <mat-form-field appearance="outline">
+      <mat-label>Komentarz</mat-label>
+      <textarea matInput [(ngModel)]="data.basic_data.comment"></textarea>
+    </mat-form-field>
+  </div>
+  <div class="row">
+    <mat-form-field appearance="outline">
+      <mat-label>Wynik </mat-label>
+      <input type="text" matInput [(ngModel)]="data.basic_data.result" />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Data badań</mat-label>
+      <input
+        matInput
+        [matDatepicker]="picker"
+        [(ngModel)]="data.basic_data.date"
+      />
+      <mat-hint>DD/MM/YYYY</mat-hint>
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="picker"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </div>
+  <div class="row">
+    <mat-form-field appearance="outline">
+      <mat-label>Badania wykonał </mat-label>
+      <input type="text" matInput [(ngModel)]="data.basic_data.contractor" />
+    </mat-form-field>
+  </div>
+  <div class="buttons">
+    <button mat-raised-button routerLink="/result">Wróć</button>
+    <button mat-raised-button routerLink="/norm/pn42" (click)="next()">
+      Dalej
+    </button>
+  </div>
+</div>

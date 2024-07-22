@@ -2,9 +2,9 @@ import { Injectable, OnInit } from '@angular/core';
 import { BasicInfo, ObjectMode, ObjectPower, ObjectSignal } from './dictionary';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-export class InputsService{
+export class InputsService {
   public inputs: any = {};
 
   constructor() {
@@ -20,7 +20,7 @@ export class InputsService{
         isEndurance: true,
         date: '',
         executor: '',
-        reviewer: ''
+        reviewer: '',
       },
       object_power: {
         voltage: 'AC 230 V',
@@ -29,7 +29,7 @@ export class InputsService{
         cable: '',
         screen: '',
         cable_length: '',
-        connection: ''
+        connection: '',
       },
       object_signal: {
         conn_number: '',
@@ -37,31 +37,88 @@ export class InputsService{
         cable: '',
         screen: '',
         cable_length: '',
-        connection: ''
+        connection: '',
       },
       object_mode: {
         modes: '',
-        modes_desc: {}
+        modes_desc: {},
       },
       object_others: {
         criterion: '',
         date: '',
-        representative: ''
+        representative: '',
       },
       results: {
         emission: [],
         endurance: [],
-      }
-    }
-   }
+      },
+      pn_en_42: {
+        basic_data: {
+          temperature: 0,
+          pressure: 0,
+          humidity: 0,
+          devices: [],
+          comment: '',
+          result: '',
+          contractor: '',
+        },
+        is_table_top: false,
+        is_floor_standing: false,
+        table_top: {
+          contact: {
+            level: '',
+            criterion: '',
+            required_crit: '',
+            picture: '',
+          },
+          air: {
+            level: '',
+            criterion: '',
+            required_crit: '',
+            picture: '',
+          },
+          vcp: {
+            level: '',
+            criterion: '',
+            required_crit: '',
+            picture: '',
+          },
+          hcp: {
+            level: '',
+            criterion: '',
+            required_crit: '',
+            picture: '',
+          },
+        },
+        floor_standing: {
+          contact: {
+            level: '',
+            criterion: '',
+            required_crit: '',
+            picture: '',
+          },
+          air: {
+            level: '',
+            criterion: '',
+            required_crit: '',
+            picture: '',
+          },
+          vcp: {
+            level: '',
+            criterion: '',
+            required_crit: '',
+            picture: '',
+          },
+        },
+      },
+    };
+  }
 
-   get getInputs(){
-    return this.inputs
-   }
+  get getInputs() {
+    return this.inputs;
+  }
 
-   
-
-  public updateInputs(obj, value){
-    this.inputs[obj] = value
+  public updateInputs(obj, value) {
+    this.inputs[obj] = value;
   }
 }
