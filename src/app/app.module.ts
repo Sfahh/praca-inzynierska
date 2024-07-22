@@ -13,6 +13,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ObjectDescriptionComponent } from './components/object-description/object-description.component';
 import { DatePipe } from '@angular/common';
 import { ResearchResultComponent } from './components/research-result/research-result.component';
+import { PnEn42Component } from './components/norms/pn-en42/pn-en42.component';
+import { NormComponent } from './components/norms/norm/norm.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,8 @@ import { ResearchResultComponent } from './components/research-result/research-r
     ReportComponent,
     ObjectDescriptionComponent,
     ResearchResultComponent,
+    PnEn42Component,
+    NormComponent,
   ],
   imports: [
     BrowserModule,
