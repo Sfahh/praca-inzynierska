@@ -11,6 +11,7 @@ import { DatePipe } from '@angular/common';
 export class En43Component implements OnInit {
   data: NormEn43;
   devices = ['Amperomierz', 'Woltomierz', 'Cewka Rogowskiego', 'Sonda prądowa'];
+  levels = ['3', '10'];
 
   constructor(public inputs: InputsService, public datepipe: DatePipe) {
     this.data = new NormEn43();
@@ -18,6 +19,7 @@ export class En43Component implements OnInit {
 
   ngOnInit(): void {
     this.data = this.inputs.inputs?.en43;
+    console.log('test');
   }
   next() {
     this.data.basic_data.date = this.datepipe.transform(

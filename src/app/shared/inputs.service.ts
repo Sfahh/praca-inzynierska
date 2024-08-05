@@ -122,7 +122,7 @@ export class InputsService {
           contractor: '',
         },
         frequency: '',
-        modulation: '',
+        modulation: '80% AM, 1 kHz ',
         level: '',
         criterion: '',
         req_criterion: '',

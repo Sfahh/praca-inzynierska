@@ -115,4 +115,5 @@ export class NormEn43 {
   level: string = null;
   criterion: string = null;
   req_criteerion: string = null;
+  picture: File = null;
 }
