@@ -98,6 +98,22 @@ export class NormPnEn42 {
   floor_standing: {
     [key: string]: DeviceResult;
   };
-
-  constructor() {}
+}
+export class NormEn43 {
+  basic_data: NormBasicData = {
+    temperature: 0,
+    pressure: 0,
+    humidity: 0,
+    devices: [],
+    comment: null,
+    result: null,
+    contractor: null,
+    date: null,
+  };
+  frequency: string = null;
+  modulation: string = null;
+  level: string = null;
+  criterion: string = null;
+  req_criteerion: string = null;
+  picture: File = null;
 }
