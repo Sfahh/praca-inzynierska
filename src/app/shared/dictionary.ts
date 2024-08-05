@@ -11,6 +11,7 @@ export class BasicInfo {
 }
 
 export class ObjectPower {
+  is_power: boolean = false;
   voltage: string = 'AC 230 V';
   power: string = null;
   security: number = null;
@@ -21,6 +22,7 @@ export class ObjectPower {
 }
 
 export class ObjectSignal {
+  is_signal: boolean = false;
   conn_number: string;
   connections: {
     [key: string]: string;
@@ -116,4 +118,30 @@ export class NormEn43 {
   criterion: string = null;
   req_criteerion: string = null;
   picture: File = null;
+}
+
+export class En44Results {
+  name: string = null;
+  level: string = null;
+  frequency: string = null;
+  repetition: string = null;
+  criterion: string = null;
+  req_criterion: string = null;
+  picture: File = null;
+}
+export class NormEn44 {
+  basic_data: NormBasicData = {
+    temperature: 0,
+    pressure: 0,
+    humidity: 0,
+    devices: [],
+    comment: null,
+    result: null,
+    contractor: null,
+    date: null,
+  };
+  is_table_top: boolean = false;
+  is_floor_standing: boolean = false;
+  power: En44Results[] = [];
+  signal: En44Results[] = [];
 }
