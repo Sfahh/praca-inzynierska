@@ -111,6 +111,23 @@ export class InputsService {
           },
         },
       },
+      en43: {
+        basic_data: {
+          temperature: 0,
+          pressure: 0,
+          humidity: 0,
+          devices: [],
+          comment: '',
+          result: '',
+          contractor: '',
+        },
+        frequency: '',
+        modulation: '',
+        level: '',
+        criterion: '',
+        req_criterion: '',
+        picture: '',
+      },
     };
   }
 

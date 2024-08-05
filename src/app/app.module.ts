@@ -15,6 +15,7 @@ import { DatePipe } from '@angular/common';
 import { ResearchResultComponent } from './components/research-result/research-result.component';
 import { PnEn42Component } from './components/norms/pn-en42/pn-en42.component';
 import { NormComponent } from './components/norms/norm/norm.component';
+import { En43Component } from './components/norms/en43/en43.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { NormComponent } from './components/norms/norm/norm.component';
     ResearchResultComponent,
     PnEn42Component,
     NormComponent,
+    En43Component,
   ],
   imports: [
     BrowserModule,
