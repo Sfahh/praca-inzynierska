@@ -1,5 +1,5 @@
 <div class="container">
-  <h1>Norma EN 61000-4-4</h1>
+  <h1>Norma PN-EN 61000-4-5</h1>
   <div class="row">
     <mat-form-field appearance="outline">
       <mat-label>Temperatura </mat-label>
@@ -23,8 +23,6 @@
       />
       <span matTextSuffix>%</span>
     </mat-form-field>
-  </div>
-  <div class="row">
     <mat-form-field appearance="outline">
       <mat-label>Lista urządzeń pomiarowych</mat-label>
       <input
@@ -41,85 +39,46 @@
     </mat-form-field>
   </div>
   <div class="row">
-    <mat-checkbox [(ngModel)]="data.is_table_top">Table top</mat-checkbox>
-    <mat-checkbox [(ngModel)]="data.is_floor_standing"
-      >Floor standing</mat-checkbox
-    >
+    <mat-form-field appearance="outline">
+      <mat-label>Klasa ochronności urządzenia </mat-label>
+      <input type="text" matInput [(ngModel)]="security" />
+    </mat-form-field>
   </div>
   <div class="line"></div>
   <ng-container *ngIf="isPower">
     Zasilanie
-    <div class="row">
-      <mat-form-field appearance="outline">
-        <mat-label>Poziom</mat-label>
-        <input type="text" matInput [(ngModel)]="powerData[0].level" />
-        <span matTextSuffix>kV</span>
-      </mat-form-field>
-      <mat-form-field appearance="outline">
-        <mat-label>Częstotliwość</mat-label>
-        <input type="text" matInput [(ngModel)]="powerData[0].frequency" />
-        <span matTextSuffix>kHz</span>
-      </mat-form-field>
-    </div>
-    <div class="row">
-      <mat-form-field appearance="outline">
-        <mat-label>Repetition rate</mat-label>
-        <input type="text" matInput [(ngModel)]="powerData[0].repetition" />
-      </mat-form-field>
-      <mat-form-field appearance="outline">
-        <mat-label>Osiągnięte kryterium</mat-label>
-        <input type="text" matInput [(ngModel)]="powerData[0].criterion" />
-      </mat-form-field>
-    </div>
-    <div class="row">
-      <mat-form-field appearance="outline">
-        <mat-label>Wymagane kryterium</mat-label>
-        <input type="text" matInput [(ngModel)]="powerData[0].req_criterion" />
-      </mat-form-field>
-    </div>
-    <div class="line"></div
-  ></ng-container>
-  <ng-container *ngIf="isSignal">
-    <div class="signal" *ngFor="let conn of conns; let i = index">
-      {{ "Port sygnałowy " + (i + 1) }}
-      <br />
-      <br />
+    <div class="results" *ngFor="let item of dataPower">
       <div class="row">
         <mat-form-field appearance="outline">
-          <mat-label>Poziom</mat-label>
-          <input type="text" matInput [(ngModel)]="signalData[i].level" />
+          <mat-label>Sprzężenie </mat-label>
+          <input type="text" matInput [(ngModel)]="item.interface" />
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Efektywna impedancja urządzenia </mat-label>
+          <input type="text" matInput [(ngModel)]="item.impedance" />
+          <span matTextSuffix>{{ "\u03a9" }}</span>
+        </mat-form-field>
+      </div>
+      <div class="row">
+        <mat-form-field appearance="outline">
+          <mat-label>Poziom </mat-label>
+          <input type="text" matInput [(ngModel)]="item.level" />
           <span matTextSuffix>kV</span>
         </mat-form-field>
         <mat-form-field appearance="outline">
-          <mat-label>Częstotliwość</mat-label>
-          <input type="text" matInput [(ngModel)]="signalData[i].frequency" />
-          <span matTextSuffix>kHz</span>
+          <mat-label>Osiągnięte kryterium </mat-label>
+          <input type="text" matInput [(ngModel)]="item.criterion" />
         </mat-form-field>
       </div>
       <div class="row">
         <mat-form-field appearance="outline">
-          <mat-label>Repetition rate</mat-label>
-          <input type="text" matInput [(ngModel)]="signalData[i].repetition" />
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-          <mat-label>Osiągnięte kryterium</mat-label>
-          <input type="text" matInput [(ngModel)]="signalData[i].criterion" />
-        </mat-form-field>
-      </div>
-      <div class="row">
-        <mat-form-field appearance="outline">
-          <mat-label>Wymagane kryterium</mat-label>
-          <input
-            type="text"
-            matInput
-            [(ngModel)]="signalData[i].req_criterion"
-          />
+          <mat-label>Wymagane kryterium </mat-label>
+          <input type="text" matInput [(ngModel)]="item.req_criterion" />
         </mat-form-field>
       </div>
     </div>
-    <div class="line"></div>
   </ng-container>
-
+  <div class="line"></div>
   <div class="row">
     <mat-form-field appearance="outline">
       <mat-label>Komentarz</mat-label>
@@ -133,7 +92,11 @@
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Data badań</mat-label>
-      <input matInput [matDatepicker]="picker" [(ngModel)]="date" />
+      <input
+        matInput
+        [matDatepicker]="picker"
+        [(ngModel)]="data.basic_data.date"
+      />
       <mat-hint>DD/MM/YYYY</mat-hint>
       <mat-datepicker-toggle
         matIconSuffix
@@ -149,8 +112,8 @@
     </mat-form-field>
   </div>
   <div class="buttons">
-    <button mat-raised-button routerLink="/norm/en43">Wróć</button>
-    <button mat-raised-button routerLink="/norm/en45" (click)="next()">
+    <button mat-raised-button routerLink="/norm/en44">Wróć</button>
+    <button mat-raised-button routerLink="/norm/en46" (click)="next()">
       Dalej
     </button>
   </div>

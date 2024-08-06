@@ -145,3 +145,33 @@ export class NormEn44 {
   power: En44Results[] = [];
   signal: En44Results[] = [];
 }
+
+export class En45Results {
+  port?: string = null;
+  interface: string = null;
+  impedance: number = null;
+  level: number = null;
+  criterion: string = null;
+  req_criterion: string = null;
+}
+
+export class NormEn45 {
+  basic_data: NormBasicData = {
+    temperature: 0,
+    pressure: 0,
+    humidity: 0,
+    devices: [],
+    comment: null,
+    result: null,
+    contractor: null,
+    date: null,
+  };
+  security_class: string;
+  power: En45Results[] = [];
+  signal: En45Results[] = [];
+  interface_angle: string = null;
+  positive_bursts: number = null;
+  negative_bursts: number = null;
+  bursts_gap: string = null;
+  picture: File = null;
+}

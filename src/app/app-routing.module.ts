@@ -8,6 +8,7 @@ import { NormComponent } from './components/norms/norm/norm.component';
 import { PnEn42Component } from './components/norms/pn-en42/pn-en42.component';
 import { En43Component } from './components/norms/en43/en43.component';
 import { En44Component } from './components/norms/en44/en44.component';
+import { En45Component } from './components/norms/en45/en45.component';
 
 const routes: Routes = [
   { path: '', component: LandingPageComponent },
@@ -21,6 +22,7 @@ const routes: Routes = [
       { path: 'pn42', component: PnEn42Component },
       { path: 'en43', component: En43Component },
       { path: 'en44', component: En44Component },
+      { path: 'en45', component: En45Component },
     ],
   },
 ];
