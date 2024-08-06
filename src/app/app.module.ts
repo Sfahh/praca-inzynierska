@@ -16,6 +16,7 @@ import { ResearchResultComponent } from './components/research-result/research-r
 import { PnEn42Component } from './components/norms/pn-en42/pn-en42.component';
 import { NormComponent } from './components/norms/norm/norm.component';
 import { En43Component } from './components/norms/en43/en43.component';
+import { En44Component } from './components/norms/en44/en44.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { En43Component } from './components/norms/en43/en43.component';
     PnEn42Component,
     NormComponent,
     En43Component,
+    En44Component,
   ],
   imports: [
     BrowserModule,

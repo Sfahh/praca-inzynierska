@@ -45,6 +45,8 @@ export class ObjectDescriptionComponent implements OnInit {
   }
 
   next() {
+    this.dataPower.is_power = this.isPower;
+    this.dataSignal.is_signal = this.isSignal;
     this.dataOthers.date = this.datepipe.transform(
       this.dataOthers.date,
       'dd/MM/yyyy'
