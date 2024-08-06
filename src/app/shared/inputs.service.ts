@@ -175,6 +175,20 @@ export class InputsService {
         bursts_gap: '30',
         picture: null,
       },
+      en46: {
+        basic_data: {
+          temperature: 0,
+          pressure: 0,
+          humidity: 0,
+          devices: [],
+          comment: '',
+          result: '',
+          contractor: '',
+        },
+        power: [],
+        signal: [],
+        picture: null,
+      },
     };
   }
 

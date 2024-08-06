@@ -177,3 +177,28 @@ export class NormEn45 {
   bursts_gap: string = null;
   picture: File = null;
 }
+
+export class En46Results {
+  port: string = null;
+  frequency: string = null;
+  modulation: string = null;
+  level: string = null;
+  criterion: string = null;
+  req_criterion: string = null;
+}
+
+export class NormEn46 {
+  basic_data: NormBasicData = {
+    temperature: 0,
+    pressure: 0,
+    humidity: 0,
+    devices: [],
+    comment: null,
+    result: null,
+    contractor: null,
+    date: null,
+  };
+  power: En46Results[] = [];
+  signal: En46Results[] = [];
+  picture: File = null;
+}
