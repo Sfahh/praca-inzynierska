@@ -22,6 +22,8 @@ export class En46Component implements OnInit {
 
   devices = ['Amperomierz', 'Woltomierz', 'Cewka Rogowskiego', 'Sonda prądowa'];
 
+  selectedFile;
+
   constructor(public inputs: InputsService, public datepipe: DatePipe) {}
 
   ngOnInit(): void {
@@ -58,5 +60,27 @@ export class En46Component implements OnInit {
     this.data.signal = this.dataSignal;
     this.inputs.updateInputs('en_46', this.data);
     console.log(this.inputs.inputs);
+    console.log(this.selectedFile);
+    this.fileToBase64(this.selectedFile.files);
+  }
+
+  onFileSelected(event: any): void {
+    this.selectedFile = event.target.files[0] ?? null;
+    console.log(this.selectedFile);
+    const reader = new FileReader();
+    reader.readAsDataURL(this.selectedFile);
+    reader.onload = () => {
+      console.log(reader.result);
+    };
+  }
+
+  fileToBase64(files: []) {
+    files.forEach((el) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(el);
+      reader.onload = () => {
+        console.log(reader.result);
+      };
+    });
   }
 }
