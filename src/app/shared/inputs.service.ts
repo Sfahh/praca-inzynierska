@@ -142,6 +142,8 @@ export class InputsService {
         },
         power: [],
         signal: [],
+        is_table_top: false,
+        is_floor_standing: false,
       },
     };
   }

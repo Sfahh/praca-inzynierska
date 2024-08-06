@@ -40,6 +40,12 @@
       </mat-autocomplete>
     </mat-form-field>
   </div>
+  <div class="row">
+    <mat-checkbox [(ngModel)]="data.is_table_top">Table top</mat-checkbox>
+    <mat-checkbox [(ngModel)]="data.is_floor_standing"
+      >Floor standing</mat-checkbox
+    >
+  </div>
   <div class="line"></div>
   <ng-container *ngIf="isPower">
     Zasilanie
