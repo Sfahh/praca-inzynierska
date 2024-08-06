@@ -21,16 +21,18 @@ export class ObjectPower {
   connection: string = null;
 }
 
+export class ObjectSignalDetail {
+  name: string = null;
+  cable: string = null;
+  screen: string = null;
+  cable_length: number = null;
+  connection: string = null;
+}
+
 export class ObjectSignal {
   is_signal: boolean = false;
   conn_number: string;
-  connections: {
-    [key: string]: string;
-  };
-  cable: string = null;
-  screen: string;
-  cable_length: number = null;
-  connection: string = null;
+  connections: ObjectSignalDetail[] = [];
 }
 
 export class ObjectMode {

@@ -35,11 +35,22 @@ export class InputsService {
       object_signal: {
         is_signal: true,
         conn_number: '2',
-        connections: {},
-        cable: '',
-        screen: '',
-        cable_length: '',
-        connection: '',
+        connections: [
+          {
+            cable: 'test1',
+            cable_length: '2',
+            connection: 'RJ45',
+            name: 'test',
+            screen: 'Tak',
+          },
+          {
+            cable: 'test2',
+            cable_length: '2',
+            connection: 'RJ45',
+            name: 'test2',
+            screen: 'Nie',
+          },
+        ],
       },
       object_mode: {
         modes: '',

@@ -1,197 +1,224 @@
 <div class="container">
-    <mat-label>Porty urządzenia badanego</mat-label>
-    <div class="ports">
-        <mat-checkbox [(ngModel)]="isPower">Zasilania</mat-checkbox>
-        <mat-checkbox [(ngModel)]="isSignal">Sygnałowe</mat-checkbox>
-    </div>
-    <div class="power" *ngIf="isPower || isSignal">
-        <mat-accordion multi>
-            <div *ngIf="isPower">
-                <mat-expansion-panel>
-                    <mat-expansion-panel-header>
-                        <mat-panel-title>
-                            Zasilanie
-                        </mat-panel-title>
-                    </mat-expansion-panel-header>
-                    <div class="row">
-                        <div class="item">
-                            <mat-form-field appearance="outline">
-                                <mat-label>Napięcie</mat-label>
-                                <input matInput type="text"  [(ngModel)]="dataPower.voltage">
-                            </mat-form-field>
-                        </div>
-                        <div class="item">
-                            <mat-form-field appearance="outline">
-                                <mat-label>Moc</mat-label>
-                                <input matInput type="text"  [(ngModel)]="dataPower.power">
-                            </mat-form-field>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="item">
-                            <mat-form-field appearance="outline">
-                                <mat-label>Klasa ochronności urządzenia</mat-label>
-                                <!-- <input matInput type="text"  [(ngModel)]="dataPower.security"> -->
-                                <mat-select [(ngModel)]="dataPower.security">
-                                    <mat-option value="1">1</mat-option>
-                                    <mat-option value="2">2</mat-option>
-                                    <mat-option value="3">3</mat-option>
-                                </mat-select>
-                            </mat-form-field>
-                        </div>
-                        <div class="item">
-                            <mat-form-field appearance="outline">
-                                <mat-label>Typ kabla (liczba żył, przekrój)</mat-label>
-                                <input matInput type="text"  [(ngModel)]="dataPower.cable">
-                            </mat-form-field>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="item">
-                            <mat-form-field appearance="outline">
-                                <mat-label>Ekran</mat-label>
-                                <mat-select [(ngModel)]="dataPower.screen">
-                                    <mat-option value="Tak">Tak</mat-option>
-                                    <mat-option value="Nie">Nie</mat-option>
-                                </mat-select>
-                            </mat-form-field>
-                        </div>
-                        <div class="item">
-                            <mat-form-field appearance="outline">
-                                <mat-label>Długość kabla</mat-label>
-                                <input matInput type="text"  [(ngModel)]="dataPower.cable_length">
-                            </mat-form-field>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="item">
-                            <mat-form-field appearance="outline">
-                                <mat-label>Złącze</mat-label>
-                                <input matInput type="text"  [(ngModel)]="dataPower.connection">
-                            </mat-form-field>
-                        </div>
-                    </div>
-                </mat-expansion-panel>
-            </div> 
-            <br>
-            <div *ngIf="isSignal">
-                <mat-expansion-panel>
-                    <mat-expansion-panel-header>
-                        <mat-panel-title>
-                            Sygnał
-                        </mat-panel-title>
-                    </mat-expansion-panel-header>
-                    <div class="row">
-                        <div class="item">
-                            <mat-form-field appearance="outline">
-                                <mat-label>Ilość złącz/typów złącz</mat-label>
-                                <input matInput type="text"  [(ngModel)]="dataSignal.conn_number">
-                            </mat-form-field>
-                        </div>
-                    </div>
-                    <div class="row-conns">
-                        <div class="item-conn" *ngFor="let item of countConnections(dataSignal.conn_number)">
-                            <mat-form-field appearance="outline">
-                                <mat-label>Złącze sygnałowe nr {{item + 1}}</mat-label>
-                                <input matInput type="text"  [(ngModel)]="dataSignal.connections['conn'+(item + 1)]">
-                            </mat-form-field>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="item">
-                            <mat-form-field appearance="outline">
-                                <mat-label>Typ kabla</mat-label>
-                                <input matInput type="text"  [(ngModel)]="dataSignal.cable">
-                            </mat-form-field>
-                        </div>
-                        <div class="item">
-                            <mat-form-field appearance="outline">
-                                <mat-label>Ekran</mat-label>
-                                <mat-select [(ngModel)]="dataSignal.screen">
-                                    <mat-option value="Tak">Tak</mat-option>
-                                    <mat-option value="Nie">Nie</mat-option>
-                                </mat-select>
-                            </mat-form-field>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="item">
-                            <mat-form-field appearance="outline">
-                                <mat-label>Długość kabla</mat-label>
-                                <input matInput type="text"  [(ngModel)]="dataSignal.cable_length">
-                            </mat-form-field>
-                        </div>
-                        <div class="item">
-                            <mat-form-field appearance="outline">
-                                <mat-label>Złącze</mat-label>
-                                <input 
-                                    matInput 
-                                    type="text"  
-                                    [(ngModel)]="dataSignal.connection"
-                                    [matAutocomplete]="auto"
-                                >
-                                <mat-autocomplete #auto="matAutocomplete">
-                                    <mat-option value="RJ45">RJ45</mat-option>
-                                    <mat-option value="COM">COM</mat-option>
-                                </mat-autocomplete>
-                            </mat-form-field>
-                        </div>
-                    </div>
-                </mat-expansion-panel>
-            </div>
-        </mat-accordion>        
-    </div>
-    <div class="mode">
-        Tryby pracy urządzenia w trakcie badań
-        <div class="row">
+  <mat-label>Porty urządzenia badanego</mat-label>
+  <div class="ports">
+    <mat-checkbox [(ngModel)]="isPower">Zasilania</mat-checkbox>
+    <mat-checkbox [(ngModel)]="isSignal">Sygnałowe</mat-checkbox>
+  </div>
+  <div class="power" *ngIf="isPower || isSignal">
+    <mat-accordion multi>
+      <div *ngIf="isPower">
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title> Zasilanie </mat-panel-title>
+          </mat-expansion-panel-header>
+          <div class="row">
             <div class="item">
-                <mat-form-field appearance="outline">
-                    <mat-label>Liczba trybów pracy</mat-label>
-                    <input matInput type="text"  [(ngModel)]="dataMode.modes">
-                </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Napięcie</mat-label>
+                <input matInput type="text" [(ngModel)]="dataPower.voltage" />
+              </mat-form-field>
             </div>
-        </div>
-        <div class="row-conns">
-            <div class="item-conn" *ngFor="let item of countConnections(dataMode.modes)">
-                <mat-form-field appearance="outline">
-                    <mat-label>Tryb {{item + 1}}</mat-label>
-                    <input matInput type="text"  [(ngModel)]="dataMode.modes_desc['mode' + item]">
-                </mat-form-field>
+            <div class="item">
+              <mat-form-field appearance="outline">
+                <mat-label>Moc</mat-label>
+                <input matInput type="text" [(ngModel)]="dataPower.power" />
+              </mat-form-field>
             </div>
-        </div>
+          </div>
+          <div class="row">
+            <div class="item">
+              <mat-form-field appearance="outline">
+                <mat-label>Klasa ochronności urządzenia</mat-label>
+                <!-- <input matInput type="text"  [(ngModel)]="dataPower.security"> -->
+                <mat-select [(ngModel)]="dataPower.security">
+                  <mat-option value="1">1</mat-option>
+                  <mat-option value="2">2</mat-option>
+                  <mat-option value="3">3</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="item">
+              <mat-form-field appearance="outline">
+                <mat-label>Typ kabla (liczba żył, przekrój)</mat-label>
+                <input matInput type="text" [(ngModel)]="dataPower.cable" />
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="item">
+              <mat-form-field appearance="outline">
+                <mat-label>Ekran</mat-label>
+                <mat-select [(ngModel)]="dataPower.screen">
+                  <mat-option value="Tak">Tak</mat-option>
+                  <mat-option value="Nie">Nie</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="item">
+              <mat-form-field appearance="outline">
+                <mat-label>Długość kabla</mat-label>
+                <input
+                  matInput
+                  type="text"
+                  [(ngModel)]="dataPower.cable_length"
+                />
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="item">
+              <mat-form-field appearance="outline">
+                <mat-label>Złącze</mat-label>
+                <input
+                  matInput
+                  type="text"
+                  [(ngModel)]="dataPower.connection"
+                />
+              </mat-form-field>
+            </div>
+          </div>
+        </mat-expansion-panel>
+      </div>
+      <br />
+      <div *ngIf="isSignal">
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title> Sygnał </mat-panel-title>
+          </mat-expansion-panel-header>
+          <div class="row">
+            <div class="item">
+              <mat-form-field appearance="outline">
+                <mat-label>Ilość złącz/typów złącz</mat-label>
+                <input
+                  matInput
+                  type="text"
+                  [(ngModel)]="dataSignal.conn_number"
+                  (input)="countConnectionsSignal($event)"
+                />
+              </mat-form-field>
+            </div>
+          </div>
+          <div *ngFor="let item of connections; let i = index">
+            <div class="row">
+              <div class="item">
+                <mat-form-field appearance="outline">
+                  <mat-label>Złącze sygnałowe nr {{ i + 1 }}</mat-label>
+                  <input matInput type="text" [(ngModel)]="item.name" />
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="item">
+                <mat-form-field appearance="outline">
+                  <mat-label>Typ kabla</mat-label>
+                  <input matInput type="text" [(ngModel)]="item.cable" />
+                </mat-form-field>
+              </div>
+              <div class="item">
+                <mat-form-field appearance="outline">
+                  <mat-label>Ekran</mat-label>
+                  <mat-select [(ngModel)]="item.screen">
+                    <mat-option value="Tak">Tak</mat-option>
+                    <mat-option value="Nie">Nie</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="item">
+                <mat-form-field appearance="outline">
+                  <mat-label>Długość kabla</mat-label>
+                  <input matInput type="text" [(ngModel)]="item.cable_length" />
+                </mat-form-field>
+              </div>
+              <div class="item">
+                <mat-form-field appearance="outline">
+                  <mat-label>Złącze</mat-label>
+                  <input
+                    matInput
+                    type="text"
+                    [(ngModel)]="item.connection"
+                    [matAutocomplete]="auto"
+                  />
+                  <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option value="RJ45">RJ45</mat-option>
+                    <mat-option value="COM">COM</mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+        </mat-expansion-panel>
+      </div>
+    </mat-accordion>
+  </div>
+  <div class="mode">
+    Tryby pracy urządzenia w trakcie badań
+    <div class="row">
+      <div class="item">
+        <mat-form-field appearance="outline">
+          <mat-label>Liczba trybów pracy</mat-label>
+          <input matInput type="text" [(ngModel)]="dataMode.modes" />
+        </mat-form-field>
+      </div>
     </div>
-    <div class="others">
-        <div class="row">
-            <div class="item">
-                <mat-form-field class="form-criterion" appearance="outline">
-                    <mat-label>Kryterium Oceny</mat-label>
-                    <textarea matInput  [(ngModel)]="dataOthers.criterion"></textarea>
-                </mat-form-field>
-            </div>
-        </div>
-        <div class="row">
-            <div class="item">
-                <mat-form-field appearance="outline">
-                    <mat-label>Data wykonania badań</mat-label>
-                    <input matInput [matDatepicker]="picker"  [(ngModel)]="dataOthers.date">
-                    <mat-hint>DD/MM/YYYY</mat-hint>
-                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-                    <mat-datepicker #picker></mat-datepicker>
-                </mat-form-field>
-            </div>
-        </div>
-        <div class="row">
-            <div class="item">
-                <mat-form-field appearance="outline">
-                    <mat-label>Przedstawiciele Zleceniodawcy</mat-label>
-                    <input matInput type="text"  [(ngModel)]="dataOthers.representative">
-                </mat-form-field>
-            </div>
-        </div>
+    <div class="row-conns">
+      <div
+        class="item-conn"
+        *ngFor="let item of countConnections(dataMode.modes)"
+      >
+        <mat-form-field appearance="outline">
+          <mat-label>Tryb {{ item + 1 }}</mat-label>
+          <input
+            matInput
+            type="text"
+            [(ngModel)]="dataMode.modes_desc['mode' + item]"
+          />
+        </mat-form-field>
+      </div>
     </div>
+  </div>
+  <div class="others">
+    <div class="row">
+      <div class="item">
+        <mat-form-field class="form-criterion" appearance="outline">
+          <mat-label>Kryterium Oceny</mat-label>
+          <textarea matInput [(ngModel)]="dataOthers.criterion"></textarea>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="item">
+        <mat-form-field appearance="outline">
+          <mat-label>Data wykonania badań</mat-label>
+          <input
+            matInput
+            [matDatepicker]="picker"
+            [(ngModel)]="dataOthers.date"
+          />
+          <mat-hint>DD/MM/YYYY</mat-hint>
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="item">
+        <mat-form-field appearance="outline">
+          <mat-label>Przedstawiciele Zleceniodawcy</mat-label>
+          <input matInput type="text" [(ngModel)]="dataOthers.representative" />
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
 
-    <div class="buttons">
-        <button mat-raised-button routerLink="/create">Wróć</button>
-        <button mat-raised-button routerLink="/result" (click)="next()">Dalej</button>
-    </div>
+  <div class="buttons">
+    <button mat-raised-button routerLink="/create">Wróć</button>
+    <button mat-raised-button routerLink="/result" (click)="next()">
+      Dalej
+    </button>
+  </div>
 </div>

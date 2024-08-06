@@ -18,14 +18,16 @@ export class En45Component implements OnInit {
   signal_connections: number = 0;
   conns;
   security;
-  screen;
+  signalDetail;
 
   constructor(public inputs: InputsService, public datepipe: DatePipe) {}
 
   ngOnInit(): void {
     this.data = this.inputs.inputs?.en45;
     this.security = this.inputs.inputs?.object_power.security;
-    this.screen = this.inputs.inputs?.object_signal.screen;
+    this.signalDetail = this.inputs.inputs?.object_signal.connections;
+    console.log(this.signalDetail);
+
     this.isPower = this.inputs.inputs?.object_power.is_power;
     this.isSignal = this.inputs.inputs?.object_signal.is_signal;
     // this.date = new Date(this.data.basic_data.date);
@@ -40,10 +42,14 @@ export class En45Component implements OnInit {
     }
     if (this.isSignal) {
       console.log('test');
-      this.conns.forEach((el) => {
+      this.conns.forEach((el, index) => {
+        console.log(index);
         el = new En45Results();
         el.interface =
-          this.screen === 'Tak' ? 'bezpośrednio w ekran' : 'CDN117';
+          this.signalDetail[index].screen === 'Tak'
+            ? 'bezpośrednio w ekran'
+            : 'CDN117';
+        el.port = this.signalDetail[index].name;
         this.dataSignal.push(el);
       });
       console.log(this.dataSignal);
@@ -70,6 +76,8 @@ export class En45Component implements OnInit {
       this.data.basic_data.date,
       'dd/MM/yyyy'
     );
+    this.data.power = this.dataPower;
+    this.data.signal = this.dataSignal;
     this.inputs.updateInputs('en_45', this.data);
     console.log(this.inputs.inputs);
   }

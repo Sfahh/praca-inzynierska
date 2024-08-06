@@ -44,40 +44,105 @@
       <input type="text" matInput [(ngModel)]="security" />
     </mat-form-field>
   </div>
-  <div class="line"></div>
-  <ng-container *ngIf="isPower">
-    Zasilanie
-    <div class="results" *ngFor="let item of dataPower">
-      <div class="row">
-        <mat-form-field appearance="outline">
-          <mat-label>Sprzężenie </mat-label>
-          <input type="text" matInput [(ngModel)]="item.interface" />
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-          <mat-label>Efektywna impedancja urządzenia </mat-label>
-          <input type="text" matInput [(ngModel)]="item.impedance" />
-          <span matTextSuffix>{{ "\u03a9" }}</span>
-        </mat-form-field>
+  <ng-container *ngIf="isPower || isSignal">
+    <mat-accordion multi>
+      <div *ngIf="isPower">
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>Zasilanie</mat-panel-title>
+          </mat-expansion-panel-header>
+          <div class="results" *ngFor="let item of dataPower">
+            <div class="row">
+              <mat-form-field appearance="outline">
+                <mat-label>Sprzężenie </mat-label>
+                <input type="text" matInput [(ngModel)]="item.interface" />
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Efektywna impedancja urządzenia </mat-label>
+                <input type="text" matInput [(ngModel)]="item.impedance" />
+                <span matTextSuffix>{{ "\u03a9" }}</span>
+              </mat-form-field>
+            </div>
+            <div class="row">
+              <mat-form-field appearance="outline">
+                <mat-label>Poziom </mat-label>
+                <input type="text" matInput [(ngModel)]="item.level" />
+                <span matTextSuffix>kV</span>
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Osiągnięte kryterium </mat-label>
+                <input type="text" matInput [(ngModel)]="item.criterion" />
+              </mat-form-field>
+            </div>
+            <div class="row">
+              <mat-form-field appearance="outline">
+                <mat-label>Wymagane kryterium </mat-label>
+                <input type="text" matInput [(ngModel)]="item.req_criterion" />
+              </mat-form-field>
+            </div>
+          </div>
+        </mat-expansion-panel>
       </div>
-      <div class="row">
-        <mat-form-field appearance="outline">
-          <mat-label>Poziom </mat-label>
-          <input type="text" matInput [(ngModel)]="item.level" />
-          <span matTextSuffix>kV</span>
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-          <mat-label>Osiągnięte kryterium </mat-label>
-          <input type="text" matInput [(ngModel)]="item.criterion" />
-        </mat-form-field>
+      <div *ngIf="isSignal">
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>Sygnał</mat-panel-title>
+          </mat-expansion-panel-header>
+          <div class="results" *ngFor="let item of dataSignal; let i = index">
+            Port sygnałowy {{ item.port }}
+            <div class="row">
+              <mat-form-field appearance="outline">
+                <mat-label>Sprzężenie </mat-label>
+                <input type="text" matInput [(ngModel)]="item.interface" />
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Efektywna impedancja urządzenia </mat-label>
+                <input type="text" matInput [(ngModel)]="item.impedance" />
+                <span matTextSuffix>{{ "\u03a9" }}</span>
+              </mat-form-field>
+            </div>
+            <div class="row">
+              <mat-form-field appearance="outline">
+                <mat-label>Poziom </mat-label>
+                <input type="text" matInput [(ngModel)]="item.level" />
+                <span matTextSuffix>kV</span>
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Osiągnięte kryterium </mat-label>
+                <input type="text" matInput [(ngModel)]="item.criterion" />
+              </mat-form-field>
+            </div>
+            <div class="row">
+              <mat-form-field appearance="outline">
+                <mat-label>Wymagane kryterium </mat-label>
+                <input type="text" matInput [(ngModel)]="item.req_criterion" />
+              </mat-form-field>
+            </div>
+          </div>
+        </mat-expansion-panel>
       </div>
-      <div class="row">
-        <mat-form-field appearance="outline">
-          <mat-label>Wymagane kryterium </mat-label>
-          <input type="text" matInput [(ngModel)]="item.req_criterion" />
-        </mat-form-field>
-      </div>
-    </div>
+    </mat-accordion>
   </ng-container>
+  <div class="row">
+    <mat-form-field appearance="outline">
+      <mat-label>Kąty sprzężenia </mat-label>
+      <input type="text" matInput [(ngModel)]="data.interface_angle" />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Liczba impulsów dodatnich </mat-label>
+      <input type="text" matInput [(ngModel)]="data.positive_bursts" />
+    </mat-form-field>
+  </div>
+  <div class="row">
+    <mat-form-field appearance="outline">
+      <mat-label>Liczba impulsów ujemnych </mat-label>
+      <input type="text" matInput [(ngModel)]="data.negative_bursts" />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Odstęp między impulsami </mat-label>
+      <input type="text" matInput [(ngModel)]="data.bursts_gap" />
+    </mat-form-field>
+  </div>
   <div class="line"></div>
   <div class="row">
     <mat-form-field appearance="outline">
