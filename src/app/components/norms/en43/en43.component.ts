@@ -19,7 +19,7 @@ export class En43Component implements OnInit {
 
   ngOnInit(): void {
     this.data = this.inputs.inputs?.en43;
-    console.log('test');
+    console.log('tes2t');
   }
   next() {
     this.data.basic_data.date = this.datepipe.transform(

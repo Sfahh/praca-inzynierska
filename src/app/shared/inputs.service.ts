@@ -23,6 +23,7 @@ export class InputsService {
         reviewer: '',
       },
       object_power: {
+        is_power: true,
         voltage: 'AC 230 V',
         power: '',
         security: '',
@@ -32,7 +33,8 @@ export class InputsService {
         connection: '',
       },
       object_signal: {
-        conn_number: '',
+        is_signal: true,
+        conn_number: '2',
         connections: {},
         cable: '',
         screen: '',
@@ -127,6 +129,21 @@ export class InputsService {
         criterion: '',
         req_criterion: '',
         picture: '',
+      },
+      en44: {
+        basic_data: {
+          temperature: 0,
+          pressure: 0,
+          humidity: 0,
+          devices: [],
+          comment: '',
+          result: '',
+          contractor: '',
+        },
+        power: [],
+        signal: [],
+        is_table_top: false,
+        is_floor_standing: false,
       },
     };
   }
