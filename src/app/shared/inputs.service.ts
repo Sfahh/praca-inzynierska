@@ -189,6 +189,18 @@ export class InputsService {
         signal: [],
         picture: null,
       },
+      en48: {
+        basic_data: {
+          devices: [],
+          comment: '',
+          result: '',
+          contractor: '',
+        },
+        level: '',
+        frequency: '',
+        picture: null,
+        axis: [],
+      },
     };
   }
 

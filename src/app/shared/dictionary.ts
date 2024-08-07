@@ -66,14 +66,14 @@ export class Results {
 }
 
 export class NormBasicData {
-  temperature: number = 0;
-  pressure: number = 0;
-  humidity: number = 0;
-  devices: Array<string> = [];
-  comment: string = null;
-  result: 'pozytywny' | 'negatywny' | null = null;
-  contractor: string = null;
-  date: string = null;
+  temperature?: number = 0;
+  pressure?: number = 0;
+  humidity?: number = 0;
+  devices?: Array<string> = [];
+  comment?: string = null;
+  result?: 'pozytywny' | 'negatywny' | null = null;
+  contractor?: string = null;
+  date?: string = null;
 }
 
 export class DeviceResult {
@@ -201,4 +201,24 @@ export class NormEn46 {
   power: En46Results[] = [];
   signal: En46Results[] = [];
   picture: File = null;
+}
+
+export class En48Results {
+  axis: 'X' | 'Y' | 'Z' | null = null;
+  criterion: string = null;
+  req_criterion: string = null;
+}
+
+export class NormEn48 {
+  basic_data: NormBasicData = {
+    devices: [],
+    comment: null,
+    result: null,
+    contractor: null,
+    date: null,
+  };
+  axis: En48Results[] = [];
+  level: string = null;
+  frequency: string = null;
+  picture: any = null;
 }

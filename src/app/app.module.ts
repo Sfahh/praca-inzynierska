@@ -19,6 +19,7 @@ import { En43Component } from './components/norms/en43/en43.component';
 import { En44Component } from './components/norms/en44/en44.component';
 import { En45Component } from './components/norms/en45/en45.component';
 import { En46Component } from './components/norms/en46/en46.component';
+import { En48Component } from './components/norms/en48/en48.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { En46Component } from './components/norms/en46/en46.component';
     En44Component,
     En45Component,
     En46Component,
+    En48Component,
   ],
   imports: [
     BrowserModule,
