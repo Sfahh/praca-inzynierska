@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="emission" *ngIf="isEmission">
+  <!-- <div class="emission" *ngIf="isEmission">
     <div class="header">
       <b>Emisja</b>
       <button mat-icon-button (click)="addNorm('emission')">
@@ -29,10 +29,6 @@
         </mat-form-field>
       </div>
       <div class="row">
-        <!-- <mat-form-field appearance="outline">
-                    <mat-label>Szczegółowe wyniki badań</mat-label>
-                    <input type="text" matInput>
-                </mat-form-field> -->
         <mat-form-field appearance="outline">
           <mat-label>Wynik próby</mat-label>
           <mat-select [(ngModel)]="dataResult.emission[i].result">
@@ -50,7 +46,7 @@
       <div class="line" *ngIf="i !== dataResult.emission.length + 1"></div>
       <br />
     </div>
-  </div>
+  </div> -->
   <div class="endurance" *ngIf="isEndurance">
     <div class="header">
       <b>Odporność</b>
@@ -107,7 +103,10 @@
         </button>
       </div>
       <br />
-      <div class="line"></div>
+      <div
+        class="line"
+        *ngIf="normEnduranceNumber > 1 && i !== normEnduranceNumber - 1"
+      ></div>
       <br />
     </div>
   </div>

@@ -9,6 +9,8 @@ import { En48Results, NormEn48 } from '../../../shared/dictionary';
   styleUrl: './en48.component.scss',
 })
 export class En48Component implements OnInit {
+  componentName: string = 'en48';
+
   data: NormEn48;
   axisResults: En48Results[] = [];
 

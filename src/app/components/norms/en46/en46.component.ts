@@ -9,6 +9,8 @@ import { En46Results, NormEn46 } from '../../../shared/dictionary';
   styleUrl: './en46.component.scss',
 })
 export class En46Component implements OnInit {
+  componentName: string = 'en46';
+
   data: NormEn46;
   dataSignal: En46Results[] = [];
   dataPower: En46Results[] = [];

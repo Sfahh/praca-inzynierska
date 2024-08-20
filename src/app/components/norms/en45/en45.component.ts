@@ -9,16 +9,22 @@ import { En45Results, NormEn45 } from '../../../shared/dictionary';
   styleUrl: './en45.component.scss',
 })
 export class En45Component implements OnInit {
+  componentName: string = 'en45';
+
   data: NormEn45;
   dataPower: En45Results[] = [];
   dataSignal: En45Results[] = [];
+
   devices = ['Amperomierz', 'Woltomierz', 'Cewka Rogowskiego', 'Sonda prądowa'];
+
   isPower: boolean = false;
   isSignal: boolean = false;
+
   signal_connections: number = 0;
   conns;
-  security;
   signalDetail;
+
+  security;
 
   constructor(public inputs: InputsService, public datepipe: DatePipe) {}
 

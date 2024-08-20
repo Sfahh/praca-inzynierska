@@ -9,15 +9,22 @@ import { En44Results, NormEn44 } from '../../../shared/dictionary';
   styleUrl: './en44.component.scss',
 })
 export class En44Component implements OnInit {
+  componentName: string = 'en44';
+
   data: NormEn44;
-  devices = ['Amperomierz', 'Woltomierz', 'Cewka Rogowskiego', 'Sonda prądowa'];
+
   signal_connections: number = 0;
   conns;
+
   signalData: En44Results[] = [];
   powerData: En44Results[] = [];
-  date: Date;
+
   isPower: boolean = false;
   isSignal: boolean = false;
+
+  date: Date;
+
+  devices = ['Amperomierz', 'Woltomierz', 'Cewka Rogowskiego', 'Sonda prądowa'];
 
   constructor(public inputs: InputsService, public datepipe: DatePipe) {
     this.data = new NormEn44();
@@ -31,25 +38,20 @@ export class En44Component implements OnInit {
     this.signal_connections = +this.inputs.inputs?.object_signal.conn_number;
     this.conns = Array.from(
       new Array(this.signal_connections),
-
       (x, i) => i + 1
     );
     if (this.isPower) {
       let power = new En44Results();
       this.powerData.push(power);
     }
-
     if (this.isSignal) {
       console.log('test');
-
       this.conns.forEach((el) => {
         el = new En44Results();
         this.signalData.push(el);
       });
-
       console.log(this.signalData);
     }
-
     console.log(this.signal_connections);
   }
 

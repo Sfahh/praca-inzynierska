@@ -23,7 +23,7 @@ export class InputsService {
         reviewer: '',
       },
       object_power: {
-        is_power: true,
+        is_power: false,
         voltage: 'AC 230 V',
         power: '',
         security: '1',
@@ -40,14 +40,14 @@ export class InputsService {
             cable: 'test1',
             cable_length: '2',
             connection: 'RJ45',
-            name: 'test',
+            name: 'Złącze rodzaju 1',
             screen: 'Tak',
           },
           {
             cable: 'test2',
             cable_length: '2',
             connection: 'RJ45',
-            name: 'test2',
+            name: 'Złącze typu 2',
             screen: 'Nie',
           },
         ],
@@ -63,7 +63,7 @@ export class InputsService {
       },
       results: {
         emission: [],
-        endurance: [],
+        endurance: ['pn_en_42', 'en43', 'en44', 'en45', 'en46', 'en48'],
       },
       pn_en_42: {
         basic_data: {

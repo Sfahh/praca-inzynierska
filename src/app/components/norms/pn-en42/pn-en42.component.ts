@@ -9,7 +9,10 @@ import { DatePipe } from '@angular/common';
   styleUrl: './pn-en42.component.scss',
 })
 export class PnEn42Component implements OnInit {
+  componentName: string = 'pn_en_42';
+
   data: NormPnEn42;
+
   devices = ['Amperomierz', 'Woltomierz', 'Cewka Rogowskiego', 'Sonda prądowa'];
 
   constructor(public inputs: InputsService, public datepipe: DatePipe) {

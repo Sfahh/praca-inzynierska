@@ -10,6 +10,8 @@ import { DatePipe } from '@angular/common';
 })
 export class En43Component implements OnInit {
   data: NormEn43;
+  componentName: string = 'en43';
+
   devices = ['Amperomierz', 'Woltomierz', 'Cewka Rogowskiego', 'Sonda prądowa'];
   levels = ['3', '10'];
 
