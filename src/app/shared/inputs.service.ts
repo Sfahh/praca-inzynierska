@@ -53,12 +53,15 @@ export class InputsService {
         ],
       },
       object_mode: {
-        modes: '',
-        modes_desc: {},
+        modes: '2',
+        modes_desc: {
+          mode1: 'test',
+          mode2: 'test2'
+        },
       },
       object_others: {
-        criterion: '',
-        date: '',
+        criterion: 'A',
+        date: '21/08/2024',
         representative: '',
       },
       results: {

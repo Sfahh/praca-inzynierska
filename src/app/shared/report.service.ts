@@ -63,7 +63,15 @@ export class ReportService implements OnInit {
         },
       },
     };
-    const inputss = this.inputs.inputs;
+
+    this.createSections()
+  }
+  ngOnInit(): void {
+    const inputs = this.inputs.inputs;
+  }
+
+  createSections(){
+    const inputs = this.inputs.inputs;
 
     this.basicInfo = [
       {
@@ -71,16 +79,16 @@ export class ReportService implements OnInit {
         table: {
           widths: [150, 300],
           body: [
-            ['Numer projektu', `${inputss.basic_info?.project_nr}`],
+            ['Numer projektu', `${inputs.basic_info?.project_nr}`],
             [
               { rowSpan: 4, text: 'Zleceniodawca' },
-              { rowSpan: 4, text: `${inputss.basic_info?.principal}` },
+              { rowSpan: 4, text: `${inputs.basic_info?.principal}` },
             ],
             ['', ''],
             ['', ''],
             ['', ''],
-            ['Obiekt badany', `${inputss.basic_info?.object}`],
-            ['Miejsce wykonania badań', `${inputss.basic_info?.place}`],
+            ['Obiekt badany', `${inputs.basic_info?.object}`],
+            ['Miejsce wykonania badań', `${inputs.basic_info?.place}`],
             // [
             //   { rowSpan: 2, text: 'Zakres badań' },
             //   inputs.basic_info?.isEmission ? 'Emisja' : '',
@@ -89,7 +97,7 @@ export class ReportService implements OnInit {
               { rowSpan: 2, text: 'Zakres badań' },
               { rowSpan: 2, text: 'Odporność' },
             ],
-            ['Data wydania sprawozdania', `${inputss.basic_info?.date}`],
+            ['Data wydania sprawozdania', `${inputs.basic_info?.date}`],
           ],
         },
       },
@@ -100,8 +108,8 @@ export class ReportService implements OnInit {
           body: [
             ['Sprawozdanie Sprawdził', 'Sprawozdanie wykonał'],
             [
-              `${inputss.basic_info?.reviewer}`,
-              `${inputss.basic_info?.executor}`,
+              `${inputs.basic_info?.reviewer}`,
+              `${inputs.basic_info?.executor}`,
             ],
           ],
         },
@@ -118,7 +126,7 @@ export class ReportService implements OnInit {
         text: 'Porty urządzenia badanego:',
       },
     ];
-    this.objPower = !inputss.object_power?.is_power
+    this.objPower = !inputs.object_power?.is_power
       ? []
       : [
           {
@@ -127,26 +135,26 @@ export class ReportService implements OnInit {
           {
             style: 'table',
             table: {
-              widths: [150, 300],
+              widths: [200, 250],
               body: [
-                ['Napięcie', `${inputss.object_power?.voltage}`],
-                ['Moc', `${inputss.object_power?.power}`],
+                ['Napięcie', `${inputs.object_power?.voltage}`],
+                ['Moc', `${inputs.object_power?.power}`],
                 [
                   'Klasa ochronności urządzenia',
-                  `${inputss.object_power?.security}`,
+                  `${inputs.object_power?.security}`,
                 ],
                 [
                   'Typ kabla (liczba żył, przekrój)',
-                  `${inputss.object_power?.cable}`,
+                  `${inputs.object_power?.cable}`,
                 ],
-                ['Ekran', `${inputss.object_power?.screen}`],
-                ['Długość kabla', `${inputss.object_power?.cable_length}`],
-                ['Złącze', `${inputss.object_power?.connection}`],
+                ['Ekran', `${inputs.object_power?.screen}`],
+                ['Długość kabla', `${inputs.object_power?.cable_length}`],
+                ['Złącze', `${inputs.object_power?.connection}`],
               ],
             },
           },
         ];
-    this.objSignal = !inputss.object_signal?.is_signal
+    this.objSignal = !inputs.object_signal?.is_signal
       ? []
       : [
           {
@@ -160,6 +168,36 @@ export class ReportService implements OnInit {
             },
           },
         ];
+
+    
+    this.objMode = [
+      {
+        style: 'table',
+        table: {
+          widths: [200, 250],
+          body: [
+            ['Liczba trybów pracy', inputs.object_mode.modes],
+            ...Object.keys(inputs.object_mode.modes_desc).map((p, idx) => ([`Tryb ${idx + 1}`,inputs.object_mode.modes_desc[p]]))
+          ]
+        }
+      }
+    ];
+    this.objOthers = [{
+      text: [
+        'Kryterium oceny \n',
+        `Kryterium ${inputs.object_others.criterion} \n`,
+        `Data wykonania badań ${inputs.object_others.date} \n`,
+        `Przedstawiciele zleceniodawcy obecni w trakcie badań ${inputs.object_others.representative}`
+      ]
+    }];
+    this.results = inputs.results;
+    this.pn_en_42 = inputs.pn_en_42;
+    this.en43 = inputs.en43;
+    this.en44 = inputs.en44;
+    this.en45 = inputs.en45;
+    this.en46 = inputs.en46;
+    this.en48 = inputs.en48;
+
     this.basicInfo.forEach((el) => {
       this.docDefinition['content'].push(el);
     });
@@ -169,18 +207,12 @@ export class ReportService implements OnInit {
     this.objSignal.forEach((el) => {
       this.docDefinition['content'].push(el);
     });
-    this.objMode = inputss.object_mode;
-    this.objOthers = inputss.object_others;
-    this.results = inputss.results;
-    this.pn_en_42 = inputss.pn_en_42;
-    this.en43 = inputss.en43;
-    this.en44 = inputss.en44;
-    this.en45 = inputss.en45;
-    this.en46 = inputss.en46;
-    this.en48 = inputss.en48;
-  }
-  ngOnInit(): void {
-    const inputs = this.inputs.inputs;
+    this.objMode.forEach((el) => {
+      this.docDefinition['content'].push(el);
+    });
+    this.objOthers.forEach((el) => {
+      this.docDefinition['content'].push(el);
+    });
   }
 
   createObjectSignalValue() {
