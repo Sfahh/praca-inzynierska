@@ -64,13 +64,13 @@ export class ReportService implements OnInit {
       },
     };
 
-    this.createSections()
+    this.createSections();
   }
   ngOnInit(): void {
     const inputs = this.inputs.inputs;
   }
 
-  createSections(){
+  createSections() {
     const inputs = this.inputs.inputs;
 
     this.basicInfo = [
@@ -169,7 +169,6 @@ export class ReportService implements OnInit {
           },
         ];
 
-    
     this.objMode = [
       {
         style: 'table',
@@ -177,26 +176,356 @@ export class ReportService implements OnInit {
           widths: [200, 250],
           body: [
             ['Liczba trybów pracy', inputs.object_mode.modes],
-            ...Object.keys(inputs.object_mode.modes_desc).map((p, idx) => ([`Tryb ${idx + 1}`,inputs.object_mode.modes_desc[p]]))
-          ]
-        }
-      }
+            ...Object.keys(inputs.object_mode.modes_desc).map((p, idx) => [
+              `Tryb ${idx + 1}`,
+              inputs.object_mode.modes_desc[p],
+            ]),
+          ],
+        },
+      },
     ];
-    this.objOthers = [{
-      text: [
-        'Kryterium oceny \n',
-        `Kryterium ${inputs.object_others.criterion} \n`,
-        `Data wykonania badań ${inputs.object_others.date} \n`,
-        `Przedstawiciele zleceniodawcy obecni w trakcie badań ${inputs.object_others.representative}`
-      ]
-    }];
-    this.results = inputs.results;
-    this.pn_en_42 = inputs.pn_en_42;
-    this.en43 = inputs.en43;
-    this.en44 = inputs.en44;
-    this.en45 = inputs.en45;
-    this.en46 = inputs.en46;
-    this.en48 = inputs.en48;
+    this.objOthers = [
+      {
+        text: [
+          'Kryterium oceny \n',
+          `Kryterium ${inputs.object_others.criterion} \n`,
+          `Data wykonania badań ${inputs.object_others.date} \n`,
+          `Przedstawiciele zleceniodawcy obecni w trakcie badań ${inputs.object_others.representative}`,
+        ],
+        pageBreak: 'after',
+      },
+    ];
+    this.results = [
+      {
+        text: 'Wyniki badań',
+      },
+      {
+        style: 'table',
+        table: {
+          widths: [95, 95, 95, 95, 95],
+          body: [
+            [
+              'Norma',
+              'Specyfikacja',
+              'Szczegółowe wyniki badań',
+              'Uzyskane kryterium w trakcie testu',
+              'Wynik próby',
+            ],
+            ...inputs.results.endurance.map((p) => [
+              p.norm,
+              p.specs,
+              '11',
+              p.criterion,
+              p.result,
+            ]),
+          ],
+        },
+      },
+    ];
+    this.pn_en_42 =
+      inputs.results.endurance.findIndex((item) => item.norm === 'pn_en_42') < 0
+        ? []
+        : [
+            {
+              text: 'Szczegółowe wyniki odporności zgodnie z PN-EN 61000-4-2 - wyładowania elektrostatyczne ESD',
+              pageBreak: 'before',
+            },
+            this.createBasicData(inputs.pn_en_42.basic_data),
+            {
+              text: [
+                '\nTyp urządzenia:',
+                `${inputs.pn_en_42.is_table_top ? '\nTable top' : ''}`,
+                `${
+                  inputs.pn_en_42.is_floor_standing ? '\nFloor standing\n' : ''
+                }`,
+              ],
+            },
+            !inputs.pn_en_42.is_table_top ? {} : { text: '\nTable top' },
+            {
+              style: 'table',
+              table: {
+                widths: [118.75, 118.75, 118.75, 118.75],
+                body: [
+                  [
+                    'Typ',
+                    'Poziom [kV]',
+                    'Osiągnięte kryterium',
+                    'Wymagane kryterium',
+                  ],
+                  [
+                    'Contact',
+                    inputs.pn_en_42.table_top.contact.level,
+                    inputs.pn_en_42.table_top.contact.criterion,
+                    inputs.pn_en_42.table_top.contact.required_crit,
+                  ],
+                  [
+                    'Air',
+                    inputs.pn_en_42.table_top.air.level,
+                    inputs.pn_en_42.table_top.air.criterion,
+                    inputs.pn_en_42.table_top.air.required_crit,
+                  ],
+                  [
+                    'VCP',
+                    inputs.pn_en_42.table_top.vcp.level,
+                    inputs.pn_en_42.table_top.vcp.criterion,
+                    inputs.pn_en_42.table_top.vcp.required_crit,
+                  ],
+                  [
+                    'HCP',
+                    inputs.pn_en_42.table_top.hcp.level,
+                    inputs.pn_en_42.table_top.hcp.criterion,
+                    inputs.pn_en_42.table_top.hcp.required_crit,
+                  ],
+                ],
+              },
+            },
+            !inputs.pn_en_42.is_floor_standing
+              ? {}
+              : { text: 'Floor standing' },
+            {
+              style: 'table',
+              table: {
+                widths: [118.75, 118.75, 118.75, 118.75],
+                body: [
+                  [
+                    'Typ',
+                    'Poziom [kV]',
+                    'Osiągnięte kryterium',
+                    'Wymagane kryterium',
+                  ],
+                  [
+                    'Contact',
+                    inputs.pn_en_42.floor_standing.contact.level,
+                    inputs.pn_en_42.floor_standing.contact.criterion,
+                    inputs.pn_en_42.floor_standing.contact.required_crit,
+                  ],
+                  [
+                    'Air',
+                    inputs.pn_en_42.floor_standing.air.level,
+                    inputs.pn_en_42.floor_standing.air.criterion,
+                    inputs.pn_en_42.floor_standing.air.required_crit,
+                  ],
+                  [
+                    'VCP',
+                    inputs.pn_en_42.floor_standing.vcp.level,
+                    inputs.pn_en_42.floor_standing.vcp.criterion,
+                    inputs.pn_en_42.floor_standing.vcp.required_crit,
+                  ],
+                ],
+              },
+            },
+            {
+              text: [
+                'Komentarz: \n',
+                inputs.pn_en_42.basic_data.comment,
+                '\n\nWynik ',
+                inputs.pn_en_42.basic_data.result,
+                '\n\nData badania: ',
+                inputs.pn_en_42.basic_data.date,
+                '\n\nBadania wykonał: ',
+                inputs.pn_en_42.basic_data.contractor,
+              ],
+            },
+          ];
+    this.en43 =
+      inputs.results.endurance.findIndex((item) => item.norm === 'en43') < 0
+        ? []
+        : [
+            {
+              text: 'Szczegółowe wyniki odporności zgodnie z EN 61000-4-3 - promieniowane pole EM o częstotliwości radiowej',
+              pageBreak: 'before',
+            },
+            this.createBasicData(inputs.en43.basic_data),
+            {
+              style: 'table',
+              table: {
+                widths: [95, 95, 95, 95, 95],
+                body: [
+                  [
+                    'Przedział częstotliwości [MHz]',
+                    'Modulacja',
+                    'Poziom [V/m]',
+                    'Osiągniete kryterium',
+                    'Wymagane kryterium',
+                  ],
+                  [
+                    inputs.en43.frequency,
+                    inputs.en43.modulation,
+                    inputs.en43.level,
+                    inputs.en43.criterion,
+                    inputs.en43.req_criterion,
+                  ],
+                ],
+              },
+            },
+            {
+              text: [
+                'Komentarz: \n',
+                inputs.en43.basic_data.comment,
+                '\n\nWynik ',
+                inputs.en43.basic_data.result,
+                '\n\nData badania: ',
+                inputs.en43.basic_data.date,
+                '\n\nBadania wykonał: ',
+                inputs.en43.basic_data.contractor,
+              ],
+            },
+          ];
+    this.en44 =
+      inputs.results.endurance.findIndex((item) => item.norm === 'en44') < 0
+        ? []
+        : [
+            {
+              text: 'Szczegółowe wyniki odporności zgodnie z EN 61000-4-4 - seria szybkich elektrycznych stanów przejściowych (burst/EFT)',
+              pageBreak: 'before',
+            },
+            this.createBasicData(inputs.en44.basic_data),
+            {
+              text: [
+                '\nTyp urządzenia:',
+                `${inputs.en44.is_table_top ? '\nTable top' : ''}`,
+                `${
+                  inputs.en44.is_floor_standing ? '\nFloor standing\n\n' : ''
+                }`,
+              ],
+            },
+            {
+              style: 'table',
+              table: {
+                widths: [79.16, 79.16, 79.16, 79.16, 79.16, 79.16],
+                body: [
+                  [
+                    'Port',
+                    'Poziom [kV]',
+                    'Częstotliwość [kHz]',
+                    'Repetition rate',
+                    'Osiągnięte kryterium',
+                    'Wymagane kryterium',
+                  ],
+                  [
+                    inputs.en44.power[0].name,
+                    inputs.en44.power[0].level,
+                    inputs.en44.power[0].frequency,
+                    inputs.en44.power[0].repetition,
+                    inputs.en44.power[0].criterion,
+                    inputs.en44.power[0].req_criterion,
+                  ],
+                  ...inputs.en44.signal.map((p) => [
+                    p.name,
+                    p.level,
+                    p.frequency,
+                    p.repetition,
+                    p.criterion,
+                    p.req_criterion,
+                  ]),
+                ],
+              },
+            },
+            {
+              text: [
+                'Komentarz: \n',
+                inputs.en43.basic_data.comment,
+                '\n\nWynik ',
+                inputs.en43.basic_data.result,
+                '\n\nData badania: ',
+                inputs.en43.basic_data.date,
+                '\n\nBadania wykonał: ',
+                inputs.en43.basic_data.contractor,
+              ],
+            },
+          ];
+    this.en45 =
+      inputs.results.endurance.findIndex((item) => item.norm === 'en45') < 0
+        ? []
+        : [
+            {
+              text: 'Szczegółowe wyniki odporności zgodnie z EN 61000-4-5 - udary napięciowe (surge)',
+              pageBreak: 'before',
+            },
+            this.createBasicData(inputs.en45.basic_data),
+            `\nKlasa ochronności urządzenia: ${inputs.en45.security_class}\n\n`,
+            {
+              style: 'table',
+              table: {
+                widths: [79.16, 79.16, 79.16, 79.16, 79.16, 79.16],
+                body: [
+                  [
+                    'Port',
+                    'Sprzężenie',
+                    'Efektywna impedancja urządzenia [\u03a9]',
+                    'Poziom [kV]',
+                    'Osiągnięte kryterium',
+                    'Wymagane kryterium',
+                  ],
+                  [
+                    { rowSpan: 2, text: 'Zasilanie' },
+                    `${+inputs.en45.security_class === 1 ? 'L-PE' : 'L-N'}`,
+                    inputs.en45.power[0].impedance,
+                    inputs.en45.power[0].level,
+                    inputs.en45.power[0].criterion,
+                    inputs.en45.power[0].req_criterion,
+                  ],
+                  +inputs.en45.security_class !== 1
+                    ? []
+                    : [
+                        'N-PE',
+                        inputs.en45.power[1].interface,
+                        inputs.en45.power[1].impedance,
+                        inputs.en45.power[1].level,
+                        inputs.en45.power[1].criterion,
+                        inputs.en45.power[1].req_criterion,
+                      ],
+                  ...inputs.en45.signal.map((p) => [
+                    p.port,
+                    p.interface,
+                    p.impedance,
+                    p.level,
+                    p.criterion,
+                    p.req_criterion,
+                  ]),
+                ],
+              },
+            },
+            {
+              text: [
+                `\n\nKąty sprzężenia: ${inputs.en45.interface_angle}\n`,
+                `Liczba impulsów dodatnich: ${inputs.en45.positive_bursts}\n`,
+                `Liczba impulsów ujemnych: ${inputs.en45.negative_bursts}\n`,
+                `Odstęp między impulsami: ${inputs.en45.bursts_gap}\n\n`,
+              ],
+            },
+            {
+              text: [
+                'Komentarz: \n',
+                inputs.en43.basic_data.comment,
+                '\n\nWynik ',
+                inputs.en43.basic_data.result,
+                '\n\nData badania: ',
+                inputs.en43.basic_data.date,
+                '\n\nBadania wykonał: ',
+                inputs.en43.basic_data.contractor,
+              ],
+            },
+          ];
+    this.en46 =
+      inputs.results.endurance.findIndex((item) => item.norm === 'en46') < 0
+        ? []
+        : [
+            {
+              text: 'Szczegółowe wyniki odporności zgodnie z EN 61000-4-6 - zaburzenia przewodzone od pól o częstotliwości radiowej',
+              pageBreak: 'before',
+            },
+            this.createBasicData(inputs.en46.basic_data),
+          ];
+    this.en48 =
+      inputs.results.endurance.findIndex((item) => item.norm === 'en48') < 0
+        ? []
+        : [
+            {
+              text: 'Szczegółowe wyniki odporności zgodnie z EN 61000-4-8 - pole magnetyczne o częstotliwości sieci energetycznej',
+              pageBreak: 'before',
+            },
+          ];
 
     this.basicInfo.forEach((el) => {
       this.docDefinition['content'].push(el);
@@ -211,6 +540,27 @@ export class ReportService implements OnInit {
       this.docDefinition['content'].push(el);
     });
     this.objOthers.forEach((el) => {
+      this.docDefinition['content'].push(el);
+    });
+    this.results.forEach((el) => {
+      this.docDefinition['content'].push(el);
+    });
+    this.pn_en_42.forEach((el) => {
+      this.docDefinition['content'].push(el);
+    });
+    this.en43.forEach((el) => {
+      this.docDefinition['content'].push(el);
+    });
+    this.en44.forEach((el) => {
+      this.docDefinition['content'].push(el);
+    });
+    this.en45.forEach((el) => {
+      this.docDefinition['content'].push(el);
+    });
+    this.en46.forEach((el) => {
+      this.docDefinition['content'].push(el);
+    });
+    this.en48.forEach((el) => {
       this.docDefinition['content'].push(el);
     });
   }
@@ -235,6 +585,29 @@ export class ReportService implements OnInit {
     });
     console.log(body);
     return body;
+  }
+
+  createBasicData(basicData) {
+    return [
+      { text: 'Warunki atmosferyczne:' },
+      {
+        style: 'table',
+        table: {
+          widths: [158.33, 158.33, 158.33],
+          body: [
+            [
+              `Temperatura [\xB0C]`,
+              'Ciśnienie atmosferyczne [kPa]',
+              'Wilgotność [%]',
+            ],
+            [basicData.temperature, basicData.pressure, basicData.humidity],
+          ],
+        },
+      },
+      {
+        text: ['Lista urządzeń pomiarowych: \n', basicData.devices[0]],
+      },
+    ];
   }
 
   test() {
