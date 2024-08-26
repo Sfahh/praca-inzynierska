@@ -113,7 +113,11 @@
 
   <div class="buttons">
     <button mat-raised-button routerLink="/object">Wróć</button>
-    <button mat-raised-button routerLink="/norm/pn42" (click)="next()">
+    <button
+      mat-raised-button
+      routerLink="/norm/{{ inputs.inputs.results.endurance[0].norm }}"
+      (click)="next()"
+    >
       Dalej
     </button>
   </div>

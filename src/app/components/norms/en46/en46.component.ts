@@ -26,6 +26,8 @@ export class En46Component implements OnInit {
 
   selectedFile;
 
+  normIndex: number;
+
   constructor(public inputs: InputsService, public datepipe: DatePipe) {}
 
   ngOnInit(): void {
@@ -51,6 +53,9 @@ export class En46Component implements OnInit {
     }
     console.log(this.dataSignal);
     console.log(this.dataPower);
+    this.normIndex = this.inputs.inputs.results.endurance.findIndex(
+      (item) => item.norm === this.componentName
+    );
   }
 
   next() {

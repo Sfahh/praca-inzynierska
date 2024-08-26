@@ -26,6 +26,8 @@ export class En45Component implements OnInit {
 
   security;
 
+  normIndex: number;
+
   constructor(public inputs: InputsService, public datepipe: DatePipe) {}
 
   ngOnInit(): void {
@@ -60,6 +62,9 @@ export class En45Component implements OnInit {
       });
       console.log(this.dataSignal);
     }
+    this.normIndex = this.inputs.inputs.results.endurance.findIndex(
+      (item) => item.norm === this.componentName
+    );
   }
 
   countPowerDetail() {

@@ -11,6 +11,8 @@ import { DatePipe } from '@angular/common';
 export class PnEn42Component implements OnInit {
   componentName: string = 'pn_en_42';
 
+  normIndex: number;
+
   data: NormPnEn42;
 
   devices = ['Amperomierz', 'Woltomierz', 'Cewka Rogowskiego', 'Sonda prądowa'];
@@ -21,6 +23,9 @@ export class PnEn42Component implements OnInit {
 
   ngOnInit(): void {
     this.data = this.inputs.inputs?.pn_en_42;
+    this.normIndex = this.inputs.inputs.results.endurance.findIndex(
+      (item) => item.norm === this.componentName
+    );
   }
 
   next() {

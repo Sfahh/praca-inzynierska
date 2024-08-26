@@ -18,6 +18,8 @@ export class En48Component implements OnInit {
 
   selectedFile;
 
+  normIndex: number;
+
   constructor(public inputs: InputsService, public datepipe: DatePipe) {}
 
   ngOnInit(): void {
@@ -25,6 +27,9 @@ export class En48Component implements OnInit {
     if (this.data.axis.length < 1) {
       this.countAxis();
     }
+    this.normIndex = this.inputs.inputs.results.endurance.findIndex(
+      (item) => item.norm === this.componentName
+    );
   }
 
   countAxis() {

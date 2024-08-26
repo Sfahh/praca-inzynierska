@@ -21,7 +21,7 @@ const routes: Routes = [
     path: 'norm',
     component: NormComponent,
     children: [
-      { path: 'pn42', component: PnEn42Component },
+      { path: 'pn_en_42', component: PnEn42Component },
       { path: 'en43', component: En43Component },
       { path: 'en44', component: En44Component },
       { path: 'en45', component: En45Component },

@@ -15,12 +15,17 @@ export class En43Component implements OnInit {
   devices = ['Amperomierz', 'Woltomierz', 'Cewka Rogowskiego', 'Sonda prądowa'];
   levels = ['3', '10'];
 
+  normIndex: number;
+
   constructor(public inputs: InputsService, public datepipe: DatePipe) {
     this.data = new NormEn43();
   }
 
   ngOnInit(): void {
     this.data = this.inputs.inputs?.en43;
+    this.normIndex = this.inputs.inputs.results.endurance.findIndex(
+      (item) => item.norm === this.componentName
+    );
     console.log('tes2t');
   }
   next() {

@@ -26,6 +26,8 @@ export class En44Component implements OnInit {
 
   devices = ['Amperomierz', 'Woltomierz', 'Cewka Rogowskiego', 'Sonda prądowa'];
 
+  normIndex: number;
+
   constructor(public inputs: InputsService, public datepipe: DatePipe) {
     this.data = new NormEn44();
   }
@@ -53,6 +55,10 @@ export class En44Component implements OnInit {
       console.log(this.signalData);
     }
     console.log(this.signal_connections);
+
+    this.normIndex = this.inputs.inputs.results.endurance.findIndex(
+      (item) => item.norm === this.componentName
+    );
   }
 
   next() {

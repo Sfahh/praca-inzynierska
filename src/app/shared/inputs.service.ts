@@ -293,21 +293,65 @@ export class InputsService {
           contractor: 'Stanisław Być',
           date: '22/08/2024',
         },
-        power: [],
-        signal: [],
+        power: [
+          {
+            port: 'Port zasilania',
+            frequency: '2-5',
+            modulation: '80% AM, 1 kHz',
+            level: '3',
+            criterion: 'A',
+            req_criterion: 'A',
+          },
+        ],
+        signal: [
+          {
+            port: 'Port sygnałowy 1',
+            frequency: '2-10',
+            modulation: '82% AM, 2 kHz',
+            level: '4',
+            criterion: 'C',
+            req_criterion: 'C',
+          },
+          {
+            port: 'Port sygnałowy 2',
+            frequency: '0.15-20',
+            modulation: '85% AM, 3 kHz',
+            level: '1',
+            criterion: 'B',
+            req_criterion: 'B',
+          },
+        ],
         picture: null,
       },
       en48: {
         basic_data: {
-          devices: [],
-          comment: '',
-          result: '',
-          contractor: '',
+          devices: ['Amperomierz'],
+          comment:
+            'Testowy komentarz dość długi taktaktak taktaktak taktaktaktaktaktak taktaktaktaktaktaktaktaktak',
+          result: 'Pozytywny',
+          contractor: 'Stanisław Być',
+          date: '22/08/2024',
         },
-        level: '',
-        frequency: '',
+        level: '3',
+        frequency: '24',
         picture: null,
-        axis: [],
+        axis: [
+          {
+            axis: 'X',
+            criterion: 'A',
+            req_criterion: 'A',
+          },
+          {
+            axis: 'Y',
+            criterion: 'B',
+            req_criterion: 'B',
+          },
+          {
+            axis: 'Z',
+            criterion: 'C',
+            req_criterion: 'C',
+          },
+        ],
       },
     };
   }

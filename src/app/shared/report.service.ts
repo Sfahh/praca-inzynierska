@@ -44,7 +44,7 @@ export class ReportService implements OnInit {
           columns: [
             {
               // image: 'data:image/png;base64,' + require('fs').readFileSync('src/assets/pw_logo.png').toString('base64')
-              text: 'ZDJĘCIE',
+              // text: 'ZDJĘCIE',
               //TO DO trzeba wyciągnąć base64 ze zdjęcia i robić 'data:image/png;base64,{{TUTAJ BASE64}}'
             },
             {
@@ -516,6 +516,49 @@ export class ReportService implements OnInit {
               pageBreak: 'before',
             },
             this.createBasicData(inputs.en46.basic_data),
+            {
+              style: 'table',
+              table: {
+                body: [
+                  [
+                    'Port',
+                    'Przedział częstotliwości [MHz]',
+                    'Modulacja',
+                    'Poziom [V/m]',
+                    'Osiągnięte kryterium',
+                    'Wymagane kryterium',
+                  ],
+                  [
+                    'Zasilanie',
+                    inputs.en46.power[0].frequency,
+                    inputs.en46.power[0].modulation,
+                    inputs.en46.power[0].level,
+                    inputs.en46.power[0].criterion,
+                    inputs.en46.power[0].req_criterion,
+                  ],
+                  ...inputs.en46.signal.map((p) => [
+                    p.port,
+                    p.frequency,
+                    p.modulation,
+                    p.level,
+                    p.criterion,
+                    p.req_criterion,
+                  ]),
+                ],
+              },
+            },
+            {
+              text: [
+                'Komentarz: \n',
+                inputs.en46.basic_data.comment,
+                '\n\nWynik ',
+                inputs.en46.basic_data.result,
+                '\n\nData badania: ',
+                inputs.en46.basic_data.date,
+                '\n\nBadania wykonał: ',
+                inputs.en46.basic_data.contractor,
+              ],
+            },
           ];
     this.en48 =
       inputs.results.endurance.findIndex((item) => item.norm === 'en48') < 0
@@ -524,6 +567,62 @@ export class ReportService implements OnInit {
             {
               text: 'Szczegółowe wyniki odporności zgodnie z EN 61000-4-8 - pole magnetyczne o częstotliwości sieci energetycznej',
               pageBreak: 'before',
+            },
+            {
+              text: [
+                'Lista urządzeń pomiarowych: \n',
+                inputs.en48.basic_data.devices[0],
+              ],
+            },
+            {
+              style: 'table',
+              table: {
+                body: [
+                  [
+                    'Częstotliwość [Hz]',
+                    'Poziom [A/m]',
+                    'Oś',
+                    'Osiągnięte kryterium',
+                    'Wymagane kryterium',
+                  ],
+                  [
+                    { rowSpan: 3, text: inputs.en48.frequency },
+                    { rowSpan: 3, text: inputs.en48.level },
+                    inputs.en48.axis.filter((p) => p.axis === 'X')[0].axis,
+                    inputs.en48.axis.filter((p) => p.axis === 'X')[0].criterion,
+                    inputs.en48.axis.filter((p) => p.axis === 'X')[0]
+                      .req_criterion,
+                  ],
+                  [
+                    '',
+                    '',
+                    inputs.en48.axis.filter((p) => p.axis === 'Y')[0].axis,
+                    inputs.en48.axis.filter((p) => p.axis === 'Y')[0].criterion,
+                    inputs.en48.axis.filter((p) => p.axis === 'Y')[0]
+                      .req_criterion,
+                  ],
+                  [
+                    '',
+                    '',
+                    inputs.en48.axis.filter((p) => p.axis === 'Z')[0].axis,
+                    inputs.en48.axis.filter((p) => p.axis === 'Z')[0].criterion,
+                    inputs.en48.axis.filter((p) => p.axis === 'Z')[0]
+                      .req_criterion,
+                  ],
+                ],
+              },
+            },
+            {
+              text: [
+                'Komentarz: \n',
+                inputs.en48.basic_data.comment,
+                '\n\nWynik ',
+                inputs.en48.basic_data.result,
+                '\n\nData badania: ',
+                inputs.en48.basic_data.date,
+                '\n\nBadania wykonał: ',
+                inputs.en48.basic_data.contractor,
+              ],
             },
           ];
 
@@ -619,6 +718,16 @@ export class ReportService implements OnInit {
     //   this.docDefinition['content'].push(el);
     // });
     console.log(this.docDefinition);
+  }
+
+  fileToBase64(files: []) {
+    files.forEach((el) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(el);
+      reader.onload = () => {
+        console.log(reader.result);
+      };
+    });
   }
 
   public openPDF() {

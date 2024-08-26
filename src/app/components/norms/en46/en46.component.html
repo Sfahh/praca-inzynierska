@@ -176,8 +176,25 @@
     </mat-form-field>
   </div>
   <div class="buttons">
-    <button mat-raised-button routerLink="/norm/en44">Wróć</button>
-    <button mat-raised-button routerLink="/norm/en48" (click)="next()">
+    <button
+      mat-raised-button
+      routerLink="{{
+        normIndex === 0
+          ? '/result'
+          : '/norm/' + inputs.inputs.results.endurance[normIndex - 1].norm
+      }}"
+    >
+      Wróć
+    </button>
+    <button
+      mat-raised-button
+      routerLink="/norm/{{
+        inputs.inputs.results.endurance[normIndex + 1].norm
+          ? inputs.inputs.results.endurance[normIndex + 1].norm
+          : inputs.inputs.results.endurance[normIndex].norm
+      }}"
+      (click)="next()"
+    >
       Dalej
     </button>
   </div>
