@@ -222,3 +222,35 @@ export class NormEn48 {
   frequency: string = null;
   picture: any = null;
 }
+
+export class norms {
+  key: string;
+  value: string;
+}
+
+export const Norms: norms[] = [
+  {
+    key: 'PN-EN 61000-4-2',
+    value: 'pn_en_42',
+  },
+  {
+    key: 'EN 61000-4-3',
+    value: 'en43',
+  },
+  {
+    key: 'EN 61000-4-4',
+    value: 'en44',
+  },
+  {
+    key: 'PN-EN 61000-4-5',
+    value: 'en45',
+  },
+  {
+    key: 'PN-EN 61000-4-6',
+    value: 'en46',
+  },
+  {
+    key: 'PN-EN 61000-4-8',
+    value: 'en48',
+  },
+];

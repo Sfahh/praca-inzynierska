@@ -24,6 +24,7 @@ export class En48Component implements OnInit {
 
   ngOnInit(): void {
     this.data = this.inputs.inputs?.en48;
+    this.axisResults = this.data.axis;
     if (this.data.axis.length < 1) {
       this.countAxis();
     }

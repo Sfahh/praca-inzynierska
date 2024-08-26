@@ -211,10 +211,10 @@ export class ReportService implements OnInit {
               'Uzyskane kryterium w trakcie testu',
               'Wynik próby',
             ],
-            ...inputs.results.endurance.map((p) => [
+            ...inputs.results.endurance.map((p, idx) => [
               p.norm,
               p.specs,
-              '11',
+              'Numer strony: ' + (3 + idx + 1),
               p.criterion,
               p.result,
             ]),

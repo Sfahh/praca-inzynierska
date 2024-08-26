@@ -38,6 +38,8 @@ export class En45Component implements OnInit {
 
     this.isPower = this.inputs.inputs?.object_power.is_power;
     this.isSignal = this.inputs.inputs?.object_signal.is_signal;
+    this.dataPower = this.data.power;
+    this.dataSignal = this.data.signal;
     // this.date = new Date(this.data.basic_data.date);
     this.signal_connections = +this.inputs.inputs?.object_signal.conn_number;
     this.conns = Array.from(

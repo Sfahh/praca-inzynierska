@@ -23,7 +23,7 @@ export class InputsService {
         reviewer: 'Andrzej Łasica',
       },
       object_power: {
-        is_power: false,
+        is_power: true,
         voltage: 'AC 230 V',
         power: '10',
         security: '1',

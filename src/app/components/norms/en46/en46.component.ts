@@ -34,6 +34,8 @@ export class En46Component implements OnInit {
     this.data = this.inputs.inputs?.en46;
     this.isPower = this.inputs.inputs?.object_power.is_power;
     this.isSignal = this.inputs.inputs?.object_signal.is_signal;
+    this.dataPower = this.data.power;
+    this.dataSignal = this.data.signal;
     this.signal = this.inputs.inputs?.object_signal.connections;
     this.connectionsNr = +this.inputs.inputs?.object_signal.conn_number;
     this.connectionsNrArr = Array.from(
