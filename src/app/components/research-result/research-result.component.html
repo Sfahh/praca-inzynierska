@@ -61,11 +61,15 @@
       <div class="row">
         <mat-form-field appearance="outline">
           <mat-label>Norma</mat-label>
-          <input
-            type="text"
-            matInput
+          <mat-select
             [(ngModel)]="dataResult.endurance[i].norm"
-          />
+            name="norm"
+            (selectionChange)="filterNorms($event.value)"
+          >
+            @for (norm of norms; track norm){
+            <mat-option [value]="norm.value">{{ norm.key }}</mat-option>
+            }
+          </mat-select>
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>Specyfikacja</mat-label>
@@ -113,12 +117,14 @@
 
   <div class="buttons">
     <button mat-raised-button routerLink="/object">Wróć</button>
-    <button
-      mat-raised-button
-      routerLink="/norm/{{ inputs.inputs.results.endurance[0].norm }}"
-      (click)="next()"
-    >
-      Dalej
-    </button>
+    <ng-container *ngIf="dataResult.endurance[0].norm">
+      <button
+        mat-raised-button
+        routerLink="/norm/{{ dataResult.endurance[0].norm }}"
+        (click)="next()"
+      >
+        Dalej
+      </button>
+    </ng-container>
   </div>
 </div>

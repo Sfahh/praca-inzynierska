@@ -20,6 +20,7 @@ export class ResearchResultComponent implements OnInit {
   normEnduranceNumber: number;
   dataResult: Results;
   norms: norms[] = Norms;
+  selectedNorms = [];
 
   constructor(public inputs: InputsService) {
     this.dataResult = new Results();
@@ -89,13 +90,37 @@ export class ResearchResultComponent implements OnInit {
     console.log(this.dataResult);
   }
 
+  filterNorms(value) {
+    // this.selectedNorms.push(value);
+  }
+
+  checkNormAvailability(value) {
+    console.log(value);
+
+    let isAvailable = true;
+    console.log(this.selectedNorms);
+    console.log(this.selectedNorms.findIndex((item) => item === value));
+
+    if (this.selectedNorms.findIndex((item) => item === value) !== -1) {
+      isAvailable = false;
+      console.log('test');
+    }
+    console.log(isAvailable);
+
+    return isAvailable;
+  }
+
+  removeDuplicates() {
+    const result = Array.from(
+      this.dataResult.endurance
+        .reduce((m, t) => m.set(t.norm, t), new Map())
+        .values()
+    );
+    return result;
+  }
+
   next() {
-    // this.dataOthers.date = this.datepipe.transform(this.dataOthers.date, 'dd/MM/yyyy');
-    // this.inputs.updateInputs('object_power', this.dataPower)
-    // this.inputs.updateInputs('object_signal', this.dataSignal)
-    // this.inputs.updateInputs('object_mode', this.dataMode)
-    // this.inputs.updateInputs('object_others', this.dataOthers)
-    // console.log(this.inputs.inputs)
+    this.dataResult.endurance = this.removeDuplicates();
     this.inputs.updateInputs('results', this.dataResult);
     console.log(this.inputs.inputs);
   }

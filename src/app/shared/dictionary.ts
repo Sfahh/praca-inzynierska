@@ -242,15 +242,15 @@ export const Norms: norms[] = [
     value: 'en44',
   },
   {
-    key: 'PN-EN 61000-4-5',
+    key: 'EN 61000-4-5',
     value: 'en45',
   },
   {
-    key: 'PN-EN 61000-4-6',
+    key: 'EN 61000-4-6',
     value: 'en46',
   },
   {
-    key: 'PN-EN 61000-4-8',
+    key: 'EN 61000-4-8',
     value: 'en48',
   },
 ];

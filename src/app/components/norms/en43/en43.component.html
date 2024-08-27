@@ -126,7 +126,7 @@
     <button
       mat-raised-button
       routerLink="/norm/{{
-        inputs.inputs.results.endurance[normIndex + 1].norm
+        normIndex + 1 !== inputs.inputs.results.endurance.length
           ? inputs.inputs.results.endurance[normIndex + 1].norm
           : inputs.inputs.results.endurance[normIndex].norm
       }}"

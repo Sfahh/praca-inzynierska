@@ -67,42 +67,42 @@ export class InputsService {
       results: {
         emission: [],
         endurance: [
-          {
-            norm: 'pn_en_42',
-            specs: 'PN-EN 61000-6-1',
-            criterion: 'A',
-            result: 'pozytywny',
-          },
-          {
-            norm: 'en43',
-            specs: 'PN-EN 61000-6-2',
-            criterion: 'B',
-            result: 'negatywny',
-          },
-          {
-            norm: 'en44',
-            specs: 'PN-EN 61000-6-3',
-            criterion: 'C',
-            result: 'pozytywny',
-          },
-          {
-            norm: 'en45',
-            specs: 'PN-EN 61000-6-4',
-            criterion: 'C',
-            result: 'pozytywny',
-          },
-          {
-            norm: 'en46',
-            specs: 'PN-EN 61000-6-5',
-            criterion: 'B',
-            result: 'negatywny',
-          },
-          {
-            norm: 'en48',
-            specs: 'PN-EN 61000-6-6',
-            criterion: 'A',
-            result: 'pozytywny',
-          },
+          // {
+          //   norm: 'pn_en_42',
+          //   specs: 'PN-EN 61000-6-1',
+          //   criterion: 'A',
+          //   result: 'pozytywny',
+          // },
+          // {
+          //   norm: 'en43',
+          //   specs: 'PN-EN 61000-6-2',
+          //   criterion: 'B',
+          //   result: 'negatywny',
+          // },
+          // {
+          //   norm: 'en44',
+          //   specs: 'PN-EN 61000-6-3',
+          //   criterion: 'C',
+          //   result: 'pozytywny',
+          // },
+          // {
+          //   norm: 'en45',
+          //   specs: 'PN-EN 61000-6-4',
+          //   criterion: 'C',
+          //   result: 'pozytywny',
+          // },
+          // {
+          //   norm: 'en46',
+          //   specs: 'PN-EN 61000-6-5',
+          //   criterion: 'B',
+          //   result: 'negatywny',
+          // },
+          // {
+          //   norm: 'en48',
+          //   specs: 'PN-EN 61000-6-6',
+          //   criterion: 'A',
+          //   result: 'pozytywny',
+          // },
         ],
       },
       pn_en_42: {
