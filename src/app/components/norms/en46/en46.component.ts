@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { InputsService } from '../../../shared/inputs.service';
 import { DatePipe } from '@angular/common';
 import { En46Results, NormEn46 } from '../../../shared/dictionary';
+import { ReportService } from '../../../shared/report.service';
 
 @Component({
   selector: 'app-en46',
@@ -28,14 +29,18 @@ export class En46Component implements OnInit {
 
   normIndex: number;
 
-  constructor(public inputs: InputsService, public datepipe: DatePipe) {}
+  constructor(
+    public inputs: InputsService,
+    public datepipe: DatePipe,
+    public reportService: ReportService
+  ) {}
 
   ngOnInit(): void {
     this.data = this.inputs.inputs?.en46;
     this.isPower = this.inputs.inputs?.object_power.is_power;
     this.isSignal = this.inputs.inputs?.object_signal.is_signal;
-    this.dataPower = this.data.power;
-    this.dataSignal = this.data.signal;
+    this.dataPower = this.data.power ? this.data.power : [];
+    this.dataSignal = this.data.signal ? this.data.signal : [];
     this.signal = this.inputs.inputs?.object_signal.connections;
     this.connectionsNr = +this.inputs.inputs?.object_signal.conn_number;
     this.connectionsNrArr = Array.from(
@@ -71,6 +76,7 @@ export class En46Component implements OnInit {
     console.log(this.inputs.inputs);
     console.log(this.selectedFile);
     this.fileToBase64(this.selectedFile.files);
+    this.reportService.createSections();
   }
 
   onFileSelected(event: any): void {

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { InputsService } from '../../../shared/inputs.service';
 import { DatePipe } from '@angular/common';
 import { En48Results, NormEn48 } from '../../../shared/dictionary';
+import { ReportService } from '../../../shared/report.service';
 
 @Component({
   selector: 'app-en48',
@@ -20,7 +21,11 @@ export class En48Component implements OnInit {
 
   normIndex: number;
 
-  constructor(public inputs: InputsService, public datepipe: DatePipe) {}
+  constructor(
+    public inputs: InputsService,
+    public datepipe: DatePipe,
+    public reportService: ReportService
+  ) {}
 
   ngOnInit(): void {
     this.data = this.inputs.inputs?.en48;
@@ -62,5 +67,6 @@ export class En48Component implements OnInit {
     this.data.picture = this.fileToBase64(this.selectedFile.files);
     this.inputs.updateInputs('en48', this.data);
     console.log(this.inputs.inputs);
+    this.reportService.createSections();
   }
 }

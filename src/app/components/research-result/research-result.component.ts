@@ -29,7 +29,6 @@ export class ResearchResultComponent implements OnInit {
   ngOnInit(): void {
     this.isEmission = this.inputs.inputs?.basic_info.isEmission;
     this.isEndurance = this.inputs.inputs?.basic_info.isEndurance;
-    console.log(this.inputs.inputs);
     if (
       this.inputs.inputs.results?.emission.length > 0 ||
       this.inputs.inputs.results?.endurance.length > 0
@@ -65,18 +64,12 @@ export class ResearchResultComponent implements OnInit {
     if (value === 'emission') {
       this.normEmissionNumber++;
       emission = new Emission();
-      console.log(this.dataResult);
-
-      console.log(emission);
       this.dataResult.emission.push(emission);
     } else {
       this.normEnduranceNumber++;
       endurance = new Endurance();
       this.dataResult.endurance.push(endurance);
     }
-    console.log(this.normEmissionNumber);
-    console.log(this.normEnduranceNumber);
-    console.log(this.dataResult);
   }
 
   deleteNorm(value, index) {
@@ -88,26 +81,6 @@ export class ResearchResultComponent implements OnInit {
       this.dataResult.endurance.splice(index, 1);
     }
     console.log(this.dataResult);
-  }
-
-  filterNorms(value) {
-    // this.selectedNorms.push(value);
-  }
-
-  checkNormAvailability(value) {
-    console.log(value);
-
-    let isAvailable = true;
-    console.log(this.selectedNorms);
-    console.log(this.selectedNorms.findIndex((item) => item === value));
-
-    if (this.selectedNorms.findIndex((item) => item === value) !== -1) {
-      isAvailable = false;
-      console.log('test');
-    }
-    console.log(isAvailable);
-
-    return isAvailable;
   }
 
   removeDuplicates() {
@@ -122,6 +95,5 @@ export class ResearchResultComponent implements OnInit {
   next() {
     this.dataResult.endurance = this.removeDuplicates();
     this.inputs.updateInputs('results', this.dataResult);
-    console.log(this.inputs.inputs);
   }
 }

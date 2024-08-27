@@ -20,6 +20,7 @@ import { En44Component } from './components/norms/en44/en44.component';
 import { En45Component } from './components/norms/en45/en45.component';
 import { En46Component } from './components/norms/en46/en46.component';
 import { En48Component } from './components/norms/en48/en48.component';
+import { HttpClient, provideHttpClient } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -43,12 +44,9 @@ import { En48Component } from './components/norms/en48/en48.component';
     AppRoutingModule,
     MaterialModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
   ],
-  providers: [
-    provideAnimationsAsync(),
-    DatePipe
-  ],
-  bootstrap: [AppComponent]
+  providers: [provideAnimationsAsync(), DatePipe, provideHttpClient()],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
