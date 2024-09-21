@@ -61,7 +61,11 @@
       <div class="row">
         <mat-form-field appearance="outline">
           <mat-label>Norma</mat-label>
-          <mat-select [(ngModel)]="dataResult.endurance[i].norm" name="norm">
+          <mat-select
+            [(ngModel)]="dataResult.endurance[i].norm"
+            name="norm"
+            [required]="true"
+          >
             @for (norm of norms; track norm){
             <mat-option [value]="norm.value">{{ norm.key }}</mat-option>
             }
@@ -73,6 +77,7 @@
             type="text"
             matInput
             [(ngModel)]="dataResult.endurance[i].specs"
+            [required]="true"
           />
         </mat-form-field>
       </div>
@@ -87,11 +92,15 @@
             type="text"
             matInput
             [(ngModel)]="dataResult.endurance[i].criterion"
+            [required]="true"
           />
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>Wynik próby</mat-label>
-          <mat-select [(ngModel)]="dataResult.endurance[i].result">
+          <mat-select
+            [(ngModel)]="dataResult.endurance[i].result"
+            [required]="true"
+          >
             <mat-option value="Pozytywna">Pozytywna</mat-option>
             <mat-option value="Negatywna">Negatywna</mat-option>
           </mat-select>

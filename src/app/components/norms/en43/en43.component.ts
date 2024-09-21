@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { InputsService } from '../../../shared/inputs.service';
 import { NormEn43 } from '../../../shared/dictionary';
 import { DatePipe } from '@angular/common';
+import { ReportService } from '../../../shared/report.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-en43',
@@ -9,6 +11,8 @@ import { DatePipe } from '@angular/common';
   styleUrl: './en43.component.scss',
 })
 export class En43Component implements OnInit {
+  private _snackBar = inject(MatSnackBar);
+
   data: NormEn43;
   componentName: string = 'en43';
 
@@ -17,7 +21,11 @@ export class En43Component implements OnInit {
 
   normIndex: number;
 
-  constructor(public inputs: InputsService, public datepipe: DatePipe) {
+  constructor(
+    public inputs: InputsService,
+    public datepipe: DatePipe,
+    public reportService: ReportService
+  ) {
     this.data = new NormEn43();
   }
 
@@ -28,12 +36,16 @@ export class En43Component implements OnInit {
     );
     console.log('tes2t');
   }
-  next() {
+  next(isSave?: boolean) {
     this.data.basic_data.date = this.datepipe.transform(
       this.data.basic_data.date,
       'dd/MM/yyyy'
     );
     this.inputs.updateInputs('en_43', this.data);
     console.log(this.inputs.inputs);
+    this.reportService.createSections();
+    if (isSave) {
+      this._snackBar.open('Pomyślnie zapisano', 'Ok');
+    }
   }
 }

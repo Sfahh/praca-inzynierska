@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { InputsService } from '../../../shared/inputs.service';
 import { DatePipe } from '@angular/common';
 import { En48Results, NormEn48 } from '../../../shared/dictionary';
 import { ReportService } from '../../../shared/report.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-en48',
@@ -10,6 +11,8 @@ import { ReportService } from '../../../shared/report.service';
   styleUrl: './en48.component.scss',
 })
 export class En48Component implements OnInit {
+  private _snackBar = inject(MatSnackBar);
+
   componentName: string = 'en48';
 
   data: NormEn48;
@@ -58,7 +61,7 @@ export class En48Component implements OnInit {
     });
   }
 
-  next() {
+  next(isSave?: boolean) {
     this.data.basic_data.date = this.datepipe.transform(
       this.data.basic_data.date,
       'dd/MM/yyyy'
@@ -68,5 +71,8 @@ export class En48Component implements OnInit {
     this.inputs.updateInputs('en48', this.data);
     console.log(this.inputs.inputs);
     this.reportService.createSections();
+    if (isSave) {
+      this._snackBar.open('Pomyślnie zapisano', 'Ok');
+    }
   }
 }

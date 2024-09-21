@@ -1,7 +1,9 @@
-import { Component, input, OnInit } from '@angular/core';
+import { Component, inject, input, OnInit } from '@angular/core';
 import { InputsService } from '../../../shared/inputs.service';
 import { DatePipe } from '@angular/common';
 import { En44Results, NormEn44 } from '../../../shared/dictionary';
+import { ReportService } from '../../../shared/report.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-en44',
@@ -9,6 +11,8 @@ import { En44Results, NormEn44 } from '../../../shared/dictionary';
   styleUrl: './en44.component.scss',
 })
 export class En44Component implements OnInit {
+  private _snackBar = inject(MatSnackBar);
+
   componentName: string = 'en44';
 
   data: NormEn44;
@@ -28,7 +32,11 @@ export class En44Component implements OnInit {
 
   normIndex: number;
 
-  constructor(public inputs: InputsService, public datepipe: DatePipe) {
+  constructor(
+    public inputs: InputsService,
+    public datepipe: DatePipe,
+    public reportService: ReportService
+  ) {
     this.data = new NormEn44();
   }
 
@@ -63,7 +71,7 @@ export class En44Component implements OnInit {
     );
   }
 
-  next() {
+  next(isSave?: boolean) {
     this.data.power = this.powerData;
     this.data.signal = this.signalData;
     this.data.basic_data.date = this.datepipe.transform(
@@ -72,5 +80,9 @@ export class En44Component implements OnInit {
     );
     this.inputs.updateInputs('en_44', this.data);
     console.log(this.inputs.inputs);
+    this.reportService.createSections();
+    if (isSave) {
+      this._snackBar.open('Pomyślnie zapisano', 'Ok');
+    }
   }
 }

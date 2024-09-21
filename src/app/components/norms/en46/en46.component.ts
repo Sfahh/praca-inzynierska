@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { InputsService } from '../../../shared/inputs.service';
 import { DatePipe } from '@angular/common';
 import { En46Results, NormEn46 } from '../../../shared/dictionary';
 import { ReportService } from '../../../shared/report.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-en46',
@@ -10,6 +11,7 @@ import { ReportService } from '../../../shared/report.service';
   styleUrl: './en46.component.scss',
 })
 export class En46Component implements OnInit {
+  private _snackBar = inject(MatSnackBar);
   componentName: string = 'en46';
 
   data: NormEn46;
@@ -65,7 +67,7 @@ export class En46Component implements OnInit {
     );
   }
 
-  next() {
+  next(isSave?: boolean) {
     this.data.basic_data.date = this.datepipe.transform(
       this.data.basic_data.date,
       'dd/MM/yyyy'
@@ -77,6 +79,9 @@ export class En46Component implements OnInit {
     console.log(this.selectedFile);
     this.fileToBase64(this.selectedFile.files);
     this.reportService.createSections();
+    if (isSave) {
+      this._snackBar.open('Pomyślnie zapisano', 'Ok');
+    }
   }
 
   onFileSelected(event: any): void {

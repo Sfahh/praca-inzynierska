@@ -2,19 +2,28 @@
   <div class="form-container">
     <mat-form-field appearance="outline">
       <mat-label>Numer projektu</mat-label>
-      <input matInput type="number" [(ngModel)]="data.project_nr" />
+      <input
+        matInput
+        type="number"
+        [(ngModel)]="data.project_nr"
+        [required]="true"
+      />
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Zleceniodawca</mat-label>
-      <textarea matInput [(ngModel)]="data.principal"></textarea>
+      <textarea
+        matInput
+        [(ngModel)]="data.principal"
+        [required]="true"
+      ></textarea>
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Obiekt badany</mat-label>
-      <input matInput type="text" [(ngModel)]="data.object" />
+      <input matInput type="text" [(ngModel)]="data.object" [required]="true" />
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Miejsce wykonania badań</mat-label>
-      <input matInput type="text" [(ngModel)]="data.place" />
+      <input matInput type="text" [(ngModel)]="data.place" [required]="true" />
     </mat-form-field>
     <mat-label>Zakres zadań</mat-label>
     <div>
@@ -25,7 +34,12 @@
     </div>
     <mat-form-field appearance="outline">
       <mat-label>Data wykonania sprawozdania</mat-label>
-      <input matInput [matDatepicker]="picker" [(ngModel)]="data.date" />
+      <input
+        matInput
+        [matDatepicker]="picker"
+        [(ngModel)]="data.date"
+        [required]="true"
+      />
       <mat-hint>DD/MM/YYYY</mat-hint>
       <mat-datepicker-toggle
         matIconSuffix
@@ -35,7 +49,7 @@
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Sprawozdanie sprawdził</mat-label>
-      <mat-select [(ngModel)]="data.reviewer">
+      <mat-select [(ngModel)]="data.reviewer" [required]="true">
         @for (person of personsList; track person){
         <mat-option [value]="person.name">{{ person.name }}</mat-option>
         }
@@ -43,14 +57,12 @@
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Sprawozdanie wykonał</mat-label>
-      <mat-select [(ngModel)]="data.executor">
+      <mat-select [(ngModel)]="data.executor" [required]="true">
         @for (person of personsList; track person){
         <mat-option [value]="person.name">{{ person.name }}</mat-option>
         }
       </mat-select>
     </mat-form-field>
-    <button mat-raised-button (click)="next()" routerLink="/object">
-      Dalej
-    </button>
+    <button mat-raised-button (click)="next()">Dalej</button>
   </div>
 </div>

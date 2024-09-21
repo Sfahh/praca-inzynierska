@@ -3,12 +3,22 @@
   <div class="row">
     <mat-form-field appearance="outline">
       <mat-label>Temperatura </mat-label>
-      <input type="text" matInput [(ngModel)]="data.basic_data.temperature" />
+      <input
+        type="text"
+        matInput
+        [(ngModel)]="data.basic_data.temperature"
+        [required]="true"
+      />
       <span matTextSuffix>&deg;C</span>
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Ciśnienie atmosferyczne </mat-label>
-      <input type="text" matInput [(ngModel)]="data.basic_data.pressure" />
+      <input
+        type="text"
+        matInput
+        [(ngModel)]="data.basic_data.pressure"
+        [required]="true"
+      />
       <span matTextSuffix>kPa</span>
     </mat-form-field>
   </div>
@@ -20,6 +30,7 @@
         type="number"
         matInput
         [(ngModel)]="data.basic_data.humidity"
+        [required]="true"
       />
       <span matTextSuffix>%</span>
     </mat-form-field>
@@ -30,6 +41,7 @@
         matInput
         [(ngModel)]="data.basic_data.devices"
         [matAutocomplete]="auto"
+        [required]="true"
       />
       <mat-autocomplete #auto="matAutocomplete">
         @for (device of devices; track device){
@@ -53,6 +65,7 @@
                   type="text"
                   matInput
                   [(ngModel)]="dataPower[0].frequency"
+                  [required]="isPower"
                 />
                 <span matTextSuffix>MHz</span>
               </mat-form-field>
@@ -62,13 +75,19 @@
                   type="text"
                   matInput
                   [(ngModel)]="dataPower[0].modulation"
+                  [required]="isPower"
                 />
               </mat-form-field>
             </div>
             <div class="row">
               <mat-form-field appearance="outline">
                 <mat-label>Poziom </mat-label>
-                <input type="text" matInput [(ngModel)]="dataPower[0].level" />
+                <input
+                  type="text"
+                  matInput
+                  [(ngModel)]="dataPower[0].level"
+                  [required]="isPower"
+                />
                 <span matTextSuffix>V/m</span>
               </mat-form-field>
               <mat-form-field appearance="outline">
@@ -77,6 +96,7 @@
                   type="text"
                   matInput
                   [(ngModel)]="dataPower[0].criterion"
+                  [required]="isPower"
                 />
               </mat-form-field>
             </div>
@@ -87,6 +107,7 @@
                   type="text"
                   matInput
                   [(ngModel)]="dataPower[0].req_criterion"
+                  [required]="isPower"
                 />
               </mat-form-field>
             </div>
@@ -103,29 +124,54 @@
             <div class="row">
               <mat-form-field appearance="outline">
                 <mat-label>Przedział częstotliwości </mat-label>
-                <input type="text" matInput [(ngModel)]="item.frequency" />
+                <input
+                  type="text"
+                  matInput
+                  [(ngModel)]="item.frequency"
+                  [required]="isSignal"
+                />
                 <span matTextSuffix>MHz</span>
               </mat-form-field>
               <mat-form-field appearance="outline">
                 <mat-label>Modulacja </mat-label>
-                <input type="text" matInput [(ngModel)]="item.modulation" />
+                <input
+                  type="text"
+                  matInput
+                  [(ngModel)]="item.modulation"
+                  [required]="isSignal"
+                />
               </mat-form-field>
             </div>
             <div class="row">
               <mat-form-field appearance="outline">
                 <mat-label>Poziom </mat-label>
-                <input type="text" matInput [(ngModel)]="item.level" />
+                <input
+                  type="text"
+                  matInput
+                  [(ngModel)]="item.level"
+                  [required]="isSignal"
+                />
                 <span matTextSuffix>V/m</span>
               </mat-form-field>
               <mat-form-field appearance="outline">
                 <mat-label>Osiągniete kryterium </mat-label>
-                <input type="text" matInput [(ngModel)]="item.criterion" />
+                <input
+                  type="text"
+                  matInput
+                  [(ngModel)]="item.criterion"
+                  [required]="isSignal"
+                />
               </mat-form-field>
             </div>
             <div class="row">
               <mat-form-field appearance="outline">
                 <mat-label>Wymagane kryterium </mat-label>
-                <input type="text" matInput [(ngModel)]="item.req_criterion" />
+                <input
+                  type="text"
+                  matInput
+                  [(ngModel)]="item.req_criterion"
+                  [required]="isSignal"
+                />
               </mat-form-field>
             </div>
           </div>
@@ -152,7 +198,12 @@
   <div class="row">
     <mat-form-field appearance="outline">
       <mat-label>Wynik </mat-label>
-      <input type="text" matInput [(ngModel)]="data.basic_data.result" />
+      <input
+        type="text"
+        matInput
+        [(ngModel)]="data.basic_data.result"
+        [required]="true"
+      />
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Data badań</mat-label>
@@ -160,6 +211,7 @@
         matInput
         [matDatepicker]="picker"
         [(ngModel)]="data.basic_data.date"
+        [required]="true"
       />
       <mat-hint>DD/MM/YYYY</mat-hint>
       <mat-datepicker-toggle
@@ -172,7 +224,12 @@
   <div class="row">
     <mat-form-field appearance="outline">
       <mat-label>Badania wykonał </mat-label>
-      <input type="text" matInput [(ngModel)]="data.basic_data.contractor" />
+      <input
+        type="text"
+        matInput
+        [(ngModel)]="data.basic_data.contractor"
+        [required]="true"
+      />
     </mat-form-field>
   </div>
   <div class="buttons">
@@ -193,9 +250,19 @@
           ? inputs.inputs.results.endurance[normIndex + 1].norm
           : inputs.inputs.results.endurance[normIndex].norm
       }}"
-      (click)="next()"
+      (click)="
+        next(
+          normIndex + 1 === inputs.inputs.results.endurance.length
+            ? true
+            : false
+        )
+      "
     >
-      Dalej
+      {{
+        normIndex + 1 === inputs.inputs.results.endurance.length
+          ? "Zapisz"
+          : "Dalej"
+      }}
     </button>
   </div>
 </div>

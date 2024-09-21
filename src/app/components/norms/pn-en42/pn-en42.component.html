@@ -3,12 +3,22 @@
   <div class="row">
     <mat-form-field appearance="outline">
       <mat-label>Temperatura </mat-label>
-      <input type="text" matInput [(ngModel)]="data.basic_data.temperature" />
+      <input
+        type="text"
+        matInput
+        [(ngModel)]="data.basic_data.temperature"
+        [required]="true"
+      />
       <span matTextSuffix>&deg;C</span>
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Ciśnienie atmosferyczne </mat-label>
-      <input type="text" matInput [(ngModel)]="data.basic_data.pressure" />
+      <input
+        type="text"
+        matInput
+        [(ngModel)]="data.basic_data.pressure"
+        [required]="true"
+      />
       <span matTextSuffix>kPa</span>
     </mat-form-field>
   </div>
@@ -20,6 +30,7 @@
         type="number"
         matInput
         [(ngModel)]="data.basic_data.humidity"
+        [required]="true"
       />
       <span matTextSuffix>%</span>
     </mat-form-field>
@@ -32,6 +43,7 @@
         matInput
         [(ngModel)]="data.basic_data.devices"
         [matAutocomplete]="auto"
+        [required]="true"
       />
       <mat-autocomplete #auto="matAutocomplete">
         @for (device of devices; track device){
@@ -41,8 +53,14 @@
     </mat-form-field>
   </div>
   <div class="row">
-    <mat-checkbox [(ngModel)]="data.is_table_top">Table top</mat-checkbox>
-    <mat-checkbox [(ngModel)]="data.is_floor_standing"
+    <mat-checkbox
+      [(ngModel)]="data.is_table_top"
+      [required]="!data.is_table_top && !data.is_floor_standing"
+      >Table top</mat-checkbox
+    >
+    <mat-checkbox
+      [(ngModel)]="data.is_floor_standing"
+      [required]="!data.is_table_top && !data.is_floor_standing"
       >Floor standing</mat-checkbox
     >
   </div>
@@ -62,6 +80,7 @@
                 type="text"
                 matInput
                 [(ngModel)]="data.table_top['contact'].level"
+                [required]="data.is_table_top"
               />
               <span matTextSuffix>kV</span>
             </mat-form-field>
@@ -71,6 +90,7 @@
                 type="text"
                 matInput
                 [(ngModel)]="data.table_top['contact'].criterion"
+                [required]="data.is_table_top"
               />
             </mat-form-field>
           </div>
@@ -81,6 +101,7 @@
                 type="text"
                 matInput
                 [(ngModel)]="data.table_top['contact'].required_crit"
+                [required]="data.is_table_top"
               />
             </mat-form-field>
           </div>
@@ -92,6 +113,7 @@
                 type="text"
                 matInput
                 [(ngModel)]="data.table_top['air'].level"
+                [required]="data.is_table_top"
               />
               <span matTextSuffix>kV</span>
             </mat-form-field>
@@ -101,6 +123,7 @@
                 type="text"
                 matInput
                 [(ngModel)]="data.table_top['air'].criterion"
+                [required]="data.is_table_top"
               />
             </mat-form-field>
           </div>
@@ -111,6 +134,7 @@
                 type="text"
                 matInput
                 [(ngModel)]="data.table_top['air'].required_crit"
+                [required]="data.is_table_top"
               />
             </mat-form-field>
           </div>
@@ -122,6 +146,7 @@
                 type="text"
                 matInput
                 [(ngModel)]="data.table_top['vcp'].level"
+                [required]="data.is_table_top"
               />
               <span matTextSuffix>kV</span>
             </mat-form-field>
@@ -131,6 +156,7 @@
                 type="text"
                 matInput
                 [(ngModel)]="data.table_top['vcp'].criterion"
+                [required]="data.is_table_top"
               />
             </mat-form-field>
           </div>
@@ -141,6 +167,7 @@
                 type="text"
                 matInput
                 [(ngModel)]="data.table_top['vcp'].required_crit"
+                [required]="data.is_table_top"
               />
             </mat-form-field>
           </div>
@@ -152,6 +179,7 @@
                 type="text"
                 matInput
                 [(ngModel)]="data.table_top['hcp'].level"
+                [required]="data.is_table_top"
               />
               <span matTextSuffix>kV</span>
             </mat-form-field>
@@ -161,6 +189,7 @@
                 type="text"
                 matInput
                 [(ngModel)]="data.table_top['hcp'].criterion"
+                [required]="data.is_table_top"
               />
             </mat-form-field>
           </div>
@@ -171,6 +200,7 @@
                 type="text"
                 matInput
                 [(ngModel)]="data.table_top['hcp'].required_crit"
+                [required]="data.is_table_top"
               />
             </mat-form-field>
           </div>
@@ -189,6 +219,7 @@
                 type="text"
                 matInput
                 [(ngModel)]="data.floor_standing['contact'].level"
+                [required]="data.is_floor_standing"
               />
               <span matTextSuffix>kV</span>
             </mat-form-field>
@@ -198,6 +229,7 @@
                 type="text"
                 matInput
                 [(ngModel)]="data.floor_standing['contact'].criterion"
+                [required]="data.is_floor_standing"
               />
             </mat-form-field>
           </div>
@@ -208,6 +240,7 @@
                 type="text"
                 matInput
                 [(ngModel)]="data.floor_standing['contact'].required_crit"
+                [required]="data.is_floor_standing"
               />
             </mat-form-field>
           </div>
@@ -219,6 +252,7 @@
                 type="text"
                 matInput
                 [(ngModel)]="data.floor_standing['air'].level"
+                [required]="data.is_floor_standing"
               />
               <span matTextSuffix>kV</span>
             </mat-form-field>
@@ -228,6 +262,7 @@
                 type="text"
                 matInput
                 [(ngModel)]="data.floor_standing['air'].criterion"
+                [required]="data.is_floor_standing"
               />
             </mat-form-field>
           </div>
@@ -238,6 +273,7 @@
                 type="text"
                 matInput
                 [(ngModel)]="data.floor_standing['air'].required_crit"
+                [required]="data.is_floor_standing"
               />
             </mat-form-field>
           </div>
@@ -249,6 +285,7 @@
                 type="text"
                 matInput
                 [(ngModel)]="data.floor_standing['vcp'].level"
+                [required]="data.is_floor_standing"
               />
               <span matTextSuffix>kV</span>
             </mat-form-field>
@@ -258,6 +295,7 @@
                 type="text"
                 matInput
                 [(ngModel)]="data.floor_standing['vcp'].criterion"
+                [required]="data.is_floor_standing"
               />
             </mat-form-field>
           </div>
@@ -268,6 +306,7 @@
                 type="text"
                 matInput
                 [(ngModel)]="data.floor_standing['vcp'].required_crit"
+                [required]="data.is_floor_standing"
               />
             </mat-form-field>
           </div>
@@ -284,7 +323,12 @@
   <div class="row">
     <mat-form-field appearance="outline">
       <mat-label>Wynik </mat-label>
-      <input type="text" matInput [(ngModel)]="data.basic_data.result" />
+      <input
+        type="text"
+        matInput
+        [(ngModel)]="data.basic_data.result"
+        [required]="true"
+      />
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Data badań</mat-label>
@@ -292,6 +336,7 @@
         matInput
         [matDatepicker]="picker"
         [(ngModel)]="data.basic_data.date"
+        [required]="true"
       />
       <mat-hint>DD/MM/YYYY</mat-hint>
       <mat-datepicker-toggle
@@ -304,7 +349,12 @@
   <div class="row">
     <mat-form-field appearance="outline">
       <mat-label>Badania wykonał </mat-label>
-      <input type="text" matInput [(ngModel)]="data.basic_data.contractor" />
+      <input
+        type="text"
+        matInput
+        [(ngModel)]="data.basic_data.contractor"
+        [required]="true"
+      />
     </mat-form-field>
   </div>
   <div class="buttons">
@@ -325,9 +375,19 @@
           ? inputs.inputs.results.endurance[normIndex + 1].norm
           : inputs.inputs.results.endurance[normIndex].norm
       }}"
-      (click)="next()"
+      (click)="
+        next(
+          normIndex + 1 === inputs.inputs.results.endurance.length
+            ? true
+            : false
+        )
+      "
     >
-      Dalej
+      {{
+        normIndex + 1 === inputs.inputs.results.endurance.length
+          ? "Zapisz"
+          : "Dalej"
+      }}
     </button>
   </div>
 </div>

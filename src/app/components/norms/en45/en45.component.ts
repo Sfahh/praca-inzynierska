@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { InputsService } from '../../../shared/inputs.service';
 import { DatePipe } from '@angular/common';
 import { En45Results, NormEn45 } from '../../../shared/dictionary';
+import { ReportService } from '../../../shared/report.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-en45',
@@ -9,6 +11,8 @@ import { En45Results, NormEn45 } from '../../../shared/dictionary';
   styleUrl: './en45.component.scss',
 })
 export class En45Component implements OnInit {
+  private _snackBar = inject(MatSnackBar);
+
   componentName: string = 'en45';
 
   data: NormEn45;
@@ -28,7 +32,11 @@ export class En45Component implements OnInit {
 
   normIndex: number;
 
-  constructor(public inputs: InputsService, public datepipe: DatePipe) {}
+  constructor(
+    public inputs: InputsService,
+    public datepipe: DatePipe,
+    public reportService: ReportService
+  ) {}
 
   ngOnInit(): void {
     this.data = this.inputs.inputs?.en45;
@@ -84,7 +92,7 @@ export class En45Component implements OnInit {
     }
   }
 
-  next() {
+  next(isSave?: boolean) {
     this.data.basic_data.date = this.datepipe.transform(
       this.data.basic_data.date,
       'dd/MM/yyyy'
@@ -93,5 +101,9 @@ export class En45Component implements OnInit {
     this.data.signal = this.dataSignal;
     this.inputs.updateInputs('en_45', this.data);
     console.log(this.inputs.inputs);
+    this.reportService.createSections();
+    if (isSave) {
+      this._snackBar.open('Pomyślnie zapisano', 'Ok');
+    }
   }
 }

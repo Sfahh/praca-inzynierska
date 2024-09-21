@@ -8,6 +8,7 @@
         matInput
         [(ngModel)]="data.basic_data.devices"
         [matAutocomplete]="auto"
+        [required]="true"
       />
       <mat-autocomplete #auto="matAutocomplete">
         @for (device of devices; track device){
@@ -20,12 +21,17 @@
   <div class="row">
     <mat-form-field appearance="outline">
       <mat-label>Częstotliwość</mat-label>
-      <input type="text" matInput [(ngModel)]="data.frequency" />
+      <input
+        type="text"
+        matInput
+        [(ngModel)]="data.frequency"
+        [required]="true"
+      />
       <span matTextSuffix>Hz</span>
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Poziom</mat-label>
-      <input type="text" matInput [(ngModel)]="data.level" />
+      <input type="text" matInput [(ngModel)]="data.level" [required]="true" />
       <span matTextSuffix>A/m</span>
     </mat-form-field>
   </div>
@@ -35,11 +41,21 @@
     <div class="row">
       <mat-form-field appearance="outline">
         <mat-label>Osiągnięte kryterium</mat-label>
-        <input type="text" matInput [(ngModel)]="item.criterion" />
+        <input
+          type="text"
+          matInput
+          [(ngModel)]="item.criterion"
+          [required]="true"
+        />
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Wymagane kryterium</mat-label>
-        <input type="text" matInput [(ngModel)]="item.req_criterion" />
+        <input
+          type="text"
+          matInput
+          [(ngModel)]="item.req_criterion"
+          [required]="true"
+        />
       </mat-form-field>
     </div>
     <div class="dot" *ngIf="i !== axisResults.length - 1"></div>
@@ -64,7 +80,12 @@
   <div class="row">
     <mat-form-field appearance="outline">
       <mat-label>Wynik </mat-label>
-      <input type="text" matInput [(ngModel)]="data.basic_data.result" />
+      <input
+        type="text"
+        matInput
+        [(ngModel)]="data.basic_data.result"
+        [required]="true"
+      />
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Data badań</mat-label>
@@ -72,6 +93,7 @@
         matInput
         [matDatepicker]="picker"
         [(ngModel)]="data.basic_data.date"
+        [required]="true"
       />
       <mat-hint>DD/MM/YYYY</mat-hint>
       <mat-datepicker-toggle
@@ -84,7 +106,12 @@
   <div class="row">
     <mat-form-field appearance="outline">
       <mat-label>Badania wykonał </mat-label>
-      <input type="text" matInput [(ngModel)]="data.basic_data.contractor" />
+      <input
+        type="text"
+        matInput
+        [(ngModel)]="data.basic_data.contractor"
+        [required]="true"
+      />
     </mat-form-field>
   </div>
   <div class="buttons">
@@ -105,9 +132,19 @@
           ? inputs.inputs.results.endurance[normIndex + 1].norm
           : inputs.inputs.results.endurance[normIndex].norm
       }}"
-      (click)="next()"
+      (click)="
+        next(
+          normIndex + 1 === inputs.inputs.results.endurance.length
+            ? true
+            : false
+        )
+      "
     >
-      Dalej
+      {{
+        normIndex + 1 === inputs.inputs.results.endurance.length
+          ? "Zapisz"
+          : "Dalej"
+      }}
     </button>
   </div>
 </div>

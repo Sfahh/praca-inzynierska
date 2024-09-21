@@ -15,13 +15,23 @@
             <div class="item">
               <mat-form-field appearance="outline">
                 <mat-label>Napięcie</mat-label>
-                <input matInput type="text" [(ngModel)]="dataPower.voltage" />
+                <input
+                  matInput
+                  type="text"
+                  [(ngModel)]="dataPower.voltage"
+                  [required]="isPower"
+                />
               </mat-form-field>
             </div>
             <div class="item">
               <mat-form-field appearance="outline">
                 <mat-label>Moc</mat-label>
-                <input matInput type="text" [(ngModel)]="dataPower.power" />
+                <input
+                  matInput
+                  type="text"
+                  [(ngModel)]="dataPower.power"
+                  [required]="isPower"
+                />
               </mat-form-field>
             </div>
           </div>
@@ -30,7 +40,10 @@
               <mat-form-field appearance="outline">
                 <mat-label>Klasa ochronności urządzenia</mat-label>
                 <!-- <input matInput type="text"  [(ngModel)]="dataPower.security"> -->
-                <mat-select [(ngModel)]="dataPower.security">
+                <mat-select
+                  [(ngModel)]="dataPower.security"
+                  [required]="isPower"
+                >
                   <mat-option value="1">1</mat-option>
                   <mat-option value="2">2</mat-option>
                   <mat-option value="3">3</mat-option>
@@ -40,7 +53,12 @@
             <div class="item">
               <mat-form-field appearance="outline">
                 <mat-label>Typ kabla (liczba żył, przekrój)</mat-label>
-                <input matInput type="text" [(ngModel)]="dataPower.cable" />
+                <input
+                  matInput
+                  type="text"
+                  [(ngModel)]="dataPower.cable"
+                  [required]="isPower"
+                />
               </mat-form-field>
             </div>
           </div>
@@ -48,7 +66,7 @@
             <div class="item">
               <mat-form-field appearance="outline">
                 <mat-label>Ekran</mat-label>
-                <mat-select [(ngModel)]="dataPower.screen">
+                <mat-select [(ngModel)]="dataPower.screen" [required]="isPower">
                   <mat-option value="Tak">Tak</mat-option>
                   <mat-option value="Nie">Nie</mat-option>
                 </mat-select>
@@ -61,6 +79,7 @@
                   matInput
                   type="text"
                   [(ngModel)]="dataPower.cable_length"
+                  [required]="isPower"
                 />
               </mat-form-field>
             </div>
@@ -73,6 +92,7 @@
                   matInput
                   type="text"
                   [(ngModel)]="dataPower.connection"
+                  [required]="isPower"
                 />
               </mat-form-field>
             </div>
@@ -94,6 +114,7 @@
                   type="text"
                   [(ngModel)]="dataSignal.conn_number"
                   (input)="countConnectionsSignal($event)"
+                  [required]="isSignal"
                 />
               </mat-form-field>
             </div>
@@ -103,7 +124,12 @@
               <div class="item">
                 <mat-form-field appearance="outline">
                   <mat-label>Złącze sygnałowe nr {{ i + 1 }}</mat-label>
-                  <input matInput type="text" [(ngModel)]="item.name" />
+                  <input
+                    matInput
+                    type="text"
+                    [(ngModel)]="item.name"
+                    [required]="isSignal"
+                  />
                 </mat-form-field>
               </div>
             </div>
@@ -111,13 +137,18 @@
               <div class="item">
                 <mat-form-field appearance="outline">
                   <mat-label>Typ kabla</mat-label>
-                  <input matInput type="text" [(ngModel)]="item.cable" />
+                  <input
+                    matInput
+                    type="text"
+                    [(ngModel)]="item.cable"
+                    [required]="isSignal"
+                  />
                 </mat-form-field>
               </div>
               <div class="item">
                 <mat-form-field appearance="outline">
                   <mat-label>Ekran</mat-label>
-                  <mat-select [(ngModel)]="item.screen">
+                  <mat-select [(ngModel)]="item.screen" [required]="isSignal">
                     <mat-option value="Tak">Tak</mat-option>
                     <mat-option value="Nie">Nie</mat-option>
                   </mat-select>
@@ -128,7 +159,12 @@
               <div class="item">
                 <mat-form-field appearance="outline">
                   <mat-label>Długość kabla</mat-label>
-                  <input matInput type="text" [(ngModel)]="item.cable_length" />
+                  <input
+                    matInput
+                    type="text"
+                    [(ngModel)]="item.cable_length"
+                    [required]="isSignal"
+                  />
                 </mat-form-field>
               </div>
               <div class="item">
@@ -139,6 +175,7 @@
                     type="text"
                     [(ngModel)]="item.connection"
                     [matAutocomplete]="auto"
+                    [required]="isSignal"
                   />
                   <mat-autocomplete #auto="matAutocomplete">
                     <mat-option value="RJ45">RJ45</mat-option>
@@ -158,7 +195,12 @@
       <div class="item">
         <mat-form-field appearance="outline">
           <mat-label>Liczba trybów pracy</mat-label>
-          <input matInput type="text" [(ngModel)]="dataMode.modes" />
+          <input
+            matInput
+            type="text"
+            [(ngModel)]="dataMode.modes"
+            [required]="true"
+          />
         </mat-form-field>
       </div>
     </div>
@@ -173,6 +215,7 @@
             matInput
             type="text"
             [(ngModel)]="dataMode.modes_desc['mode' + item]"
+            [required]="true"
           />
         </mat-form-field>
       </div>
@@ -183,7 +226,11 @@
       <div class="item">
         <mat-form-field class="form-criterion" appearance="outline">
           <mat-label>Kryterium Oceny</mat-label>
-          <textarea matInput [(ngModel)]="dataOthers.criterion"></textarea>
+          <textarea
+            matInput
+            [(ngModel)]="dataOthers.criterion"
+            [required]="true"
+          ></textarea>
         </mat-form-field>
       </div>
     </div>
@@ -195,6 +242,7 @@
             matInput
             [matDatepicker]="picker"
             [(ngModel)]="dataOthers.date"
+            [required]="true"
           />
           <mat-hint>DD/MM/YYYY</mat-hint>
           <mat-datepicker-toggle
@@ -209,7 +257,12 @@
       <div class="item">
         <mat-form-field appearance="outline">
           <mat-label>Przedstawiciele Zleceniodawcy</mat-label>
-          <input matInput type="text" [(ngModel)]="dataOthers.representative" />
+          <input
+            matInput
+            type="text"
+            [(ngModel)]="dataOthers.representative"
+            [required]="true"
+          />
         </mat-form-field>
       </div>
     </div>
