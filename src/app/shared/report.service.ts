@@ -434,6 +434,8 @@ export class ReportService {
               ],
             },
           ];
+    console.log(inputs.en45);
+
     this.en45 =
       inputs.results.endurance.findIndex((item) => item.norm === 'en45') < 0
         ? []
@@ -458,23 +460,34 @@ export class ReportService {
                     'Wymagane kryterium',
                   ],
                   [
-                    { rowSpan: 2, text: 'Zasilanie' },
-                    `${+inputs.en45.security_class === 1 ? 'L-PE' : 'L-N'}`,
+                    {
+                      rowSpan: +inputs.object_power?.security === 1 ? 2 : 1,
+                      text: 'Zasilanie',
+                    },
+                    `${+inputs.object_power?.security === 1 ? 'L-PE' : 'L-N'}`,
                     inputs.en45.power[0].impedance,
                     inputs.en45.power[0].level,
                     inputs.en45.power[0].criterion,
                     inputs.en45.power[0].req_criterion,
                   ],
-                  +inputs.en45.security_class !== 1
-                    ? []
-                    : [
+                  // [
+                  //   'Port',
+                  //   'N-PE',
+                  //   inputs.en45.power[1].impedance,
+                  //   inputs.en45.power[1].level,
+                  //   inputs.en45.power[1].criterion,
+                  //   inputs.en45.power[1].req_criterion,
+                  // ],
+                  +inputs.object_power?.security === 1
+                    ? [
+                        'Port',
                         'N-PE',
-                        inputs.en45.power[1].interface,
                         inputs.en45.power[1].impedance,
                         inputs.en45.power[1].level,
                         inputs.en45.power[1].criterion,
                         inputs.en45.power[1].req_criterion,
-                      ],
+                      ]
+                    : [],
                   ...inputs.en45.signal.map((p) => [
                     p.port,
                     p.interface,

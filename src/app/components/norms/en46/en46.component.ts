@@ -49,11 +49,11 @@ export class En46Component implements OnInit {
       new Array(this.connectionsNr),
       (x, i) => i + 1
     );
-    if (this.isPower) {
+    if (this.isPower && this.dataPower.length === 0) {
       let power = new En46Results();
       this.dataPower.push(power);
     }
-    if (this.isSignal) {
+    if (this.isSignal && this.dataSignal.length === 0) {
       this.connectionsNrArr.forEach((el, index) => {
         el = new En46Results();
         el.port = this.signal[index].name;

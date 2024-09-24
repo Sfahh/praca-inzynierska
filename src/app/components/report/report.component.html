@@ -1,6 +1,6 @@
 <div class="container">
   <div class="form-container">
-    <mat-form-field appearance="outline">
+    <mat-form-field #form appearance="outline">
       <mat-label>Numer projektu</mat-label>
       <input
         matInput
@@ -9,7 +9,7 @@
         [required]="true"
       />
     </mat-form-field>
-    <mat-form-field appearance="outline">
+    <mat-form-field #form appearance="outline">
       <mat-label>Zleceniodawca</mat-label>
       <textarea
         matInput
@@ -17,11 +17,11 @@
         [required]="true"
       ></textarea>
     </mat-form-field>
-    <mat-form-field appearance="outline">
+    <mat-form-field #form appearance="outline">
       <mat-label>Obiekt badany</mat-label>
       <input matInput type="text" [(ngModel)]="data.object" [required]="true" />
     </mat-form-field>
-    <mat-form-field appearance="outline">
+    <mat-form-field #form appearance="outline">
       <mat-label>Miejsce wykonania badań</mat-label>
       <input matInput type="text" [(ngModel)]="data.place" [required]="true" />
     </mat-form-field>
@@ -32,7 +32,7 @@
         >Odporność</mat-checkbox
       >
     </div>
-    <mat-form-field appearance="outline">
+    <mat-form-field #form appearance="outline">
       <mat-label>Data wykonania sprawozdania</mat-label>
       <input
         matInput
@@ -47,7 +47,7 @@
       ></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
-    <mat-form-field appearance="outline">
+    <mat-form-field #form appearance="outline">
       <mat-label>Sprawozdanie sprawdził</mat-label>
       <mat-select [(ngModel)]="data.reviewer" [required]="true">
         @for (person of personsList; track person){
@@ -55,7 +55,7 @@
         }
       </mat-select>
     </mat-form-field>
-    <mat-form-field appearance="outline">
+    <mat-form-field #form appearance="outline">
       <mat-label>Sprawozdanie wykonał</mat-label>
       <mat-select [(ngModel)]="data.executor" [required]="true">
         @for (person of personsList; track person){

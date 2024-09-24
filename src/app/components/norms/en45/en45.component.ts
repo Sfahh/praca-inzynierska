@@ -100,6 +100,8 @@ export class En45Component implements OnInit {
     this.data.power = this.dataPower;
     this.data.signal = this.dataSignal;
     this.inputs.updateInputs('en_45', this.data);
+    console.log(this.inputs.inputs.en_45);
+
     console.log(this.inputs.inputs);
     this.reportService.createSections();
     if (isSave) {

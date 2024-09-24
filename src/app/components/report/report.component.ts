@@ -1,4 +1,12 @@
-import { Component, OnInit, inject, input } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild,
+  ViewChildren,
+  inject,
+  input,
+} from '@angular/core';
 import { ReportService } from '../../shared/report.service';
 import { DateAdapter } from '@angular/material/core';
 import {
@@ -20,6 +28,9 @@ import { Router } from '@angular/router';
   styleUrl: './report.component.scss',
 })
 export class ReportComponent implements OnInit {
+  @ViewChild('form', { read: ElementRef })
+  formField: ElementRef<HTMLElement>;
+
   personsList = People;
   data: BasicInfo;
   isPrev: boolean;
@@ -64,14 +75,10 @@ export class ReportComponent implements OnInit {
 
   isValid() {
     const keys = Object.keys(this.data);
-    console.log(keys);
-
+    keys.splice(keys.indexOf('isEndurance'), 1);
+    keys.splice(keys.indexOf('isEmission'), 1);
     for (let key of keys) {
-      console.log(key);
-
       if (!this.data[key]) {
-        console.log(this.data[key]);
-
         return false;
       }
     }
