@@ -223,6 +223,28 @@ export class NormEn48 {
   picture: any = null;
 }
 
+export class En411Results {
+  datum_level: string = 'AC 230';
+  frequency: string = null;
+  level: string = null;
+  period_nr: string = null;
+  criterion: string;
+  req_criterion: string;
+}
+export class NormEn411 {
+  basic_data: NormBasicData = {
+    devices: [],
+    comment: null,
+    result: null,
+    contractor: null,
+    date: null,
+  };
+  results: En411Results[] = [];
+  repetition: string;
+  repetition_gap: string;
+  pictures: null;
+}
+
 export class norms {
   key: string;
   value: string;
@@ -252,5 +274,9 @@ export const Norms: norms[] = [
   {
     key: 'EN 61000-4-8',
     value: 'en48',
+  },
+  {
+    key: 'EN 61000-4-11',
+    value: 'en411',
   },
 ];

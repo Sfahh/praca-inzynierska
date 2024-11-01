@@ -37,6 +37,8 @@ export class ObjectDescriptionComponent implements OnInit {
     this.dataMode = this.inputs.inputs?.object_mode;
     this.dataOthers = this.inputs.inputs?.object_others;
     this.connections = this.inputs.inputs?.object_signal.connections;
+    this.isPower = this.inputs.inputs?.object_power.is_power;
+    this.isSignal = this.inputs.inputs?.object_signal.is_signal;
     console.log('t');
   }
 

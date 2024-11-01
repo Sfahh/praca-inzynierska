@@ -74,7 +74,7 @@ export class En46Component implements OnInit {
     );
     this.data.power = this.dataPower;
     this.data.signal = this.dataSignal;
-    this.inputs.updateInputs('en_46', this.data);
+    this.inputs.updateInputs('en46', this.data);
     console.log(this.inputs.inputs);
     console.log(this.selectedFile);
     this.fileToBase64(this.selectedFile.files);

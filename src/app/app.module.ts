@@ -21,6 +21,7 @@ import { En45Component } from './components/norms/en45/en45.component';
 import { En46Component } from './components/norms/en46/en46.component';
 import { En48Component } from './components/norms/en48/en48.component';
 import { HttpClient, provideHttpClient } from '@angular/common/http';
+import { En411Component } from './components/norms/en411/en411.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { HttpClient, provideHttpClient } from '@angular/common/http';
     En45Component,
     En46Component,
     En48Component,
+    En411Component,
   ],
   imports: [
     BrowserModule,

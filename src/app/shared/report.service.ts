@@ -23,6 +23,7 @@ export class ReportService {
   en45;
   en46;
   en48;
+  en411;
 
   pdfElements: {};
 
@@ -470,14 +471,6 @@ export class ReportService {
                     inputs.en45.power[0].criterion,
                     inputs.en45.power[0].req_criterion,
                   ],
-                  // [
-                  //   'Port',
-                  //   'N-PE',
-                  //   inputs.en45.power[1].impedance,
-                  //   inputs.en45.power[1].level,
-                  //   inputs.en45.power[1].criterion,
-                  //   inputs.en45.power[1].req_criterion,
-                  // ],
                   +inputs.object_power?.security === 1
                     ? [
                         'Port',
@@ -639,6 +632,57 @@ export class ReportService {
             },
           ];
 
+    this.en411 =
+      inputs.results.endurance.findIndex((item) => item.norm === 'en411') < 0
+        ? []
+        : [
+            {
+              text: 'Szczegółowe wyniki odporności zgodnie z EN 61000-4-11 - zapady napięcia, krótkie przerwy i zmiany napięcia zasilania',
+              pageBreak: 'before',
+            },
+            {
+              text: [
+                'Lista urządzeń pomiarowych: \n',
+                inputs.en411.basic_data.devices[0],
+              ],
+            },
+            {
+              style: 'table',
+              table: {
+                body: [
+                  [
+                    'Poziom odniesienia [V]',
+                    'Częstotliwość [Hz]',
+                    'Poziom',
+                    'Liczba okresów zaburzenia',
+                    'Osiągnięte kryterium',
+                    'Wymagane kryterium',
+                  ],
+                  ...inputs.en411.results.map((p) => [
+                    p.datum_level,
+                    p.frequency,
+                    p.level,
+                    p.period_nr,
+                    p.criterion,
+                    p.req_criterion,
+                  ]),
+                ],
+              },
+            },
+            {
+              text: [
+                'Komentarz: \n',
+                inputs.en411.basic_data.comment,
+                '\n\nWynik ',
+                inputs.en411.basic_data.result,
+                '\n\nData badania: ',
+                inputs.en411.basic_data.date,
+                '\n\nBadania wykonał: ',
+                inputs.en411.basic_data.contractor,
+              ],
+            },
+          ];
+
     this.basicInfo.forEach((el) => {
       this.docDefinition['content'].push(el);
     });
@@ -673,6 +717,9 @@ export class ReportService {
       this.docDefinition['content'].push(el);
     });
     this.en48.forEach((el) => {
+      this.docDefinition['content'].push(el);
+    });
+    this.en411.forEach((el) => {
       this.docDefinition['content'].push(el);
     });
   }

@@ -68,25 +68,25 @@ export class InputsService {
             level: '+/- 4',
             criterion: '',
             required_crit: '',
-            picture: '',
+            picture: null,
           },
           air: {
             level: 'do +/- 8',
             criterion: '',
             required_crit: '',
-            picture: '',
+            picture: null,
           },
           vcp: {
             level: '+/- 4',
             criterion: '',
             required_crit: '',
-            picture: '',
+            picture: null,
           },
           hcp: {
             level: '+/- 4',
             criterion: '',
             required_crit: '',
-            picture: '',
+            picture: null,
           },
         },
         floor_standing: {
@@ -94,19 +94,19 @@ export class InputsService {
             level: '+/- 4',
             criterion: '',
             required_crit: '',
-            picture: '',
+            picture: null,
           },
           air: {
             level: 'do +/- 8',
             criterion: '',
             required_crit: '',
-            picture: '',
+            picture: null,
           },
           vcp: {
             level: '+/- 4',
             criterion: '',
             required_crit: '',
-            picture: '',
+            picture: null,
           },
         },
       },
@@ -126,7 +126,7 @@ export class InputsService {
         level: '',
         criterion: '',
         req_criterion: '',
-        picture: '',
+        picture: null,
       },
       en44: {
         basic_data: {
@@ -192,6 +192,19 @@ export class InputsService {
         picture: null,
         axis: [],
       },
+      en411: {
+        basic_data: {
+          devices: [],
+          comment: '',
+          result: '',
+          contractor: '',
+          date: '',
+        },
+        repetition: '',
+        repetition_gap: '',
+        pictures: null,
+        results: [],
+      },
     };
   }
 
@@ -201,5 +214,10 @@ export class InputsService {
 
   public updateInputs(obj, value) {
     this.inputs[obj] = value;
+    localStorage.setItem('project', JSON.stringify(this.inputs));
+  }
+
+  public setInputs() {
+    this.inputs = JSON.parse(localStorage.getItem('project'));
   }
 }

@@ -1,5 +1,34 @@
 <div class="container">
-   <h1>Witaj w sprawozdaniu</h1>
-   <h2>Kliknij w przycisk poniżej aby utworzyć nowe sprawozdanie</h2>
-   <a mat-raised-button color="primary" routerLink="/create">Utwórz</a>
+  <h1>Witaj w sprawozdaniu</h1>
+  <h2>Kliknij w przycisk poniżej aby utworzyć nowe sprawozdanie</h2>
+  <a
+    (click)="isContinue ? setInputs() : ''"
+    mat-raised-button
+    color="primary"
+    routerLink="/create"
+    [style.margin-bottom]="'15px'"
+    >{{ isContinue ? "Kontynuuj" : "Utwórz" }}</a
+  >
+  <a
+    *ngIf="isContinue"
+    mat-raised-button
+    color="primary"
+    (click)="createWarning(warning)"
+    >Nowe sprawozdanie</a
+  >
 </div>
+
+<ng-template #warning>
+  <h2 matDialogTitle>Uwaga</h2>
+  <p matDialogContent [align]="'center'">
+    Utworzenie nowego sprawozdania spowoduje usunięcie zapisanej pracy
+  </p>
+  <mat-dialog-actions [align]="'end'">
+    <button mat-raised-button color="warn" (click)="createNew()">
+      Kontynuuj
+    </button>
+    <button mat-raised-button color="primary" (click)="closeDialog()">
+      Wróć
+    </button>
+  </mat-dialog-actions>
+</ng-template>

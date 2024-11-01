@@ -1,6 +1,17 @@
-.container{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
+
+.dialogButtons {
+  margin-bottom: 15px;
+}
+
+// :host::ng-deep {
+//   .mat-mdc-raised-button:not(:disabled) {
+//     color: var(--mdc-protected-button-label-text-color);
+//     margin-bottom: 15px;
+//   }
+// }
