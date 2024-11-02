@@ -49,7 +49,6 @@ export class ReportComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.reportService.test();
     this.data = this.inputs.inputs?.basic_info;
     this.isPrev = this.inputs.inputs?.is_prev;
     console.log(this.personsList[0].name);

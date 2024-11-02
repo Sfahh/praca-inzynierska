@@ -435,8 +435,6 @@ export class ReportService {
               ],
             },
           ];
-    console.log(inputs.en45);
-
     this.en45 =
       inputs.results.endurance.findIndex((item) => item.norm === 'en45') < 0
         ? []
@@ -451,45 +449,7 @@ export class ReportService {
               style: 'table',
               table: {
                 widths: [79.16, 79.16, 79.16, 79.16, 79.16, 79.16],
-                body: [
-                  [
-                    'Port',
-                    'Sprzężenie',
-                    'Efektywna impedancja urządzenia [\u03a9]',
-                    'Poziom [kV]',
-                    'Osiągnięte kryterium',
-                    'Wymagane kryterium',
-                  ],
-                  [
-                    {
-                      rowSpan: +inputs.object_power?.security === 1 ? 2 : 1,
-                      text: 'Zasilanie',
-                    },
-                    `${+inputs.object_power?.security === 1 ? 'L-PE' : 'L-N'}`,
-                    inputs.en45.power[0].impedance,
-                    inputs.en45.power[0].level,
-                    inputs.en45.power[0].criterion,
-                    inputs.en45.power[0].req_criterion,
-                  ],
-                  +inputs.object_power?.security === 1
-                    ? [
-                        'Port',
-                        'N-PE',
-                        inputs.en45.power[1].impedance,
-                        inputs.en45.power[1].level,
-                        inputs.en45.power[1].criterion,
-                        inputs.en45.power[1].req_criterion,
-                      ]
-                    : [],
-                  ...inputs.en45.signal.map((p) => [
-                    p.port,
-                    p.interface,
-                    p.impedance,
-                    p.level,
-                    p.criterion,
-                    p.req_criterion,
-                  ]),
-                ],
+                body: this.parseSecurityArr(),
               },
             },
             {
@@ -769,17 +729,61 @@ export class ReportService {
     ];
   }
 
-  test() {
-    console.log(this.docDefinition);
+  parseSecurityArr() {
+    if (+this.inputs.inputs.object_power.security === 1) {
+      return [
+        [
+          {
+            rowSpan: 2,
+            text: 'Zasilanie',
+          },
+          'L-PE',
+          this.inputs.inputs.en45.power[0].impedance,
+          this.inputs.inputs.en45.power[0].level,
+          this.inputs.inputs.en45.power[0].criterion,
+          this.inputs.inputs.en45.power[0].req_criterion,
+        ],
+        [
+          'Port',
+          'N-PE',
+          this.inputs.inputs.en45.power[1].impedance,
+          this.inputs.inputs.en45.power[1].level,
+          this.inputs.inputs.en45.power[1].criterion,
+          this.inputs.inputs.en45.power[1].req_criterion,
+        ],
+        ...this.inputs.inputs.en45.signal.map((p) => [
+          p.port,
+          p.interface,
+          p.impedance,
+          p.level,
+          p.criterion,
+          p.req_criterion,
+        ]),
+      ];
+    } else {
+      return [
+        [
+          {
+            rowSpan: 1,
+            text: 'Zasilanie',
+          },
+          'L-N',
+          this.inputs.inputs.en45.power[0].impedance,
+          this.inputs.inputs.en45.power[0].level,
+          this.inputs.inputs.en45.power[0].criterion,
+          this.inputs.inputs.en45.power[0].req_criterion,
+        ],
+        ...this.inputs.inputs.en45.signal.map((p) => [
+          p.port,
+          p.interface,
+          p.impedance,
+          p.level,
+          p.criterion,
+          p.req_criterion,
+        ]),
+      ];
+    }
   }
-
-  public addToPDF(elements: {}[]) {
-    // elements.forEach((el) => {
-    //   this.docDefinition['content'].push(el);
-    // });
-    console.log(this.docDefinition);
-  }
-
   fileToBase64(files?: []) {
     this.http
       .get('./assets/pw_logo.png', {

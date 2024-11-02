@@ -54,11 +54,11 @@ export class En45Component implements OnInit {
       new Array(this.signal_connections),
       (x, i) => i + 1
     );
-    if (this.isPower) {
+    if (this.isPower && this.dataPower.length === 0) {
       this.countPowerDetail();
       console.log(this.dataPower);
     }
-    if (this.isSignal) {
+    if (this.isSignal && this.dataSignal.length === 0) {
       console.log('test');
       this.conns.forEach((el, index) => {
         console.log(index);
