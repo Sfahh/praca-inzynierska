@@ -71,6 +71,29 @@ export class En44Component implements OnInit {
     );
   }
 
+  fileToBase64(files: []) {
+    this.data.picture = [];
+    files.forEach((el) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(el);
+      reader.onload = () => {
+        console.log(reader.result);
+        this.data.picture.push(reader.result);
+      };
+    });
+  }
+
+  change(e) {
+    const fileKeys = Object.keys(e.target.files);
+    let files: any = [];
+    console.log(e);
+    for (let key of fileKeys) {
+      files.push(e.target.files[key]);
+    }
+    console.log(files);
+    this.fileToBase64(files);
+  }
+
   next(isSave?: boolean) {
     this.data.power = this.powerData;
     this.data.signal = this.signalData;
@@ -78,6 +101,8 @@ export class En44Component implements OnInit {
       this.date,
       'dd/MM/yyyy'
     );
+    console.log(this.data);
+
     this.inputs.updateInputs('en_44', this.data);
     console.log(this.inputs.inputs);
     this.reportService.createSections();

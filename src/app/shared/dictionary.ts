@@ -80,7 +80,7 @@ export class DeviceResult {
   level: string = null;
   criterion: string = null;
   required_crit: string = null;
-  picture: File;
+  picture: any;
 }
 
 export class NormPnEn42 {
@@ -119,7 +119,7 @@ export class NormEn43 {
   level: string = null;
   criterion: string = null;
   req_criteerion: string = null;
-  picture: File = null;
+  picture: any = [];
 }
 
 export class En44Results {
@@ -129,7 +129,6 @@ export class En44Results {
   repetition: string = null;
   criterion: string = null;
   req_criterion: string = null;
-  picture: File = null;
 }
 export class NormEn44 {
   basic_data: NormBasicData = {
@@ -142,6 +141,7 @@ export class NormEn44 {
     contractor: null,
     date: null,
   };
+  picture: any = [];
   is_table_top: boolean = false;
   is_floor_standing: boolean = false;
   power: En44Results[] = [];
@@ -175,7 +175,7 @@ export class NormEn45 {
   positive_bursts: number = null;
   negative_bursts: number = null;
   bursts_gap: string = null;
-  picture: File = null;
+  picture: any = null;
 }
 
 export class En46Results {
@@ -200,7 +200,7 @@ export class NormEn46 {
   };
   power: En46Results[] = [];
   signal: En46Results[] = [];
-  picture: File = null;
+  picture: any = null;
 }
 
 export class En48Results {
@@ -242,7 +242,7 @@ export class NormEn411 {
   results: En411Results[] = [];
   repetition: string;
   repetition_gap: string;
-  pictures: null;
+  picture: any;
 }
 
 export class norms {

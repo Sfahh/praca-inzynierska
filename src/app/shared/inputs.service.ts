@@ -1,5 +1,6 @@
 import { Injectable, OnInit } from '@angular/core';
 import { BasicInfo, ObjectMode, ObjectPower, ObjectSignal } from './dictionary';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Injectable({
   providedIn: 'root',
@@ -7,7 +8,7 @@ import { BasicInfo, ObjectMode, ObjectPower, ObjectSignal } from './dictionary';
 export class InputsService {
   public inputs: any = {};
 
-  constructor() {
+  constructor(private sanitizer: DomSanitizer) {
     this.inputs = {
       is_prev: false,
       is_edit: false,
@@ -126,7 +127,7 @@ export class InputsService {
         level: '',
         criterion: '',
         req_criterion: '',
-        picture: null,
+        picture: [],
       },
       en44: {
         basic_data: {
@@ -143,6 +144,7 @@ export class InputsService {
         signal: [],
         is_table_top: null,
         is_floor_standing: null,
+        picture: [],
       },
       en45: {
         basic_data: {
@@ -214,10 +216,29 @@ export class InputsService {
 
   public updateInputs(obj, value) {
     this.inputs[obj] = value;
-    localStorage.setItem('project', JSON.stringify(this.inputs));
   }
 
-  public setInputs() {
-    this.inputs = JSON.parse(localStorage.getItem('project'));
+  public setInputs(value) {
+    this.inputs = value;
+  }
+
+  saveInputs() {
+    const inputsToSave = JSON.stringify(this.inputs);
+    const uri = this.sanitizer.bypassSecurityTrustUrl(
+      'data:text/json;charset=UTF-8,' + encodeURIComponent(inputsToSave)
+    );
+    return uri;
+  }
+
+  loadInputs(file) {
+    let fileReader = new FileReader();
+    fileReader.onload = (e) => {
+      console.log(fileReader.result);
+      this.inputs = JSON.parse(fileReader.result.toString());
+      console.log(this.inputs);
+    };
+    const loadedInputs: any = fileReader.readAsText(file);
+    console.log(loadedInputs);
+    return true;
   }
 }

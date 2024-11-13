@@ -105,6 +105,16 @@
               />
             </mat-form-field>
           </div>
+          <div class="row">
+            <mat-form-field appearance="outline">
+              <mat-label>Wybierz zdjęcia </mat-label>
+              <ngx-mat-file-input
+                (input)="change($event, 'table_top', 'contact')"
+                multiple
+              ></ngx-mat-file-input>
+              <mat-icon matSuffix>folder</mat-icon>
+            </mat-form-field>
+          </div>
           <div class="row">Air</div>
           <div class="row">
             <mat-form-field appearance="outline">
@@ -136,6 +146,16 @@
                 [(ngModel)]="data.table_top['air'].required_crit"
                 [required]="data.is_table_top"
               />
+            </mat-form-field>
+          </div>
+          <div class="row">
+            <mat-form-field appearance="outline">
+              <mat-label>Wybierz zdjęcia </mat-label>
+              <ngx-mat-file-input
+                (input)="change($event, 'table_top', 'air')"
+                multiple
+              ></ngx-mat-file-input>
+              <mat-icon matSuffix>folder</mat-icon>
             </mat-form-field>
           </div>
           <div class="row">VCP</div>
@@ -171,6 +191,16 @@
               />
             </mat-form-field>
           </div>
+          <div class="row">
+            <mat-form-field appearance="outline">
+              <mat-label>Wybierz zdjęcia </mat-label>
+              <ngx-mat-file-input
+                (input)="change($event, 'table_top', 'vcp')"
+                multiple
+              ></ngx-mat-file-input>
+              <mat-icon matSuffix>folder</mat-icon>
+            </mat-form-field>
+          </div>
           <div class="row">HCP</div>
           <div class="row">
             <mat-form-field appearance="outline">
@@ -202,6 +232,16 @@
                 [(ngModel)]="data.table_top['hcp'].required_crit"
                 [required]="data.is_table_top"
               />
+            </mat-form-field>
+          </div>
+          <div class="row">
+            <mat-form-field appearance="outline">
+              <mat-label>Wybierz zdjęcia </mat-label>
+              <ngx-mat-file-input
+                (input)="change($event, 'table_top', 'hcp')"
+                multiple
+              ></ngx-mat-file-input>
+              <mat-icon matSuffix>folder</mat-icon>
             </mat-form-field>
           </div>
         </mat-expansion-panel>
@@ -244,6 +284,16 @@
               />
             </mat-form-field>
           </div>
+          <div class="row">
+            <mat-form-field appearance="outline">
+              <mat-label>Wybierz zdjęcia </mat-label>
+              <ngx-mat-file-input
+                (input)="change($event, 'floor_standing', 'contact')"
+                multiple
+              ></ngx-mat-file-input>
+              <mat-icon matSuffix>folder</mat-icon>
+            </mat-form-field>
+          </div>
           <div class="row">Air</div>
           <div class="row">
             <mat-form-field appearance="outline">
@@ -277,6 +327,16 @@
               />
             </mat-form-field>
           </div>
+          <div class="row">
+            <mat-form-field appearance="outline">
+              <mat-label>Wybierz zdjęcia </mat-label>
+              <ngx-mat-file-input
+                (input)="change($event, 'floor_standing', 'air')"
+                multiple
+              ></ngx-mat-file-input>
+              <mat-icon matSuffix>folder</mat-icon>
+            </mat-form-field>
+          </div>
           <div class="row">VCP</div>
           <div class="row">
             <mat-form-field appearance="outline">
@@ -308,6 +368,17 @@
                 [(ngModel)]="data.floor_standing['vcp'].required_crit"
                 [required]="data.is_floor_standing"
               />
+            </mat-form-field>
+          </div>
+          <div class="row">
+            <mat-form-field appearance="outline">
+              <mat-label>Wybierz zdjęcia </mat-label>
+              <ngx-mat-file-input
+                multiple
+                [(ngModel)]="data.floor_standing['vcp'].picture"
+                (input)="change($event, 'floor_standing', 'vcp')"
+              ></ngx-mat-file-input>
+              <mat-icon matSuffix>folder</mat-icon>
             </mat-form-field>
           </div>
         </mat-expansion-panel>

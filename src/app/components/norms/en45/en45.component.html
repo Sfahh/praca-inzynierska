@@ -228,6 +228,16 @@
   <div class="line"></div>
   <div class="row">
     <mat-form-field appearance="outline">
+      <mat-label>Wybierz zdjęcia </mat-label>
+      <ngx-mat-file-input
+        multiple
+        (input)="change($event)"
+      ></ngx-mat-file-input>
+      <mat-icon matSuffix>folder</mat-icon>
+    </mat-form-field>
+  </div>
+  <div class="row">
+    <mat-form-field appearance="outline">
       <mat-label>Komentarz</mat-label>
       <textarea matInput [(ngModel)]="data.basic_data.comment"></textarea>
     </mat-form-field>

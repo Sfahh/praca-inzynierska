@@ -36,7 +36,34 @@ export class En43Component implements OnInit {
     );
     console.log('tes2t');
   }
+
+  fileToBase64(files: []) {
+    this.data.picture = [];
+    // this.data[type][settings].picture = [];
+    files.forEach((el) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(el);
+      reader.onload = () => {
+        console.log(reader.result);
+        this.data.picture.push(reader.result);
+      };
+    });
+  }
+
+  change(e) {
+    const fileKeys = Object.keys(e.target.files);
+    let files: any = [];
+    console.log(e);
+    for (let key of fileKeys) {
+      files.push(e.target.files[key]);
+    }
+    console.log(files);
+    this.fileToBase64(files);
+  }
+
   next(isSave?: boolean) {
+    console.log(this.data);
+
     this.data.basic_data.date = this.datepipe.transform(
       this.data.basic_data.date,
       'dd/MM/yyyy'

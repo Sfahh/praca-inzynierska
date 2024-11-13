@@ -68,6 +68,9 @@ export class ReportService {
           margin: [0, 300, 0, 0],
           alignment: 'center',
         },
+        picture_info: {
+          margin: [0, 30, 0, 0],
+        },
       },
     };
 
@@ -315,6 +318,59 @@ export class ReportService {
                 ],
               },
             },
+            !inputs.pn_en_42.is_table_top
+              ? {}
+              : {
+                  style: 'picture_info',
+                  text: [
+                    'Zdjęcia badanego urzadzenia typu Table top - wyładowania typu contact',
+                  ],
+                },
+            this.createPicturesObj(inputs.pn_en_42.table_top.contact),
+            {
+              style: 'picture_info',
+              text: [
+                'Zdjęcia badanego urzadzenia typu Table top - wyładowania typu air',
+              ],
+            },
+            this.createPicturesObj(inputs.pn_en_42.table_top.air),
+            {
+              style: 'picture_info',
+              text: [
+                'Zdjęcia badanego urzadzenia typu Table top - wyładowania typu vcp',
+              ],
+            },
+            this.createPicturesObj(inputs.pn_en_42.table_top.vcp),
+            {
+              style: 'picture_info',
+              text: [
+                'Zdjęcia badanego urzadzenia typu Table top - wyładowania typu hcp',
+              ],
+            },
+            this.createPicturesObj(inputs.pn_en_42.table_top.hcp),
+            !inputs.pn_en_42.is_floor_standing
+              ? {}
+              : {
+                  style: 'picture_info',
+                  text: [
+                    'Zdjęcia badanego urzadzenia typu Floor standing - wyładowania typu contact',
+                  ],
+                },
+            this.createPicturesObj(inputs.pn_en_42.floor_standing.contact),
+            {
+              style: 'picture_info',
+              text: [
+                'Zdjęcia badanego urzadzenia typu Floor standing - wyładowania typu air',
+              ],
+            },
+            this.createPicturesObj(inputs.pn_en_42.floor_standing.air),
+            {
+              style: 'picture_info',
+              text: [
+                'Zdjęcia badanego urzadzenia typu Floor standing - wyładowania typu vcp',
+              ],
+            },
+            this.createPicturesObj(inputs.pn_en_42.floor_standing.vcp),
             {
               text: [
                 'Komentarz: \n',
@@ -360,6 +416,11 @@ export class ReportService {
               },
             },
             {
+              style: 'picture_info',
+              text: ['Zdjęcia badanego obiektu'],
+            },
+            this.createPicturesObj(inputs.en43),
+            {
               text: [
                 'Komentarz: \n',
                 inputs.en43.basic_data.comment,
@@ -372,6 +433,7 @@ export class ReportService {
               ],
             },
           ];
+    console.log(this.en44);
     this.en44 =
       inputs.results.endurance.findIndex((item) => item.norm === 'en44') < 0
         ? []
@@ -423,15 +485,20 @@ export class ReportService {
               },
             },
             {
+              style: 'picture_info',
+              text: ['Zdjęcia badanego obiektu'],
+            },
+            this.createPicturesObj(inputs.en44),
+            {
               text: [
                 'Komentarz: \n',
-                inputs.en43.basic_data.comment,
+                inputs.en44.basic_data.comment,
                 '\n\nWynik ',
-                inputs.en43.basic_data.result,
+                inputs.en44.basic_data.result,
                 '\n\nData badania: ',
-                inputs.en43.basic_data.date,
+                inputs.en44.basic_data.date,
                 '\n\nBadania wykonał: ',
-                inputs.en43.basic_data.contractor,
+                inputs.en44.basic_data.contractor,
               ],
             },
           ];
@@ -461,15 +528,20 @@ export class ReportService {
               ],
             },
             {
+              style: 'picture_info',
+              text: ['Zdjęcia badanego obiektu'],
+            },
+            this.createPicturesObj(inputs.en45),
+            {
               text: [
                 'Komentarz: \n',
-                inputs.en43.basic_data.comment,
+                inputs.en45.basic_data.comment,
                 '\n\nWynik ',
-                inputs.en43.basic_data.result,
+                inputs.en45.basic_data.result,
                 '\n\nData badania: ',
-                inputs.en43.basic_data.date,
+                inputs.en45.basic_data.date,
                 '\n\nBadania wykonał: ',
-                inputs.en43.basic_data.contractor,
+                inputs.en45.basic_data.contractor,
               ],
             },
           ];
@@ -513,6 +585,11 @@ export class ReportService {
                 ],
               },
             },
+            {
+              style: 'picture_info',
+              text: ['Zdjęcia badanego obiektu'],
+            },
+            this.createPicturesObj(inputs.en46),
             {
               text: [
                 'Komentarz: \n',
@@ -579,6 +656,11 @@ export class ReportService {
               },
             },
             {
+              style: 'picture_info',
+              text: ['Zdjęcia badanego obiektu'],
+            },
+            this.createPicturesObj(inputs.en48),
+            {
               text: [
                 'Komentarz: \n',
                 inputs.en48.basic_data.comment,
@@ -629,6 +711,11 @@ export class ReportService {
                 ],
               },
             },
+            {
+              style: 'picture_info',
+              text: ['Zdjęcia badanego obiektu'],
+            },
+            this.createPicturesObj(inputs.en411),
             {
               text: [
                 'Komentarz: \n',
@@ -729,12 +816,61 @@ export class ReportService {
     ];
   }
 
+  // {
+  //   style: {
+  //     columnGap: 20,
+  //   },
+  //   columns: [
+  //     {
+  // image: inputs.en44.picture[0],
+  // width: 200,
+  // height: 200,
+  //     },
+  //     {
+  //       image: inputs.en44.picture[1],
+  //       width: 200,
+  //       height: 200,
+  //     },
+  //   ],
+  // },
+
+  createPicturesObj(norm) {
+    console.log(norm);
+    let body = [];
+    const rows = Math.ceil(norm.picture.length / 2);
+    console.log(rows);
+
+    for (let i = 1; i <= rows; i++) {
+      body.push({
+        style: {
+          columnGap: 20,
+          alignment: 'center',
+        },
+        columns: [
+          { image: '', width: 200, height: 200 },
+          { image: '', width: 200, height: 200 },
+        ],
+      });
+    }
+    console.log(body);
+
+    norm.picture.forEach((el, idx) => {
+      const itemIdx = Math.ceil((idx + 1) / 2);
+      const columnIdx = idx % 2 ? 0 : 1;
+      console.log('itemidx = ', itemIdx, 'columnIdx = ', columnIdx);
+
+      body[itemIdx - 1].columns[columnIdx].image = el;
+    });
+
+    return body;
+  }
+
   parseSecurityArr() {
     if (+this.inputs.inputs.object_power.security === 1) {
       return [
         [
           {
-            rowSpan: 2,
+            rowSpan: 3,
             text: 'Zasilanie',
           },
           'L-PE',
@@ -750,6 +886,14 @@ export class ReportService {
           this.inputs.inputs.en45.power[1].level,
           this.inputs.inputs.en45.power[1].criterion,
           this.inputs.inputs.en45.power[1].req_criterion,
+        ],
+        [
+          'Port',
+          'L-N',
+          this.inputs.inputs.en45.power[2].impedance,
+          this.inputs.inputs.en45.power[2].level,
+          this.inputs.inputs.en45.power[2].criterion,
+          this.inputs.inputs.en45.power[2].req_criterion,
         ],
         ...this.inputs.inputs.en45.signal.map((p) => [
           p.port,

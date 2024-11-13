@@ -27,8 +27,6 @@ export class En46Component implements OnInit {
 
   devices = ['Amperomierz', 'Woltomierz', 'Cewka Rogowskiego', 'Sonda prądowa'];
 
-  selectedFile;
-
   normIndex: number;
 
   constructor(
@@ -67,6 +65,29 @@ export class En46Component implements OnInit {
     );
   }
 
+  fileToBase64(files: []) {
+    this.data.picture = [];
+    files.forEach((el) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(el);
+      reader.onload = () => {
+        console.log(reader.result);
+        this.data.picture.push(reader.result);
+      };
+    });
+  }
+
+  change(e) {
+    const fileKeys = Object.keys(e.target.files);
+    let files: any = [];
+    console.log(e);
+    for (let key of fileKeys) {
+      files.push(e.target.files[key]);
+    }
+    console.log(files);
+    this.fileToBase64(files);
+  }
+
   next(isSave?: boolean) {
     this.data.basic_data.date = this.datepipe.transform(
       this.data.basic_data.date,
@@ -76,31 +97,9 @@ export class En46Component implements OnInit {
     this.data.signal = this.dataSignal;
     this.inputs.updateInputs('en46', this.data);
     console.log(this.inputs.inputs);
-    console.log(this.selectedFile);
-    this.fileToBase64(this.selectedFile.files);
     this.reportService.createSections();
     if (isSave) {
       this._snackBar.open('Pomyślnie zapisano', 'Ok');
     }
-  }
-
-  onFileSelected(event: any): void {
-    this.selectedFile = event.target.files[0] ?? null;
-    console.log(this.selectedFile);
-    const reader = new FileReader();
-    reader.readAsDataURL(this.selectedFile);
-    reader.onload = () => {
-      console.log(reader.result);
-    };
-  }
-
-  fileToBase64(files: []) {
-    files.forEach((el) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(el);
-      reader.onload = () => {
-        console.log(reader.result);
-      };
-    });
   }
 }

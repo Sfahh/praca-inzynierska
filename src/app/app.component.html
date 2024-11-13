@@ -7,7 +7,14 @@
       <button mat-raised-button (click)="openPDF()">Open PDF</button>
       <button mat-raised-button (click)="downloadPDF()">Download PDF</button>
       <button mat-raised-button (click)="printPDF()">Print PDF</button>
-  </div>
+      <a
+        *ngIf="inputs.inputs.basic_info.project_nr"
+        mat-raised-button
+        [href]="save()"
+        download="projekt_{{ inputs.inputs.basic_info.project_nr }}.json"
+        >Zapisz</a
+      >
+    </div>
     <router-outlet></router-outlet>
   </div>
 </div>

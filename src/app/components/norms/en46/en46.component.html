@@ -183,8 +183,8 @@
     <mat-form-field appearance="outline">
       <mat-label>Wybierz zdjęcia </mat-label>
       <ngx-mat-file-input
-        [(ngModel)]="selectedFile"
         multiple
+        (input)="change($event)"
       ></ngx-mat-file-input>
       <mat-icon matSuffix>folder</mat-icon>
     </mat-form-field>

@@ -17,27 +17,16 @@ export class LandingPageComponent implements OnInit {
     private inputs: InputsService
   ) {}
 
-  ngOnInit(): void {
-    if (localStorage.getItem('project')) {
-      this.isContinue = true;
-    }
-  }
+  ngOnInit(): void {}
 
-  createWarning(ref: TemplateRef<any>) {
-    this.dialog.open(ref);
-  }
-
-  setInputs() {
-    this.inputs.setInputs();
-  }
+  setInputs() {}
 
   createNew() {
     localStorage.removeItem('project');
     this.router.navigate(['/create']);
-    this.dialog.closeAll();
   }
 
-  closeDialog() {
-    this.dialog.closeAll();
+  loadInputs(e) {
+    this.isContinue = this.inputs.loadInputs(e.target.files[0]);
   }
 }
