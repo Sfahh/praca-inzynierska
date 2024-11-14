@@ -17,6 +17,11 @@ import { PnEn42Component } from './components/norms/pn-en42/pn-en42.component';
 import { NormComponent } from './components/norms/norm/norm.component';
 import { En43Component } from './components/norms/en43/en43.component';
 import { En44Component } from './components/norms/en44/en44.component';
+import { En45Component } from './components/norms/en45/en45.component';
+import { En46Component } from './components/norms/en46/en46.component';
+import { En48Component } from './components/norms/en48/en48.component';
+import { HttpClient, provideHttpClient } from '@angular/common/http';
+import { En411Component } from './components/norms/en411/en411.component';
 
 @NgModule({
   declarations: [
@@ -31,18 +36,19 @@ import { En44Component } from './components/norms/en44/en44.component';
     NormComponent,
     En43Component,
     En44Component,
+    En45Component,
+    En46Component,
+    En48Component,
+    En411Component,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     MaterialModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
   ],
-  providers: [
-    provideAnimationsAsync(),
-    DatePipe
-  ],
-  bootstrap: [AppComponent]
+  providers: [provideAnimationsAsync(), DatePipe, provideHttpClient()],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

@@ -1,40 +1,5 @@
 <div class="container">
-  <h1>Norma EN 61000-4-3</h1>
-  <div class="row">
-    <mat-form-field appearance="outline">
-      <mat-label>Temperatura </mat-label>
-      <input
-        type="text"
-        matInput
-        [(ngModel)]="data.basic_data.temperature"
-        [required]="true"
-      />
-      <span matTextSuffix>&deg;C</span>
-    </mat-form-field>
-    <mat-form-field appearance="outline">
-      <mat-label>Ciśnienie atmosferyczne </mat-label>
-      <input
-        type="text"
-        matInput
-        [(ngModel)]="data.basic_data.pressure"
-        [required]="true"
-      />
-      <span matTextSuffix>kPa</span>
-    </mat-form-field>
-  </div>
-  <div class="row">
-    <mat-form-field appearance="outline">
-      <mat-label>Wilgotność</mat-label>
-      <input
-        max="100"
-        type="number"
-        matInput
-        [(ngModel)]="data.basic_data.humidity"
-        [required]="true"
-      />
-      <span matTextSuffix>%</span>
-    </mat-form-field>
-  </div>
+  <h1>Norma PN-EN 61000-4-8</h1>
   <div class="row">
     <mat-form-field appearance="outline">
       <mat-label>Lista urządzeń pomiarowych</mat-label>
@@ -55,64 +20,57 @@
   <div class="line"></div>
   <div class="row">
     <mat-form-field appearance="outline">
-      <mat-label>Przedział częstotliwości</mat-label>
+      <mat-label>Częstotliwość</mat-label>
       <input
         type="text"
         matInput
         [(ngModel)]="data.frequency"
         [required]="true"
       />
-      <span matTextSuffix>MHz</span>
+      <span matTextSuffix>Hz</span>
     </mat-form-field>
-    <mat-form-field appearance="outline">
-      <mat-label>Modulacja</mat-label>
-      <input
-        type="text"
-        matInput
-        [(ngModel)]="data.modulation"
-        [required]="true"
-      />
-    </mat-form-field>
-  </div>
-  <div class="row">
     <mat-form-field appearance="outline">
       <mat-label>Poziom</mat-label>
-      <input
-        type="text"
-        matInput
-        [(ngModel)]="data.level"
-        [matAutocomplete]="auto2"
-        [required]="true"
-      />
-      <mat-autocomplete #auto2="matAutocomplete">
-        @for (level of levels; track level){
-        <mat-option [value]="level">{{ level }}</mat-option>
-        }
-      </mat-autocomplete>
-      <span matTextSuffix>V/m</span>
-    </mat-form-field>
-    <mat-form-field appearance="outline">
-      <mat-label>Osiągnięte kryterium</mat-label>
-      <input
-        type="text"
-        matInput
-        [(ngModel)]="data.criterion"
-        [required]="true"
-      />
+      <input type="text" matInput [(ngModel)]="data.level" [required]="true" />
+      <span matTextSuffix>A/m</span>
     </mat-form-field>
   </div>
-  <div class="row">
-    <mat-form-field appearance="outline">
-      <mat-label>Wymagane kryterium</mat-label>
-      <input
-        type="text"
-        matInput
-        [(ngModel)]="data.req_criteerion"
-        [required]="true"
-      />
-    </mat-form-field>
+  <div class="dot"></div>
+  <div class="results" *ngFor="let item of axisResults; let i = index">
+    <span>Oś {{ item.axis }}</span>
+    <div class="row">
+      <mat-form-field appearance="outline">
+        <mat-label>Osiągnięte kryterium</mat-label>
+        <input
+          type="text"
+          matInput
+          [(ngModel)]="item.criterion"
+          [required]="true"
+        />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Wymagane kryterium</mat-label>
+        <input
+          type="text"
+          matInput
+          [(ngModel)]="item.req_criterion"
+          [required]="true"
+        />
+      </mat-form-field>
+    </div>
+    <div class="dot" *ngIf="i !== axisResults.length - 1"></div>
   </div>
   <div class="line"></div>
+  <div class="row">
+    <mat-form-field appearance="outline">
+      <mat-label>Wybierz zdjęcia </mat-label>
+      <ngx-mat-file-input
+        [(ngModel)]="selectedFile"
+        multiple
+      ></ngx-mat-file-input>
+      <mat-icon matSuffix>folder</mat-icon>
+    </mat-form-field>
+  </div>
   <div class="row">
     <mat-form-field appearance="outline">
       <mat-label>Wybierz zdjęcia </mat-label>

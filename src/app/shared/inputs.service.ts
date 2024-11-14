@@ -1,5 +1,6 @@
 import { Injectable, OnInit } from '@angular/core';
 import { BasicInfo, ObjectMode, ObjectPower, ObjectSignal } from './dictionary';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Injectable({
   providedIn: 'root',
@@ -7,7 +8,7 @@ import { BasicInfo, ObjectMode, ObjectPower, ObjectSignal } from './dictionary';
 export class InputsService {
   public inputs: any = {};
 
-  constructor() {
+  constructor(private sanitizer: DomSanitizer) {
     this.inputs = {
       is_prev: false,
       is_edit: false,
@@ -16,14 +17,14 @@ export class InputsService {
         principal: '',
         object: '',
         place: '',
-        isEmission: true,
+        isEmission: null,
         isEndurance: true,
         date: '',
         executor: '',
         reviewer: '',
       },
       object_power: {
-        is_power: true,
+        is_power: null,
         voltage: 'AC 230 V',
         power: '',
         security: '',
@@ -33,13 +34,9 @@ export class InputsService {
         connection: '',
       },
       object_signal: {
-        is_signal: true,
-        conn_number: '2',
-        connections: {},
-        cable: '',
-        screen: '',
-        cable_length: '',
-        connection: '',
+        is_signal: null,
+        conn_number: '',
+        connections: [],
       },
       object_mode: {
         modes: '',
@@ -56,94 +53,159 @@ export class InputsService {
       },
       pn_en_42: {
         basic_data: {
-          temperature: 0,
-          pressure: 0,
-          humidity: 0,
+          temperature: null,
+          pressure: null,
+          humidity: null,
           devices: [],
           comment: '',
           result: '',
           contractor: '',
+          date: '',
         },
-        is_table_top: false,
-        is_floor_standing: false,
+        is_table_top: null,
+        is_floor_standing: null,
         table_top: {
           contact: {
-            level: '',
+            level: '+/- 4',
             criterion: '',
             required_crit: '',
-            picture: '',
+            picture: null,
           },
           air: {
-            level: '',
+            level: 'do +/- 8',
             criterion: '',
             required_crit: '',
-            picture: '',
+            picture: null,
           },
           vcp: {
-            level: '',
+            level: '+/- 4',
             criterion: '',
             required_crit: '',
-            picture: '',
+            picture: null,
           },
           hcp: {
-            level: '',
+            level: '+/- 4',
             criterion: '',
             required_crit: '',
-            picture: '',
+            picture: null,
           },
         },
         floor_standing: {
           contact: {
-            level: '',
+            level: '+/- 4',
             criterion: '',
             required_crit: '',
-            picture: '',
+            picture: null,
           },
           air: {
-            level: '',
+            level: 'do +/- 8',
             criterion: '',
             required_crit: '',
-            picture: '',
+            picture: null,
           },
           vcp: {
-            level: '',
+            level: '+/- 4',
             criterion: '',
             required_crit: '',
-            picture: '',
+            picture: null,
           },
         },
       },
       en43: {
         basic_data: {
-          temperature: 0,
-          pressure: 0,
-          humidity: 0,
+          temperature: null,
+          pressure: null,
+          humidity: null,
           devices: [],
           comment: '',
           result: '',
           contractor: '',
+          date: '',
         },
         frequency: '',
         modulation: '80% AM, 1 kHz ',
         level: '',
         criterion: '',
         req_criterion: '',
-        picture: '',
+        picture: [],
       },
       en44: {
         basic_data: {
-          temperature: 0,
-          pressure: 0,
-          humidity: 0,
+          temperature: null,
+          pressure: null,
+          humidity: null,
           devices: [],
           comment: '',
           result: '',
           contractor: '',
+          date: '',
         },
         power: [],
         signal: [],
-        is_table_top: false,
-        is_floor_standing: false,
+        is_table_top: null,
+        is_floor_standing: null,
+        picture: [],
+      },
+      en45: {
+        basic_data: {
+          temperature: null,
+          pressure: null,
+          humidity: null,
+          devices: [],
+          comment: '',
+          result: '',
+          contractor: '',
+          date: '',
+        },
+        security_class: '',
+        power: [],
+        signal: [],
+        interface_angle: '',
+        positive_bursts: null,
+        negative_bursts: null,
+        bursts_gap: '',
+        picture: null,
+      },
+      en46: {
+        basic_data: {
+          temperature: null,
+          pressure: null,
+          humidity: null,
+          devices: [],
+          comment: '',
+          result: '',
+          contractor: '',
+          date: '',
+        },
+        power: [],
+        signal: [],
+        picture: null,
+      },
+      en48: {
+        basic_data: {
+          devices: [],
+          comment: '',
+          result: '',
+          contractor: '',
+          date: '',
+        },
+        level: '',
+        frequency: '',
+        picture: null,
+        axis: [],
+      },
+      en411: {
+        basic_data: {
+          devices: [],
+          comment: '',
+          result: '',
+          contractor: '',
+          date: '',
+        },
+        repetition: '',
+        repetition_gap: '',
+        pictures: null,
+        results: [],
       },
     };
   }
@@ -154,5 +216,29 @@ export class InputsService {
 
   public updateInputs(obj, value) {
     this.inputs[obj] = value;
+  }
+
+  public setInputs(value) {
+    this.inputs = value;
+  }
+
+  saveInputs() {
+    const inputsToSave = JSON.stringify(this.inputs);
+    const uri = this.sanitizer.bypassSecurityTrustUrl(
+      'data:text/json;charset=UTF-8,' + encodeURIComponent(inputsToSave)
+    );
+    return uri;
+  }
+
+  loadInputs(file) {
+    let fileReader = new FileReader();
+    fileReader.onload = (e) => {
+      console.log(fileReader.result);
+      this.inputs = JSON.parse(fileReader.result.toString());
+      console.log(this.inputs);
+    };
+    const loadedInputs: any = fileReader.readAsText(file);
+    console.log(loadedInputs);
+    return true;
   }
 }

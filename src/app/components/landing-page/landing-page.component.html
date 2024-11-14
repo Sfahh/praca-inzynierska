@@ -1,5 +1,15 @@
 <div class="container">
-   <h1>Witaj w sprawozdaniu</h1>
-   <h2>Kliknij w przycisk poniżej aby utworzyć nowe sprawozdanie</h2>
-   <a mat-raised-button color="primary" routerLink="/create">Utwórz</a>
+  <h1>Witaj w sprawozdaniu</h1>
+  <h2>Kliknij w przycisk poniżej aby utworzyć nowe sprawozdanie</h2>
+  <a
+    mat-raised-button
+    color="primary"
+    routerLink="/create"
+    [style.margin-bottom]="'15px'"
+    >{{ isContinue ? "Kontynuuj" : "Utwórz" }}</a
+  >
+  <button color="primary" mat-raised-button (click)="uploader.click()">
+    Wczytaj sprawozdanie
+  </button>
+  <input hidden type="file" #uploader (change)="loadInputs($event)" />
 </div>

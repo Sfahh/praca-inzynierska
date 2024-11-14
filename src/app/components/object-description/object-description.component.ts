@@ -6,6 +6,7 @@ import {
   ObjectOthers,
   ObjectPower,
   ObjectSignal,
+  ObjectSignalDetail,
 } from '../../shared/dictionary';
 import { DatePipe } from '@angular/common';
 
@@ -22,6 +23,7 @@ export class ObjectDescriptionComponent implements OnInit {
 
   dataMode: ObjectMode;
   dataOthers: ObjectOthers;
+  connections: ObjectSignalDetail[] = [];
 
   constructor(
     public reportService: ReportService,
@@ -34,9 +36,25 @@ export class ObjectDescriptionComponent implements OnInit {
     this.dataSignal = this.inputs.inputs?.object_signal;
     this.dataMode = this.inputs.inputs?.object_mode;
     this.dataOthers = this.inputs.inputs?.object_others;
+    this.connections = this.inputs.inputs?.object_signal.connections;
+    this.isPower = this.inputs.inputs?.object_power.is_power;
+    this.isSignal = this.inputs.inputs?.object_signal.is_signal;
     console.log('t');
   }
 
+  countConnectionsSignal(value) {
+    console.log(value);
+    let arr = [];
+    // let numbers = Array(+value)
+    //   .fill(0)
+    //   .map((x, i) => i);
+
+    for (let i = 1; i <= +value.data; i++) {
+      let signal = new ObjectSignalDetail();
+      arr.push(signal);
+    }
+    this.connections = arr;
+  }
   countConnections(value) {
     let numbers = Array(+value)
       .fill(0)
@@ -51,6 +69,7 @@ export class ObjectDescriptionComponent implements OnInit {
       this.dataOthers.date,
       'dd/MM/yyyy'
     );
+    this.dataSignal.connections = this.connections;
     this.inputs.updateInputs('object_power', this.dataPower);
     this.inputs.updateInputs('object_signal', this.dataSignal);
     this.inputs.updateInputs('object_mode', this.dataMode);
